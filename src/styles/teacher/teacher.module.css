@@ -1,0 +1,153 @@
+.teacherContent{
+    width: 100%;
+    height: min-content;
+    display: grid;
+    padding: 0rem .7rem;
+    grid-template-columns: repeat(4,1fr);
+    justify-content: center;
+    gap: .6rem;
+}
+
+.groupsList{
+    width: 100%;
+}
+
+.groupsList ul{
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+}
+
+.groupLi{
+    width: 50%;
+    text-align: center;
+    padding: .4rem 0;
+    font-size: .9rem;
+    border-radius: .5rem;
+}
+.lessonsContainer{
+    margin-top: .5rem;
+    width: 100%;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3,1fr);
+}
+.lesson{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .3rem;
+    position: relative;
+    height: min-content;
+    width: 7rem;
+}
+.lesson img{
+    border: none;
+    width: 100%;
+    height: 8.5rem;
+    object-fit: cover;
+    border: 1px solid #dbdbdbe5;
+}
+
+.lesson span{
+    color: #2b2b2be5;
+    text-align: center;
+    font-size: 1rem;
+    color: #2b2b2be5;
+}
+.noStudentContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+}
+.noStudentContainer img{
+    width: 100%;
+}
+.noStudentContainer p ,.noStudentContainer h2{
+    width: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.errorContainer{
+    width: 100%;
+    height: calc(100% - 7rem);
+    position: absolute;
+    top: 7rem;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .7rem;
+}
+
+.errorContainer p{
+    color: #ff7e7e;
+    font-size: 1.2rem;
+}
+
+.tryButton{
+    width: 10rem;
+    padding: 1rem;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: .5rem;
+    background-color: #e96416;
+    color: white;
+    font-weight: bold;
+}
+
+.addStSpan{
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    top: -.2rem;
+    left: 16.2rem;
+    background-color: #adc9f0;
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50%;
+}
+
+.addStBtn{
+    width: 4rem;
+    height: 4rem;
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    font-size: 2rem;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    background-color: #528fe4;
+    color: white;
+    box-shadow: 0px 10px 20px -15px black;
+    transition: all .25s;
+}
+
+.addStBtn:active{
+    transform: scale(1.07);
+    background-color: #4387e6;
+}
+
+@media only screen and (max-width:1200px) {
+    .teacherContent{
+            grid-template-columns: repeat(3,1fr);
+    }
+}
+@media only screen and (max-width:898px) {
+    .teacherContent{
+            grid-template-columns: repeat(2,1fr);
+    }
+}
+@media only screen and (max-width:576px) {
+    .teacherContent{
+            grid-template-columns: repeat(1,1fr);
+    }
+}

@@ -1,0 +1,49 @@
+.Container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-width: 1280px;
+}
+
+.header{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    height: 3.3rem;
+}
+
+.header p{
+    margin: 0;
+    font-size: .95rem;
+    height: 3.3rem;
+    display: flex;
+    align-items: center;
+    color: #525252e5;
+}
+
+.header>i {
+    height: 3.3rem;
+    cursor: pointer;
+    font-size: 1.3rem;
+    transition: all .3s;
+    display: flex;
+    width:2rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+}
+.header i:hover {
+   color: #23449e;
+}
+
+.profile{
+    display: flex;
+    margin-right: auto;
+    cursor: pointer;
+    gap: .5rem;
+    height: 3.3rem;
+    padding-left: 1rem;
+    align-items: center;
+}

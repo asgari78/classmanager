@@ -1,0 +1,49 @@
+.student{
+    background-color: white;
+    border: none;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+    gap: .8rem;
+}
+
+.infoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.student img{
+    width: 3.2rem;
+    height: 3.2rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.student p{
+    width: 100%;
+    text-align: right;
+    font-size: .92rem;
+    font-weight: 500;
+    color: #2b2b2be5;
+}
+.student span{
+    color: #838383e5;
+    font-size: .8rem;
+}
+
+.showBtn{
+    width: 100%;
+    border: 0;
+    padding: 1rem;
+    font-size: 1.2rem;
+    margin-top: auto;
+    background-color: #afc4ff;
+    cursor: pointer;
+    transition: all .3s;
+}
+.showBtn:hover{
+    background-color: #5c85f5;
+}
