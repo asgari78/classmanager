@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom"
-import styles from "../../styles/teacher/myStudent.module.css"
+import styles from "../../styles/teacher/studentBar.module.css"
 import { useState } from "react"
-import MyStPage from "./MyStPage"
+import StudentPage from "./StudentPage"
 
-const MyStudent = ({ st, index }) => {
+const StudentBar = ({ st, index }) => {
     const [showStPage, setShowStPage] = useState(false)
     return (
         <>
@@ -14,9 +14,9 @@ const MyStudent = ({ st, index }) => {
                     <span> گروه {st.group}</span>
                 </div>
             </Link>
-            {showStPage === true ? <MyStPage setShowStPage={setShowStPage} st={st} /> : null}
+            {showStPage === true ? <StudentPage setShowStPage={setShowStPage} st={st} /> : null}
         </>
     )
 }
 
-export default MyStudent
+export default StudentBar

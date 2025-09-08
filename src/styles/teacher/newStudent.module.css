@@ -1,0 +1,135 @@
+.container{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: url("../../../public/images/bgFormLight.jpg") no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; 
+    transform: translateY(-5rem);
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    z-index: 10;
+}
+
+.showin{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fadeout{
+    opacity: 0;
+    transform: translateY(-5rem);
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.5rem;
+    border-bottom: 1px solid #ffffff2c;
+}
+
+.header h6{
+    height: 3.5rem;
+    font-size: .9rem;
+    font-weight: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff71;
+    padding: 0 1rem;
+}
+
+.header p{
+    font-size: .9rem;
+    color: #a3ffa37c;
+    padding: 0 1rem;
+}
+
+.main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.main form{
+    width: 100%;
+    height: calc(100% - 20rem);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 3.5rem;
+}
+
+.main form>div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.main form>div label{
+    position: absolute;
+    transform: translate(0rem , 0rem);
+    transition: all .3s ease;
+    color: #ffffff85;
+    font-size: .8rem;
+    width: fit-content;
+}
+.main form>div input{
+    font-size: 1rem;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ffffffe7;
+    padding: .6rem .5rem;
+    color: #ffffffe7;
+}
+/* .main form>div input:focus ~ label{
+    transform: translate(1.6rem , -1.4rem);
+} */
+
+.footer{
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3.5rem;
+    gap: .2rem;
+}
+.footerBtn{
+    width: 50%;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    transition: all .2s ease;
+}
+.footerBtn:active{
+    filter: brightness(.7);
+    transform: translateY(2px) scale(.98);
+}
+.closeBtn{
+    border-top: 1px solid #ffffff7c;
+    background-color: #ffffff13;
+    color: #ffffff7c;
+}
+.nextBtn{
+    border-top: 1px solid #72e3ff;
+    background-color: #72e3ff1f;
+    color: #72e3ff;
+}
+.prevBtn{
+    border-top: 1px solid #ffa600;
+    background-color: #ffa6001a;
+    display: none;
+}
+.submitBtn{
+    border-top: 1px solid #00ff0d;;
+    background-color: #00ff0d18;
+    display: none;
+}

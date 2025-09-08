@@ -4,13 +4,24 @@ import './styles/App.css'
 import { useEffect, useState } from 'react'
 import { getAllStudents, getStudent, putStudent } from './services/Students'
 import NetworkStatus from './components/general/NetworkStatus'
+import "../node_modules/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css"
+import "../node_modules/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"
 
 function App() {
   const [userData, setUserData] = useState([])
   const [errorServer, setErrorServer] = useState("")
   const [loading, setLoading] = useState(false)
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   useEffect(() => {
+    const handleOnline = () => {
+      setIsOnline(true)
+      loginStatus()
+    };
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
     const loginStatus = async () => {
       setLoading(true)
       let localStudent = localStorage.getItem("student");
@@ -30,6 +41,11 @@ function App() {
       }
     }
     loginStatus()
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
   }, [])
   const requestLogin = async (data) => {
     setLoading(true)
@@ -61,9 +77,13 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<>< NetworkStatus /><Container loading={loading} errorServer={errorServer} userData={userData} requestLogin={requestLogin} /></>} />
-      </Routes>
+      {isOnline ?
+        <Routes>
+          <Route path='/' element={<Container loading={loading} errorServer={errorServer} userData={userData} requestLogin={requestLogin} />} />
+        </Routes>
+        :
+        <NetworkStatus />
+      }
     </BrowserRouter>
   )
 }

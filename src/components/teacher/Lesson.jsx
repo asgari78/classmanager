@@ -78,6 +78,7 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
 
     return (
         <div className={styles.lessonContainer}>
+            {loading && <Loading />}
             <section className={styles.header}>
                 <span>ثبت نمرات {lesson.name}</span>
                 <div className={styles.btnsContainer}>
@@ -86,52 +87,49 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
                 </div>
             </section >
             <section className={styles.tableContainer}>
-                {
-                    loading ? <Loading /> :
-                        <table className={styles.table}>
-                            <thead>
-                                <tr>
-                                    <th>{lesson.score.length > 2 ? "نام ماه" : "نام نوبت"}</th>
-                                    {
-                                        lesson.score.length > 2 ? lesson.score[0].value.map((week, index) => (
-                                            <th key={index}>{week.name}</th>
-                                        )) : lesson.score[0].value.map((exam, index) => (
-                                            <th key={index}>{exam.name}</th>
-                                        ))
-                                    }
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {copyLesson.score.length > 2 ? copyLesson.score.map((month, mIdx) => (
-                                    <tr key={mIdx}>
-                                        <td>{month.name}</td>
-                                        {
-                                            month.value.map((week, wIdx) => (
-                                                <td key={wIdx}>
-                                                    <button className={styles.inputTable} onClick={() => handleTable(mIdx, wIdx)}>
-                                                        {renderValue(week.value)}
-                                                    </button>
-                                                </td>
-                                            ))
-                                        }
-                                    </tr>
-                                )) : lesson.score.map((term, index) => (
-                                    <tr key={index}>
-                                        <td>{term.name}</td>
-                                        {
-                                            term.value.map((exam, index) => (
-                                                <td key={index}>
-                                                    <button className={styles.inputTable}>
-                                                        {exam.value}
-                                                    </button>
-                                                </td>
-                                            ))
-                                        }
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                }
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <th>{lesson.score.length > 2 ? "نام ماه" : "نام نوبت"}</th>
+                            {
+                                lesson.score.length > 2 ? lesson.score[0].value.map((week, index) => (
+                                    <th key={index}>{week.name}</th>
+                                )) : lesson.score[0].value.map((exam, index) => (
+                                    <th key={index}>{exam.name}</th>
+                                ))
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {copyLesson.score.length > 2 ? copyLesson.score.map((month, mIdx) => (
+                            <tr key={mIdx}>
+                                <td>{month.name}</td>
+                                {
+                                    month.value.map((week, wIdx) => (
+                                        <td key={wIdx}>
+                                            <button className={styles.inputTable} onClick={() => handleTable(mIdx, wIdx)}>
+                                                {renderValue(week.value)}
+                                            </button>
+                                        </td>
+                                    ))
+                                }
+                            </tr>
+                        )) : lesson.score.map((term, index) => (
+                            <tr key={index}>
+                                <td>{term.name}</td>
+                                {
+                                    term.value.map((exam, index) => (
+                                        <td key={index}>
+                                            <button className={styles.inputTable}>
+                                                {exam.value}
+                                            </button>
+                                        </td>
+                                    ))
+                                }
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </section>
         </div >
     )

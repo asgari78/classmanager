@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import styles from "../../styles/teacher/teacher.module.css"
 
-import MyStudent from "./MyStudent"
+import StudentBar from "./StudentBar"
 import { getStudent } from "../../services/Students"
 import Loading from "../general/Loading"
 
-const Teacher = ({ allStudents, userData }) => {
+const Teacher = ({ allStudents, userData, setShowNewStPage }) => {
 
     const [activeSection, setActiveSection] = useState(1)
     const [teacher, setTeacher] = useState()
@@ -41,38 +41,36 @@ const Teacher = ({ allStudents, userData }) => {
                 loading ? <Loading /> : null
             }
             {activeSection === 1 ?
-                (
-                    allStudents.length > 0 ?
-                        allStudents.map((st, index) => (
-                            <MyStudent st={st} key={index} />
-                        ))
-                        :
-                        <div className={styles.noStudentContainer}>
-                            <img src="https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/general/noStudent.jpg" alt="noStudentImage" />
-                            <h2>دانش آموزی ندارید</h2>
-                            <p>با زدن ..+.. <span className={styles.addStSpan}>+</span> دانش آموزان خود را اضافه کنید</p>
-                        </div>
-                )
-                :
-                (
-                    <section className={styles.lessonsContainer}>
-                        {!serverError ? teacher.lessons.map(lesson => (
-                            <div className={styles.lesson} key={lesson.id}>
-                                <img src={lesson.image} alt="lessonImg" />
-                                <span>{lesson.name}</span>
-                            </div>
-                        )) :
-                            (
-                                <div className={styles.errorContainer}>
-                                    <p>درسی یافت نشد!</p>
-                                    <button className={styles.tryButton} onClick={getTeacher}>تلاش مجدد</button>
-                                </div>
-                            )
-                        }
-                    </section>
-                )
+                allStudents.length > 0 ?
+                    allStudents.map((st, index) => (
+                        <StudentBar st={st} key={index} />
+                    ))
+                    :
+                    <div className={styles.noStudentContainer}>
+                        <img src="https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/general/noStudent.jpg" alt="noStudentImage" />
+                        <h2>دانش آموزی ندارید</h2>
+                        <p>با زدن ..+.. <span className={styles.addStSpan}>+</span> دانش آموزان خود را اضافه کنید</p>
+                    </div>
+                : null
             }
-            {activeSection === 1 ? <button className={styles.addStBtn}>+</button> : null}
+            {activeSection === 2 &&
+                <section className={styles.lessonsContainer}>
+                    {!serverError ? teacher.lessons.map(lesson => (
+                        <div className={styles.lesson} key={lesson.id}>
+                            <img src={lesson.image} alt="lessonImg" />
+                            <span>{lesson.name}</span>
+                        </div>
+                    )) :
+                        (
+                            <div className={styles.errorContainer}>
+                                <p>درسی یافت نشد!</p>
+                                <button className={styles.tryButton} onClick={getTeacher}>تلاش مجدد</button>
+                            </div>
+                        )
+                    }
+                </section>
+            }
+            {activeSection === 1 ? <button className={styles.addStBtn} onClick={() => { setShowNewStPage(true); }}>+</button> : null}
         </section>
     )
 }

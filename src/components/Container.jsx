@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 
 import { getAllStudents } from "../services/Students.js"
 import Loading from "./general/Loading.jsx";
-import NetworkStatus from "./general/NetworkStatus.jsx";
+import NewStudent from "./teacher/NewStudent.jsx"
 
 const Container = ({ userData, requestLogin, errorServer, loading }) => {
 
     const [allStudents, setAllStudents] = useState([])
+    const [showNewStPage, setShowNewStPage] = useState(false)
 
     useEffect(() => {
         const getStudents = async () => {
@@ -30,22 +31,25 @@ const Container = ({ userData, requestLogin, errorServer, loading }) => {
             {userData.length == 0 ?
                 <Login requestLogin={requestLogin} errorServer={errorServer} />
                 :
-                <div className={styles.Container}>
-                    <section className={styles.header}>
-                        <i className="fas fa-bars"></i>
-                        <p>نقش : <span>{userData.isTeacher ? "آموزگار" : "دانش آموز"}</span></p>
-                        <div className={styles.profile}>
-                            <i className="fa fa-user"></i>
-                            <p>{userData.name}</p>
-                        </div>
-                    </section>
-                    {
-                        userData.isTeacher ?
-                            <Teacher allStudents={allStudents} userData={userData} />
-                            :
-                            <p><span>{userData.name}</span> خوش آمدید </p>
-                    }
-                </div>
+                <>
+                    <NewStudent show={showNewStPage} onClose={() => setShowNewStPage(false)} />
+                    <div className={styles.Container}>
+                        <section className={styles.header}>
+                            <i className="fas fa-bars"></i>
+                            <p>نقش : <span>{userData.isTeacher ? "آموزگار" : "دانش آموز"}</span></p>
+                            <div className={styles.profile}>
+                                <i className="fa fa-user"></i>
+                                <p>{userData.name}</p>
+                            </div>
+                        </section>
+                        {
+                            userData.isTeacher ?
+                                <Teacher setShowNewStPage={setShowNewStPage} allStudents={allStudents} userData={userData} />
+                                :
+                                <p><span>{userData.name}</span> خوش آمدید </p>
+                        }
+                    </div>
+                </>
             }
         </>
     );

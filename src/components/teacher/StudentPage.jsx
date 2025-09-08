@@ -1,10 +1,10 @@
-import styles from "../../styles/teacher/myStPage.module.css"
+import styles from "../../styles/teacher/studentPage.module.css"
 
 import { useState } from "react"
 import Lesson from "./Lesson"
 import { getStudent } from "../../services/Students"
 
-const MyStPage = ({ st, setShowStPage }) => {
+const StudentPage = ({ st, setShowStPage }) => {
     const [page, setpage] = useState(3)
     const [lessonData, setLessonData] = useState(null)
     const [showOneLesson, setShowOneLesson] = useState(false)
@@ -105,4 +105,4 @@ const MyStPage = ({ st, setShowStPage }) => {
     )
 }
 
-export default MyStPage
+export default StudentPage
