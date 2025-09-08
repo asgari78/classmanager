@@ -5,7 +5,8 @@ import styles from "../styles/container.module.css"
 import { useEffect, useState } from "react";
 
 import { getAllStudents } from "../services/Students.js"
-import Loading from "./Loading.jsx";
+import Loading from "./general/Loading.jsx";
+import NetworkStatus from "./general/NetworkStatus.jsx";
 
 const Container = ({ userData, requestLogin, errorServer, loading }) => {
 

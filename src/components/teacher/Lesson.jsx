@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles/teacher/lesson.module.css"
 import { updateLesson } from "../../services/Students";
-import Loading from "../Loading"
+import Loading from "../general/Loading"
 
 const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
 

@@ -3,6 +3,7 @@ import Container from './components/Container'
 import './styles/App.css'
 import { useEffect, useState } from 'react'
 import { getAllStudents, getStudent, putStudent } from './services/Students'
+import NetworkStatus from './components/general/NetworkStatus'
 
 function App() {
   const [userData, setUserData] = useState([])
@@ -61,7 +62,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Container loading={loading} errorServer={errorServer} userData={userData} requestLogin={requestLogin} />} />
+        <Route path='/' element={<>< NetworkStatus /><Container loading={loading} errorServer={errorServer} userData={userData} requestLogin={requestLogin} /></>} />
       </Routes>
     </BrowserRouter>
   )

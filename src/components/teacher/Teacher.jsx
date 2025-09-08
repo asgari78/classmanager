@@ -3,7 +3,7 @@ import styles from "../../styles/teacher/teacher.module.css"
 
 import MyStudent from "./MyStudent"
 import { getStudent } from "../../services/Students"
-import Loading from "../Loading"
+import Loading from "../general/Loading"
 
 const Teacher = ({ allStudents, userData }) => {
 
