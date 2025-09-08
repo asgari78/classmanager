@@ -71,7 +71,7 @@ const NewStudent = ({ show, onClose }) => {
                 </form>
             </section>
             <section className={styles.footer}>
-                <button className={`${styles.footerBtn} ${styles.closeBtn}`}>لغو</button>
+                <button className={`${styles.footerBtn} ${styles.closeBtn}`} onClick={onClose}>لغو</button>
                 <button className={`${styles.footerBtn} ${styles.prevBtn}`}>مرحله قبل</button>
                 <button className={`${styles.footerBtn} ${styles.nextBtn}`}>مرحله بعد</button>
                 <button className={`${styles.footerBtn} ${styles.submitBtn}`}>ثبت</button>
