@@ -22,12 +22,12 @@ const NewStudent = ({ show, onClose }) => {
 
     const focusStatus = (inp, val, t) => {
         if (t === "focus") {
-            inp.nextSibling.style.transform = "translate(0.6rem , -1.6rem)"
+            inp.nextSibling.style.transform = "translate(-0.5rem , -.9rem)"
             if (inp.name == "dateBirth") {
                 jalaliDatepicker.startWatch();
             }
         } else if (t === "blur") {
-            val !== "" ? inp.nextSibling.style.transform = "translate(0.6rem , -1.6rem)" : inp.nextSibling.style.transform = "translate(0rem , 0rem)"
+            val !== "" ? inp.nextSibling.style.transform = "translate(-0.5rem , -.9rem)" : inp.nextSibling.style.transform = "translate(-0.7rem , 0rem)"
         }
 
     }
@@ -53,11 +53,11 @@ const NewStudent = ({ show, onClose }) => {
                         <label htmlFor="username">نام و نام خانوادگی</label>
                     </div>
                     <div className={styles.dateBirth}>
-                        <input data-jdp name="dateBirth" id="dateBirth" onFocus={handleForm} onBlur={handleForm} />
+                        <input data-jdp name="dateBirth" id="dateBirth" dir="ltr" onFocus={handleForm} onBlur={handleForm} />
                         <label htmlFor="dateBirth">تاریخ تولد</label>
                     </div>
                     <div className={styles.selfCode}>
-                        <input type="number" name="selfCode" id="selfCode" onFocus={handleForm} onBlur={handleForm} />
+                        <input type="number" name="selfCode" id="selfCode" dir="ltr" onFocus={handleForm} onBlur={handleForm} />
                         <label htmlFor="selfCode">کدملی</label>
                     </div>
                     <div className={styles.dadName}>

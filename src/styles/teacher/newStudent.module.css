@@ -64,8 +64,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 2rem;
-    gap: 3.5rem;
+    padding: 2rem 1rem;
+    gap: 1rem;
 }
 
 .main form>div{
@@ -75,21 +75,21 @@
 }
 .main form>div label{
     position: absolute;
-    transform: translate(0rem , 0rem);
+    transform: translate(-0.7rem , 0rem);
     transition: all .3s ease;
     color: #1f1f1fe7;
     font-size: .8rem;
     width: fit-content;
 }
 .main form>div input{
-    font-size: 1rem;
+    font-size: 1.2rem;
     width: 100%;
-    background-color: transparent;
+    background-color: #003a4931;
     border: none;
     outline: none;
-    border-bottom: 1px solid #1f1f1fe7;
-    padding: .6rem .5rem;
-    color: #1f1f1fe7;
+    padding: 1.8rem 1rem 0.2rem 1rem;
+    color: #000000;
+    border-radius: .5rem;
 }
 
 .footer{
@@ -115,10 +115,10 @@
     transform: translateY(2px) scale(.98);
 }
 .closeBtn{
-    background-color: #4b4b4ba9;
+    background-color: #4b4b4b81;
 }
 .nextBtn{
-    background-color: #007896ec;
+    background-color: #007896;
 }
 .prevBtn{
     background-color: #ffa60091;
