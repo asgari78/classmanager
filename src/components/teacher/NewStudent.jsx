@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/teacher/newStudent.module.css"
+import { addStudent } from "../../services/Students";
+import Loading from "../general/Loading";
 
 const NewStudent = ({ show, onClose, teacherData }) => {
 
+    const fileInputRef = useRef(null);
     const [visible, setVisible] = useState(show)
     const [animate, setAnimate] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         profileImage: null,
         namefamily: "",
@@ -13,9 +17,10 @@ const NewStudent = ({ show, onClose, teacherData }) => {
         dadName: "",
         phoneNumber: "",
         groupId: "",
-        roleId: ""
+        roleId: "",
+        username: "",
+        password: ""
     })
-    const fileInputRef = useRef(null);
 
 
     useEffect(() => {
@@ -29,9 +34,20 @@ const NewStudent = ({ show, onClose, teacherData }) => {
             return () => clearTimeout(timer)
         }
     }, [show])
-    if (!visible) return null
+    useEffect(() => {
+        let words = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        let word1 = words[Math.floor(Math.random() * 26)] + words[Math.floor(Math.random() * 26)]
+        let word2 = words[Math.floor(Math.random() * 26)]
+        let number = Math.floor(10000 + Math.random() * 90000);
+        let pass = (word1 + number + word2).toUpperCase()
 
-
+        setFormData(prev => {
+            return {
+                ...prev,
+                password: pass
+            }
+        })
+    }, [])
     const focusStatus = (e) => {
         let inp = e.target;
         let val = e.target.value;
@@ -70,142 +86,186 @@ const NewStudent = ({ show, onClose, teacherData }) => {
             })
         }
     }
+    const submitForm = async () => {
+        try {
+            setLoading(true)
+            const { data } = await addStudent(formData)
+            setLoading(false)
+        } catch (err) {
+            console.log(err);
+            setLoading(false)
+        }
+
+    }
 
 
+
+    if (!visible) return null
     return (
-        <div className={`${styles.container} ${animate ? styles.showin : styles.fadeout}`}>
-            <section className={styles.header}>
-                <h6>ثبت دانش آموز جدید</h6>
-                <i className="fas fa-question-circle"></i>
-            </section>
-            <section className={styles.main}>
-                <form>
-                    <div className={
-                        `${styles.profileImage} ${formData.profileImage !== null && styles.uploadedImg}`
-                    }>
-                        <input
-                            ref={fileInputRef}
-                            type="file"
-                            name="profileImage"
-                            id="profileImage"
-                            accept="image/png, image/jpg, image/jpeg, image/svg"
-                            onChange={validationForm}
-                        />
-                        <img
-                            onClick={() => fileInputRef.current.click()}
-                            style={{ display: formData.profileImage !== null ? "flex" : "none" }}
-                            src={formData.profileImage}
-                            alt="studentProfileImage"
-                        />
-                        <label
-                            style={{ display: formData.profileImage === null ? "flex" : "none" }} htmlFor="profileImage">
-                            تصویر دانش آموز
-                            <i className="fas fa-upload"></i>
-                        </label>
-                        <i
-                            style={{ display: formData.profileImage !== null ? "flex" : "none" }}
-                            className="fas fa-trash-alt"
-                            onClick={() => {
-                                setFormData((prev) => ({ ...prev, profileImage: null }));
-                                fileInputRef.current.value = "";
-                            }}>
-                        </i>
+        <>
+            {loading && <Loading />}
+            <div className={`${styles.container} ${animate ? styles.showin : styles.fadeout}`}>
+                <section className={styles.header}>
+                    <div>
+                        <i className="fas fa-plus"></i>
+                        <h6>ثبت دانش آموز جدید</h6>
                     </div>
-                    <div className={styles.namefamily}>
-                        <input
-                            type="text"
-                            name="namefamily"
-                            id="namefamily"
-                            onFocus={focusStatus}
-                            onBlur={focusStatus}
-                            onChange={validationForm}
-                            value={formData.namefamily}
-                        />
-                        <label htmlFor="namefamily">
-                            نام و نام خانوادگی
-                        </label>
-                    </div>
-                    <div className={styles.dateBirth}>
-                        <input
-                            data-jdp
-                            name="dateBirth"
-                            id="dateBirth"
-                            dir="ltr"
-                            onFocus={focusStatus}
-                            onBlur={focusStatus}
-                            onChange={validationForm}
-                            value={formData.dateBirth}
-                        />
-                        <label htmlFor="dateBirth">
-                            تاریخ تولد
-                        </label>
-                    </div>
-                    <div className={styles.selfCode}>
-                        <input
-                            type="number"
-                            name="selfCode"
-                            id="selfCode"
-                            dir="ltr"
-                            onFocus={focusStatus}
-                            onBlur={focusStatus}
-                            onChange={validationForm}
-                            value={formData.selfCode}
-                        />
-                        <label htmlFor="selfCode">
-                            کدملی
-                        </label>
-                    </div>
-                    <div className={styles.dadName}>
-                        <input
-                            type="text"
-                            name="dadName"
-                            id="dadName"
-                            onFocus={focusStatus}
-                            onBlur={focusStatus}
-                            onChange={validationForm}
-                            value={formData.dadName}
-                        />
-                        <label htmlFor="dadName">
-                            نام پدر
-                        </label>
-                    </div>
-                    <div className={styles.mobile}>
-                        <input
-                            type="tel"
-                            name="phoneNumber"
-                            id="phoneNumber"
-                            onFocus={focusStatus}
-                            onBlur={focusStatus}
-                            onChange={validationForm}
-                            value={formData.phoneNumber}
-                        />
-                        <label htmlFor="phoneNumber">
-                            شماره موبایل
-                        </label>
-                    </div>
-                    <div className={styles.groupId}>
-                        <i className="fas fa-angle-down"></i>
-                        <select name="groupId" id="groupId">
-                            <option value="g00">گروه کلاسی</option>
-                            {
-                                teacherData.groups.map((g, index) => (
-                                    <option key={index} value={g.id}>{g.name}</option>
-                                ))
-                            }
-                        </select>
-                    </div>
-                    <div className={styles.studentRole}>
-                        <button onClick={() => setFormData((prev) => { return { ...prev, role: 3 } })} type="button" className={formData.roleId == 3 ? styles.active : null}>زیر گروه</button>
-                        <button onClick={() => setFormData((prev) => { return { ...prev, role: 2 } })} type="button" className={formData.roleId == 2 ? styles.active : null}>معاون</button>
-                        <button onClick={() => setFormData((prev) => { return { ...prev, role: 1 } })} type="button" className={formData.roleId == 1 ? styles.active : null}>سرگروه</button>
-                    </div>
-                </form>
-            </section>
-            <section className={styles.footer}>
-                <button className={`${styles.footerBtn} ${styles.closeBtn}`} onClick={onClose}>لغو</button>
-                <button className={`${styles.footerBtn} ${styles.submitBtn}`}>ثبت</button>
-            </section>
-        </div>
+                    <button className={styles.closeBtn} onClick={onClose}>لغو</button>
+                </section>
+                <section className={styles.main}>
+                    <form>
+                        <div className={
+                            `${styles.profileImage} ${formData.profileImage !== null && styles.uploadedImg}`
+                        }>
+                            <input
+                                ref={fileInputRef}
+                                type="file"
+                                name="profileImage"
+                                id="profileImage"
+                                accept="image/png, image/jpg, image/jpeg, image/svg"
+                                onChange={validationForm}
+                            />
+                            <img
+                                onClick={() => fileInputRef.current.click()}
+                                style={{ display: formData.profileImage !== null ? "flex" : "none" }}
+                                src={formData.profileImage}
+                                alt="studentProfileImage"
+                            />
+                            <label
+                                style={{ display: formData.profileImage === null ? "flex" : "none" }} htmlFor="profileImage">
+                                تصویر دانش آموز
+                                <i className="fas fa-upload"></i>
+                            </label>
+                            <i
+                                style={{ display: formData.profileImage !== null ? "flex" : "none" }}
+                                className="fas fa-trash-alt"
+                                onClick={() => {
+                                    setFormData((prev) => ({ ...prev, profileImage: null }));
+                                    fileInputRef.current.value = "";
+                                }}>
+                            </i>
+                        </div>
+                        <div className={styles.namefamily}>
+                            <input
+                                type="text"
+                                name="namefamily"
+                                id="namefamily"
+                                onFocus={focusStatus}
+                                onBlur={focusStatus}
+                                onChange={validationForm}
+                                value={formData.namefamily}
+                            />
+                            <label htmlFor="namefamily">
+                                نام و نام خانوادگی
+                            </label>
+                        </div>
+                        <div className={styles.dateBirth}>
+                            <input
+                                data-jdp
+                                name="dateBirth"
+                                id="dateBirth"
+                                dir="ltr"
+                                onFocus={focusStatus}
+                                onBlur={focusStatus}
+                                onChange={validationForm}
+                                value={formData.dateBirth}
+                            />
+                            <label htmlFor="dateBirth">
+                                تاریخ تولد
+                            </label>
+                        </div>
+                        <div className={styles.selfCode}>
+                            <input
+                                type="number"
+                                name="selfCode"
+                                id="selfCode"
+                                dir="ltr"
+                                onFocus={focusStatus}
+                                onBlur={focusStatus}
+                                onChange={validationForm}
+                                value={formData.selfCode}
+                            />
+                            <label htmlFor="selfCode">
+                                کدملی
+                            </label>
+                        </div>
+                        <div className={styles.dadName}>
+                            <input
+                                type="text"
+                                name="dadName"
+                                id="dadName"
+                                onFocus={focusStatus}
+                                onBlur={focusStatus}
+                                onChange={validationForm}
+                                value={formData.dadName}
+                            />
+                            <label htmlFor="dadName">
+                                نام پدر
+                            </label>
+                        </div>
+                        <div className={styles.mobile}>
+                            <input
+                                type="tel"
+                                name="phoneNumber"
+                                id="phoneNumber"
+                                onFocus={focusStatus}
+                                onBlur={focusStatus}
+                                onChange={validationForm}
+                                value={formData.phoneNumber}
+                            />
+                            <label htmlFor="phoneNumber">
+                                شماره موبایل
+                            </label>
+                        </div>
+                        <div className={styles.groupId}>
+                            <i className="fas fa-angle-down"></i>
+                            <select name="groupId" id="groupId">
+                                <option value="g00">گروه کلاسی</option>
+                                {
+                                    teacherData.groups.map((g, index) => (
+                                        <option key={index} value={g.id}>{g.name}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                        <div className={styles.studentRole}>
+                            <button onClick={() => setFormData((prev) => { return { ...prev, roleId: 3 } })} type="button" className={formData.roleId == 3 ? styles.active : null}>زیر گروه</button>
+                            <button onClick={() => setFormData((prev) => { return { ...prev, roleId: 2 } })} type="button" className={formData.roleId == 2 ? styles.active : null}>معاون</button>
+                            <button onClick={() => setFormData((prev) => { return { ...prev, roleId: 1 } })} type="button" className={formData.roleId == 1 ? styles.active : null}>سرگروه</button>
+                        </div>
+                        <div className={styles.username}>
+                            <input
+                                type="text"
+                                name="username"
+                                id="username"
+                                dir="ltr"
+                                onFocus={focusStatus}
+                                onBlur={focusStatus}
+                                onChange={validationForm}
+                                value={formData.username}
+                            />
+                            <label htmlFor="username">
+                                نام کاربری دانش آموز
+                            </label>
+                        </div>
+                        <div className={styles.password}>
+                            <input
+                                type="text"
+                                readOnly
+                                dir="ltr"
+                                name="password"
+                                id="password"
+                                value={formData.password}
+                            />
+                            <label htmlFor="password">
+                                رمز عبور دانش آموز :
+                            </label>
+                        </div>
+                    </form>
+                </section>
+                <button className={styles.submitBtn} onClick={submitForm}>ثبت</button>
+            </div>
+        </>
     )
 }
 export default NewStudent;
