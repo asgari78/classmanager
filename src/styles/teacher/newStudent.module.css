@@ -25,6 +25,9 @@
 }
 
 .header{
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -81,13 +84,14 @@
 
 .main form{
     width: 100%;
-    height: max-content;
+    height: min-content;
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
     display: flex;
     flex-direction: column;
     padding: 1rem;
+    padding-top: 4.2rem;
     gap: 1rem;
 }
 
@@ -190,7 +194,7 @@
     background-color: #c5ddff;
 }
 .password{
-    opacity: .4;
+    opacity: .3;
 }
 .password input{
     background-color: #d2e5ff!important;
