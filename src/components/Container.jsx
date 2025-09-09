@@ -12,10 +12,12 @@ const Container = ({ userData, requestLogin, errorServer, loading }) => {
 
     const [allStudents, setAllStudents] = useState([])
     const [showNewStPage, setShowNewStPage] = useState(false)
+    const [teacherData, setTeacherData] = useState({})
 
     useEffect(() => {
         const getStudents = async () => {
             let { data: allSt } = await getAllStudents()
+            setTeacherData(allSt.filter(st => st.isTeacher)[0])
             allSt = allSt.filter(st => !st.isTeacher)
             setAllStudents(allSt)
         }
@@ -32,7 +34,7 @@ const Container = ({ userData, requestLogin, errorServer, loading }) => {
                 <Login requestLogin={requestLogin} errorServer={errorServer} />
                 :
                 <>
-                    <NewStudent show={showNewStPage} onClose={() => setShowNewStPage(false)} />
+                    <NewStudent show={showNewStPage} onClose={() => setShowNewStPage(false)} teacherData={teacherData} />
                     <div className={styles.Container}>
                         <section className={styles.header}>
                             <i className="fas fa-bars"></i>

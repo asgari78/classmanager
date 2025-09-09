@@ -44,10 +44,14 @@
     padding: 0 1rem;
 }
 
-.header p{
-    font-size: .9rem;
+.header i{
+    font-size: 1.5rem;
     color: #86b8ff;
     padding: 0 1rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .main{
@@ -64,16 +68,16 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 2rem 1rem;
+    padding: 1rem;
     gap: 1rem;
 }
 
-.main form>div{
+.main form>div:not(:first-child){
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.main form>div label{
+.main form>div:not(:first-child) label{
     position: absolute;
     transform: translate(-0.7rem , 0rem);
     transition: all .3s ease;
@@ -81,7 +85,7 @@
     font-size: .9rem;
     width: fit-content;
 }
-.main form>div input{
+.main form>div:not(:first-child) input{
     font-size: 1.2rem;
     width: 100%;
     background-color: #ececec;
@@ -90,6 +94,82 @@
     padding: 1.8rem 1rem 0.2rem 1rem;
     color: #000000;
 }
+.profileImage{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    background-color: #ececec;
+    border: 1px solid #949494;
+}
+.uploadedImg{
+    border: none!important;
+    background-color: transparent!important;
+    padding: .4rem!important;
+}
+.profileImage input{
+    display: none;
+}
+.profileImage label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    text-align: center;
+    width: 100%;
+    border: none;
+}
+.profileImage img{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profileImage>i{
+    position: absolute;
+    left: .5rem;
+    top: .5rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.selectGroup{
+    width: 100%;
+    position: relative;
+}
+.selectGroup select{
+    width: 100%;
+    border: none;
+    padding: 1.2rem .5rem;
+    font-size: .9rem;
+    outline: none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    appearance:none;
+}
+.selectGroup i{
+    left: 1rem;
+    position: absolute;
+}
+.studentRole{
+    width: 100%;
+    display: flex;
+    gap: .5rem;
+    justify-content: center!important;
+}
+.studentRole button{
+    border: none;
+    padding: 1rem 2rem;
+    transition: all .3s;
+}
+.studentRole button.active{
+    background-color: #a0dee0;
+}
+
+
+
 
 .footer{
     display: flex;
@@ -115,14 +195,6 @@
     background-color: #dbdbdb;
     color: #000000;
 }
-.nextBtn{
-    background-color: #2c70cf;
-}
-.prevBtn{
-    background-color: #ffa60091;
-    display: none;
-}
 .submitBtn{
-    background-color: #00ff0d79;
-    display: none;
+    background-color: #438a4f;
 }
