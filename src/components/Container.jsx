@@ -41,14 +41,14 @@ const Container = ({ userData, requestLogin, errorServer, loading }) => {
                             <p>نقش : <span>{userData.isTeacher ? "آموزگار" : "دانش آموز"}</span></p>
                             <div className={styles.profile}>
                                 <i className="fa fa-user"></i>
-                                <p>{userData.name}</p>
+                                <p>{userData.namefamily}</p>
                             </div>
                         </section>
                         {
                             userData.isTeacher ?
                                 <Teacher setShowNewStPage={setShowNewStPage} allStudents={allStudents} userData={userData} />
                                 :
-                                <p><span>{userData.name}</span> خوش آمدید </p>
+                                <p><span>{userData.namefamily}</span> خوش آمدید </p>
                         }
                     </div>
                 </>

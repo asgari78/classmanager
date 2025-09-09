@@ -7,11 +7,11 @@ const NewStudent = ({ show, onClose, teacherData }) => {
     const [animate, setAnimate] = useState(false);
     const [formData, setFormData] = useState({
         profileImage: null,
-        username: "",
+        namefamily: "",
         dateBirth: "",
         selfCode: "",
         dadName: "",
-        phoneNmber: "",
+        phoneNumber: "",
         groupId: "",
         role: ""
     })
@@ -29,8 +29,8 @@ const NewStudent = ({ show, onClose, teacherData }) => {
             return () => clearTimeout(timer)
         }
     }, [show])
-
     if (!visible) return null
+
 
     const focusStatus = (e) => {
         let inp = e.target;
@@ -56,20 +56,18 @@ const NewStudent = ({ show, onClose, teacherData }) => {
         }
 
     }
-
     const validationForm = (e) => {
         if (e.target.type === "file") {
-            console.log(formData);
             const imgFile = e.target.files[0];
             const imgScr = URL.createObjectURL(imgFile)
             setFormData(prev => { return { ...prev, profileImage: imgScr } })
         } else {
-            switch (e.target.name) {
-                case "username":
-                    console.log(formData);
-                    setFormData(prev => { return { ...prev, username: e.target.value } })
-            }
-
+            setFormData(prev => {
+                return {
+                    ...prev,
+                    [e.target.name]: e.target.value
+                }
+            })
         }
     }
 
@@ -113,38 +111,81 @@ const NewStudent = ({ show, onClose, teacherData }) => {
                             }}>
                         </i>
                     </div>
-                    <div className={styles.username}>
+                    <div className={styles.namefamily}>
                         <input
                             type="text"
-                            name="username"
-                            id="username"
+                            name="namefamily"
+                            id="namefamily"
                             onFocus={focusStatus}
                             onBlur={focusStatus}
                             onChange={validationForm}
+                            value={formData.namefamily}
                         />
-                        <label htmlFor="username">
+                        <label htmlFor="namefamily">
                             نام و نام خانوادگی
                         </label>
                     </div>
                     <div className={styles.dateBirth}>
-                        <input data-jdp name="dateBirth" id="dateBirth" dir="ltr" onFocus={focusStatus} onBlur={focusStatus} />
-                        <label htmlFor="dateBirth">تاریخ تولد</label>
+                        <input
+                            data-jdp
+                            name="dateBirth"
+                            id="dateBirth"
+                            dir="ltr"
+                            onFocus={focusStatus}
+                            onBlur={focusStatus}
+                            onChange={validationForm}
+                            value={formData.dateBirth}
+                        />
+                        <label htmlFor="dateBirth">
+                            تاریخ تولد
+                        </label>
                     </div>
                     <div className={styles.selfCode}>
-                        <input type="number" name="selfCode" id="selfCode" dir="ltr" onFocus={focusStatus} onBlur={focusStatus} />
-                        <label htmlFor="selfCode">کدملی</label>
+                        <input
+                            type="number"
+                            name="selfCode"
+                            id="selfCode"
+                            dir="ltr"
+                            onFocus={focusStatus}
+                            onBlur={focusStatus}
+                            onChange={validationForm}
+                            value={formData.selfCode}
+                        />
+                        <label htmlFor="selfCode">
+                            کدملی
+                        </label>
                     </div>
                     <div className={styles.dadName}>
-                        <input lang="fa-IR" type="text" name="dadName" id="dadName" onFocus={focusStatus} onBlur={focusStatus} />
-                        <label htmlFor="dadName">نام پدر</label>
+                        <input
+                            type="text"
+                            name="dadName"
+                            id="dadName"
+                            onFocus={focusStatus}
+                            onBlur={focusStatus}
+                            onChange={validationForm}
+                            value={formData.dadName}
+                        />
+                        <label htmlFor="dadName">
+                            نام پدر
+                        </label>
                     </div>
                     <div className={styles.mobile}>
-                        <input type="tel" name="phonenumber" id="phonenumber" onFocus={focusStatus} onBlur={focusStatus} />
-                        <label htmlFor="phonenumber">شماره موبایل</label>
+                        <input
+                            type="tel"
+                            name="phoneNumber"
+                            id="phoneNumber"
+                            onFocus={focusStatus}
+                            onBlur={focusStatus}
+                            onChange={validationForm}
+                            value={formData.phoneNumber}
+                        />
+                        <label htmlFor="phoneNumber">
+                            شماره موبایل
+                        </label>
                     </div>
-                    <div className={styles.selectGroup}>
+                    <div className={styles.groupId}>
                         <i className="fas fa-angle-down"></i>
-                        <select name="selectGroup" id="selectGroup">
+                        <select name="groupId" id="groupId">
                             <option value="g00">گروه کلاسی</option>
                             {
                                 teacherData.groups.map((g, index) => (
