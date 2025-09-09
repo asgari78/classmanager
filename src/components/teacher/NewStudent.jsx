@@ -13,7 +13,7 @@ const NewStudent = ({ show, onClose, teacherData }) => {
         dadName: "",
         phoneNumber: "",
         groupId: "",
-        role: ""
+        roleId: ""
     })
     const fileInputRef = useRef(null);
 
@@ -195,9 +195,9 @@ const NewStudent = ({ show, onClose, teacherData }) => {
                         </select>
                     </div>
                     <div className={styles.studentRole}>
-                        <button onClick={() => setFormData((prev) => { return { ...prev, role: 3 } })} type="button" className={formData.role == 3 ? styles.active : null}>زیر گروه</button>
-                        <button onClick={() => setFormData((prev) => { return { ...prev, role: 2 } })} type="button" className={formData.role == 2 ? styles.active : null}>معاون</button>
-                        <button onClick={() => setFormData((prev) => { return { ...prev, role: 1 } })} type="button" className={formData.role == 1 ? styles.active : null}>سرگروه</button>
+                        <button onClick={() => setFormData((prev) => { return { ...prev, role: 3 } })} type="button" className={formData.roleId == 3 ? styles.active : null}>زیر گروه</button>
+                        <button onClick={() => setFormData((prev) => { return { ...prev, role: 2 } })} type="button" className={formData.roleId == 2 ? styles.active : null}>معاون</button>
+                        <button onClick={() => setFormData((prev) => { return { ...prev, role: 1 } })} type="button" className={formData.roleId == 1 ? styles.active : null}>سرگروه</button>
                     </div>
                 </form>
             </section>
