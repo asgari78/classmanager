@@ -23,11 +23,21 @@ const NewStudent = ({ show, onClose }) => {
     const focusStatus = (inp, val, t) => {
         if (t === "focus") {
             inp.nextSibling.style.transform = "translate(-0.5rem , -.9rem)"
+            inp.nextSibling.style.color = "#0000006e"
+            inp.nextSibling.style.fontSize = ".75rem"
             if (inp.name == "dateBirth") {
                 jalaliDatepicker.startWatch();
             }
         } else if (t === "blur") {
-            val !== "" ? inp.nextSibling.style.transform = "translate(-0.5rem , -.9rem)" : inp.nextSibling.style.transform = "translate(-0.7rem , 0rem)"
+            if (val !== "") {
+                inp.nextSibling.style.transform = "translate(-0.5rem , -.9rem)"
+                inp.nextSibling.style.color = "#1f1f1f23!important"
+                inp.nextSibling.style.fontSize = ".75rem"
+            } else {
+                inp.nextSibling.style.transform = "translate(-0.7rem , 0rem)"
+                inp.nextSibling.style.color = "#1f1f1fe7"
+                inp.nextSibling.style.fontSize = ".9rem"
+            }
         }
 
     }
