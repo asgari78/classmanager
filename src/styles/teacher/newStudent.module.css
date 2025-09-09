@@ -80,6 +80,7 @@
     width: 100%;
     height: 100%;
     position: relative;
+    padding-top: 3.5rem;
 }
 
 .main form{
@@ -91,7 +92,6 @@
     display: flex;
     flex-direction: column;
     padding: 1rem;
-    padding-top: 4.2rem;
     gap: 1rem;
 }
 
@@ -207,6 +207,7 @@
     transform: translateY(.2rem);
 }
 .submitBtn{
+    position: absolute;
     background-color: #438a4f;
     width: 100%;
     height: 4rem;
