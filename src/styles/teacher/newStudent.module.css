@@ -30,6 +30,7 @@
     justify-content: space-between;
     align-items: center;
     height: 3.5rem;
+    padding: 1.5rem 0;
     background-color: #4794ff;
 }
 
@@ -37,6 +38,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    padding: 1.5rem 0;
 }
 
 .header>div h6{
@@ -53,7 +55,7 @@
 .header>div i{
     font-size: 1.5rem;
     color: #deebff;
-    padding: 0;
+    padding: 1.5rem 0;
     padding-right: 1rem;
     height: 100%;
     display: flex;
@@ -196,7 +198,7 @@
 }
 
 
-.footerBtn:active{
+.submitBtn:active{
     filter: brightness(.85);
     transform: translateY(.2rem);
 }
@@ -211,4 +213,5 @@
     font-size: 1.1rem;
     transition: all .2s ease;
     color: #dfdfdf;
+    padding: 1.5rem 0;
 }
