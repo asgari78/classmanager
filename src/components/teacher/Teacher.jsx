@@ -2,21 +2,24 @@ import { useEffect, useState } from "react"
 import styles from "../../styles/teacher/teacher.module.css"
 
 import StudentBar from "./StudentBar"
-import { getStudent } from "../../services/Students"
+import { getAllStudents, getTeacher } from "../../services/axiosApi"
 import Loading from "../general/Loading"
 
-const Teacher = ({ allStudents, userData, setShowNewStPage }) => {
+const Teacher = ({ userData, setShowNewStPage }) => {
 
     const [activeSection, setActiveSection] = useState(1)
-    const [teacher, setTeacher] = useState()
+    const [teacher, setTeacher] = useState({})
+    const [allStudents, setAllStudents] = useState([])
     const [serverError, setServerError] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const getTeacher = async () => {
+    const getTeacherData = async () => {
         try {
             setLoading(true)
-            const { data: teacherData } = await getStudent(userData.id);
+            const { data: teacherData } = await getTeacher(userData.id);
+            const { data: studentsData } = await getAllStudents();
             setTeacher(teacherData);
+            setAllStudents(studentsData)
             setServerError(false)
             setLoading(false)
         } catch (err) {
@@ -26,7 +29,7 @@ const Teacher = ({ allStudents, userData, setShowNewStPage }) => {
         }
     };
     useEffect(() => {
-        getTeacher()
+        getTeacherData()
     }, [])
 
     return (
@@ -37,9 +40,7 @@ const Teacher = ({ allStudents, userData, setShowNewStPage }) => {
                     <li style={{ backgroundColor: activeSection === 2 ? "#e9e9e9ff" : "white" }} className={styles.groupLi} onClick={() => setActiveSection(2)}>دروس</li>
                 </ul>
             </section>
-            {
-                loading ? <Loading /> : null
-            }
+            {loading ? <Loading /> : null}
             {activeSection === 1 ?
                 allStudents.length > 0 ?
                     allStudents.map((st, index) => (
@@ -64,7 +65,7 @@ const Teacher = ({ allStudents, userData, setShowNewStPage }) => {
                         (
                             <div className={styles.errorContainer}>
                                 <p>درسی یافت نشد!</p>
-                                <button className={styles.tryButton} onClick={getTeacher}>تلاش مجدد</button>
+                                <button className={styles.tryButton} onClick={getTeacherData}>تلاش مجدد</button>
                             </div>
                         )
                     }

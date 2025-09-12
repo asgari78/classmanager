@@ -1,21 +1,17 @@
 import { useState } from "react";
 import styles from "../styles/login.module.css"
 
-const Login = ({ requestLogin, errorServer }) => {
+const Login = ({ requestLogin, errorServer, checkTeacher, setCheckTeacher }) => {
 
     const [formData, setFormData] = useState({
         username: "",
         password: ""
     })
-
     const [errors, setErrors] = useState({
         username: false,
         password: false
     })
-
     const [allowed, setAllowed] = useState(false)
-
-
 
     const setUsername = (event) => {
         let value = event.target.value;
@@ -72,8 +68,11 @@ const Login = ({ requestLogin, errorServer }) => {
         <div className={styles.loginContainer}>
             <section>
                 <div className={styles.header}>
-                    <span>ورود دانش آموز</span>
-                    <i className="fas fa-question"></i>
+                    <span>ورود <span>{checkTeacher ? "آموزگار" : "دانش آموز"}</span></span>
+                    <button className={checkTeacher ? styles.onCheck : styles.offCheck} onClick={() => setCheckTeacher(!checkTeacher)}>
+                        <p>آموزگار هستم</p>
+                        <div></div>
+                    </button>
                 </div>
                 <form method="POST">
                     <div className="username-section">

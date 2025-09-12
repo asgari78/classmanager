@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../../styles/teacher/lesson.module.css"
-import { updateLesson } from "../../services/Students";
+import { updateLesson } from "../../services/axiosApi";
 import Loading from "../general/Loading"
 
 const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {

@@ -2,27 +2,14 @@ import Login from "./Login";
 import Teacher from "./teacher/Teacher";
 
 import styles from "../styles/container.module.css"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import { getAllStudents } from "../services/Students.js"
 import Loading from "./general/Loading.jsx";
 import NewStudent from "./teacher/NewStudent.jsx"
 
-const Container = ({ userData, requestLogin, errorServer, loading }) => {
+const Container = ({ userData, requestLogin, errorServer, loading, checkTeacher, setCheckTeacher }) => {
 
-    const [allStudents, setAllStudents] = useState([])
     const [showNewStPage, setShowNewStPage] = useState(false)
-    const [teacherData, setTeacherData] = useState({})
-
-    useEffect(() => {
-        const getStudents = async () => {
-            let { data: allSt } = await getAllStudents()
-            setTeacherData(allSt.filter(st => st.isTeacher)[0])
-            allSt = allSt.filter(st => !st.isTeacher)
-            setAllStudents(allSt)
-        }
-        getStudents()
-    }, [])
 
     return (
         <>
@@ -31,10 +18,10 @@ const Container = ({ userData, requestLogin, errorServer, loading }) => {
                 <Loading />
             }
             {userData.length == 0 ?
-                <Login requestLogin={requestLogin} errorServer={errorServer} />
+                <Login requestLogin={requestLogin} errorServer={errorServer} checkTeacher={checkTeacher} setCheckTeacher={setCheckTeacher} />
                 :
                 <>
-                    <NewStudent show={showNewStPage} onClose={() => setShowNewStPage(false)} teacherData={teacherData} />
+                    <NewStudent userData={userData} show={showNewStPage} onClose={() => setShowNewStPage(false)} />
                     <div className={styles.Container}>
                         <section className={styles.header}>
                             <i className="fas fa-bars"></i>
@@ -46,7 +33,7 @@ const Container = ({ userData, requestLogin, errorServer, loading }) => {
                         </section>
                         {
                             userData.isTeacher ?
-                                <Teacher setShowNewStPage={setShowNewStPage} allStudents={allStudents} userData={userData} />
+                                <Teacher setShowNewStPage={setShowNewStPage} userData={userData} />
                                 :
                                 <p><span>{userData.namefamily}</span> خوش آمدید </p>
                         }

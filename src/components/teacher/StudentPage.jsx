@@ -2,7 +2,7 @@ import styles from "../../styles/teacher/studentPage.module.css"
 
 import { useState } from "react"
 import Lesson from "./Lesson"
-import { getStudent } from "../../services/Students"
+import { getStudent } from "../../services/axiosApi"
 
 const StudentPage = ({ st, setShowStPage }) => {
     const [page, setpage] = useState(3)
@@ -18,7 +18,6 @@ const StudentPage = ({ st, setShowStPage }) => {
             console.error("خطا در دریافت دانش‌آموز:", err);
         }
     };
-
     const changePage = (pageNumber) => {
         setpage(parseInt(pageNumber))
     }

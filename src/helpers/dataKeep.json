@@ -1,1087 +1,1010 @@
 [
     {
-        "name": "علیرضا لطفی",
-        "className": "ششم",
-        "group": 3,
+        "profileImage": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/students/student1.png",
+        "namefamily": "علیرضا لطفی",
+        "dateBirth": "",
+        "selfCode": "0371923445",
+        "dadName": "",
+        "phoneNumber": "",
+        "groupId": 3,
+        "groupName": "گروه سوم",
         "roleId": 1,
-        "role": "سرگروه",
-        "lessons": [
-            {
-                "name": "ریاضی",
-                "score": [
-                    {
-                        "name": "مهر",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "آبان",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "آذر",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "دی",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "بهمن",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "اسفند",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "فروردین",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "اردیبهشت",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "خرداد",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    }
-                ],
-                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/riazi.jpg",
-                "id": "L01"
-            },
-            {
-                "name": "علوم",
-                "score": [
-                    {
-                        "name": "مهر",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "آبان",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "آذر",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "دی",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "بهمن",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "اسفند",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "فروردین",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "اردیبهشت",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "خرداد",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    }
-                ],
-                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/olom.jpg",
-                "id": "L02"
-            },
-            {
-                "name": "فارسی",
-                "score": [
-                    {
-                        "name": "مهر",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "آبان",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "آذر",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "دی",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "بهمن",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "اسفند",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "فروردین",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "اردیبهشت",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "خرداد",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    }
-                ],
-                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/farsi.jpg",
-                "id": "L03"
-            },
-            {
-                "name": "فناوری",
-                "score": [
-                    {
-                        "name": "نوبت اول",
-                        "value": [
-                            {
-                                "name": "ارزشیابی اول",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "نوبت دوم",
-                        "value": [
-                            {
-                                "name": "ارزشیابی اول",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی چهارم",
-                                "value": null
-                            }
-                        ]
-                    }
-                ],
-                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/fanavari.jpg",
-                "id": "L04"
-            },
-            {
-                "name": "هدیه",
-                "score": [
-                    {
-                        "name": "نوبت اول",
-                        "value": [
-                            {
-                                "name": "ارزشیابی اول",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "نوبت دوم",
-                        "value": [
-                            {
-                                "name": "ارزشیابی اول",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی چهارم",
-                                "value": null
-                            }
-                        ]
-                    }
-                ],
-                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/hediye.jpg",
-                "id": "L05"
-            },
-            {
-                "name": "مطالعات",
-                "score": [
-                    {
-                        "name": "مهر",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "آبان",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "آذر",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "دی",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "بهمن",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "اسفند",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "فروردین",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "اردیبهشت",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "خرداد",
-                        "value": [
-                            {
-                                "name": "هفته اول",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "هفته چهارم",
-                                "value": null
-                            }
-                        ]
-                    }
-                ],
-                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/motaleat.jpg",
-                "id": "L06"
-            },
-            {
-                "name": "قرآن",
-                "score": [
-                    {
-                        "name": "نوبت اول",
-                        "value": [
-                            {
-                                "name": "ارزشیابی اول",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "نوبت دوم",
-                        "value": [
-                            {
-                                "name": "ارزشیابی اول",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی چهارم",
-                                "value": null
-                            }
-                        ]
-                    }
-                ],
-                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/quran.jpg",
-                "id": "L07"
-            },
-            {
-                "name": "تفکر",
-                "score": [
-                    {
-                        "name": "نوبت اول",
-                        "value": [
-                            {
-                                "name": "ارزشیابی اول",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی چهارم",
-                                "value": null
-                            }
-                        ]
-                    },
-                    {
-                        "name": "نوبت دوم",
-                        "value": [
-                            {
-                                "name": "ارزشیابی اول",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی دوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی سوم",
-                                "value": null
-                            },
-                            {
-                                "name": "ارزشیابی چهارم",
-                                "value": null
-                            }
-                        ]
-                    }
-                ],
-                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/tafakor.jpg",
-                "id": "L08"
-            }
-        ],
+        "roleName": "سرگروه",
+        "classYear": "ششم",
+        "id": "st1",
         "homework": [],
         "activity": [],
         "login": false,
         "username": "alirezalotfi",
         "password": "E3R10@87",
         "isTeacher": false,
-        "code": "0371923445",
-        "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/students/student1.png",
-        "id": "1"
-    },
-    {
-        "name": "امیر مطلوبی",
-        "className": "ششم",
-        "group": 2,
-        "roleId": 2,
-        "role": "معاون",
         "lessons": [
             {
                 "name": "ریاضی",
-                "score": "نیاز به تلاش",
+                "score": [
+                    {
+                        "name": "مهر",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": "نیاز به تلاش"
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "آبان",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "آذر",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "دی",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "بهمن",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "اسفند",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "فروردین",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "اردیبهشت",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "خرداد",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    }
+                ],
+                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/riazi.jpg",
                 "id": "L01"
             },
             {
                 "name": "علوم",
-                "score": "خوب",
+                "score": [
+                    {
+                        "name": "مهر",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "آبان",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "آذر",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "دی",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "بهمن",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "اسفند",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "فروردین",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "اردیبهشت",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "خرداد",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    }
+                ],
+                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/olom.jpg",
                 "id": "L02"
-            }
-        ],
-        "homework": [],
-        "activity": [],
-        "login": false,
-        "username": "amirmatlobi",
-        "password": "35CR35@4",
-        "isTeacher": false,
-        "code": "0378854145",
-        "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/students/student2.png",
-        "id": "2"
-    },
-    {
-        "name": "امیر محمد اعظمی",
-        "className": "ششم",
-        "group": 1,
-        "roleId": 3,
-        "role": "زیرگروه",
-        "lessons": [
-            {
-                "name": "ریاضی",
-                "score": "نیاز به تلاش",
-                "id": "L01"
             },
             {
-                "name": "علوم",
-                "score": "خوب",
-                "id": "L02"
-            }
-        ],
-        "homework": [],
-        "activity": [],
-        "login": false,
-        "username": "amirmohammadazami",
-        "password": "308U05@1",
-        "isTeacher": false,
-        "code": "0379986543",
-        "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/students/student3.png",
-        "id": "3"
-    },
-    {
-        "name": "شهاب فراهانی",
-        "className": "ششم",
-        "group": 2,
-        "roleId": 3,
-        "role": "زیرگروه",
-        "lessons": [
-            {
-                "name": "ریاضی",
-                "score": "نیاز به تلاش",
-                "id": "L01"
+                "name": "فارسی",
+                "score": [
+                    {
+                        "name": "مهر",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "آبان",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "آذر",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "دی",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "بهمن",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "اسفند",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "فروردین",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "اردیبهشت",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "خرداد",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    }
+                ],
+                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/farsi.jpg",
+                "id": "L03"
             },
             {
-                "name": "علوم",
-                "score": "خوب",
-                "id": "L02"
+                "name": "فناوری",
+                "score": [
+                    {
+                        "name": "نوبت اول",
+                        "value": [
+                            {
+                                "name": "ارزشیابی اول",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "نوبت دوم",
+                        "value": [
+                            {
+                                "name": "ارزشیابی اول",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی چهارم",
+                                "value": null
+                            }
+                        ]
+                    }
+                ],
+                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/fanavari.jpg",
+                "id": "L04"
+            },
+            {
+                "name": "هدیه",
+                "score": [
+                    {
+                        "name": "نوبت اول",
+                        "value": [
+                            {
+                                "name": "ارزشیابی اول",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "نوبت دوم",
+                        "value": [
+                            {
+                                "name": "ارزشیابی اول",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی چهارم",
+                                "value": null
+                            }
+                        ]
+                    }
+                ],
+                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/hediye.jpg",
+                "id": "L05"
+            },
+            {
+                "name": "مطالعات",
+                "score": [
+                    {
+                        "name": "مهر",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "آبان",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "آذر",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "دی",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "بهمن",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "اسفند",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "فروردین",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "اردیبهشت",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "خرداد",
+                        "value": [
+                            {
+                                "name": "هفته اول",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "هفته چهارم",
+                                "value": null
+                            }
+                        ]
+                    }
+                ],
+                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/motaleat.jpg",
+                "id": "L06"
+            },
+            {
+                "name": "قرآن",
+                "score": [
+                    {
+                        "name": "نوبت اول",
+                        "value": [
+                            {
+                                "name": "ارزشیابی اول",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "نوبت دوم",
+                        "value": [
+                            {
+                                "name": "ارزشیابی اول",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی چهارم",
+                                "value": null
+                            }
+                        ]
+                    }
+                ],
+                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/quran.jpg",
+                "id": "L07"
+            },
+            {
+                "name": "تفکر",
+                "score": [
+                    {
+                        "name": "نوبت اول",
+                        "value": [
+                            {
+                                "name": "ارزشیابی اول",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی چهارم",
+                                "value": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "نوبت دوم",
+                        "value": [
+                            {
+                                "name": "ارزشیابی اول",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی دوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی سوم",
+                                "value": null
+                            },
+                            {
+                                "name": "ارزشیابی چهارم",
+                                "value": null
+                            }
+                        ]
+                    }
+                ],
+                "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/tafakor.jpg",
+                "id": "L07"
             }
-        ],
-        "login": false,
-        "username": "shahabfarahani",
-        "password": "3@0081EW",
-        "isTeacher": false,
-        "code": "0381162902",
-        "image": "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/students/student4.png",
-        "id": "4"
+        ]
     },
     {
-        "name": "محمدجواد عسگری",
-        "className": "ششم",
+        "id": "t1",
+        "namefamily": "محمدجواد عسگری",
+        "classCode": "ششم",
         "lessons": [
             {
                 "name": "ریاضی",
@@ -1124,11 +1047,37 @@
                 "id": "L08"
             }
         ],
+        "groups": [
+            {
+                "name": "گروه اول",
+                "id": "g01"
+            },
+            {
+                "name": "گروه دوم",
+                "id": "g01"
+            },
+            {
+                "name": "گروه سوم",
+                "id": "g01"
+            },
+            {
+                "name": "گروه چهارم",
+                "id": "g01"
+            },
+            {
+                "name": "گروه پنجم",
+                "id": "g01"
+            },
+            {
+                "name": "گروه ششم",
+                "id": "g01"
+            }
+        ],
         "login": true,
         "username": "mdjdasgari",
         "password": "Mdjdaden@2644825",
         "isTeacher": true,
-        "code": "0371910145",
-        "id": "t1"
+        "selfCode": "0371910145",
+        "profileImage": ""
     }
 ]

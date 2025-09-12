@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Container from './components/Container'
 import './styles/App.css'
 import { useEffect, useState } from 'react'
-import { getAllStudents, getStudent, putStudent } from './services/Students'
+import { getAllStudents, getAllTeacher, getStudent, getTeacher, putStudent, putTeacher } from './services/axiosApi.js'
 import NetworkStatus from './components/general/NetworkStatus'
 import "../node_modules/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css"
 import "../node_modules/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"
@@ -12,24 +12,16 @@ function App() {
   const [errorServer, setErrorServer] = useState("")
   const [loading, setLoading] = useState(false)
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [checkTeacher, setCheckTeacher] = useState(false)
 
   useEffect(() => {
-    const handleOnline = () => {
-      setIsOnline(true)
-      loginStatus()
-    };
-    const handleOffline = () => setIsOnline(false);
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-
     const loginStatus = async () => {
-      setLoading(true)
-      let localStudent = localStorage.getItem("student");
-      localStudent = JSON.parse(localStudent)
-      if (localStudent) {
-        const { data: serverStudent } = await getStudent(localStudent.id)
-        if (serverStudent.login) {
-          setUserData(serverStudent)
+      let localUser = JSON.parse(localStorage.getItem("user"));
+      if (localUser) {
+        setLoading(true)
+        const { data: serverUser } = await (checkTeacher ? getStudent(localUser.id) : getTeacher(localUser.id))
+        if (serverUser.login) {
+          setUserData(serverUser)
           setLoading(false)
         } else {
           setUserData([])
@@ -40,8 +32,13 @@ function App() {
         setLoading(false)
       }
     }
+    const handleOnline = () => { setIsOnline(true); loginStatus() };
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+    handleOffline()
+    handleOnline()
     loginStatus()
-
     return () => {
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);
@@ -51,11 +48,12 @@ function App() {
     setLoading(true)
     const username = data.username;
     const password = data.password;
-    const { data: userData } = await getAllStudents()
-    if (userData) {
-      userData.map(st => {
-        if (st.username === username && st.password === password) {
-          loggin(st)
+    const { data: usersData } = await (checkTeacher ? getAllTeacher() : getAllStudents());
+
+    if (usersData) {
+      usersData.map(user => {
+        if (user.username === username && user.password === password) {
+          loggin(user)
         } else {
           setLoading(false)
           setErrorServer("نام کاربری یا رمز عبور اشتباه است")
@@ -66,12 +64,14 @@ function App() {
       setErrorServer("خطا در ارتباط با سرور")
     }
   }
-  const loggin = async (student) => {
+  const loggin = async (user) => {
     setErrorServer("")
-    student.login = true;
-    await putStudent(student);
-    setUserData(student);
-    localStorage.setItem("student", JSON.stringify(student))
+    user.login = true;
+    console.log(user);
+
+    await (checkTeacher ? putTeacher(user) : putStudent(user));
+    setUserData(user);
+    localStorage.setItem("user", JSON.stringify(user))
     setLoading(false)
   }
 
@@ -79,7 +79,7 @@ function App() {
     <BrowserRouter>
       {isOnline ?
         <Routes>
-          <Route path='/' element={<Container loading={loading} errorServer={errorServer} userData={userData} requestLogin={requestLogin} />} />
+          <Route path='/' element={<Container checkTeacher={checkTeacher} loading={loading} errorServer={errorServer} userData={userData} requestLogin={requestLogin} setCheckTeacher={setCheckTeacher} />} />
         </Routes>
         :
         <NetworkStatus />
