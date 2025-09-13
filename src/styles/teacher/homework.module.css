@@ -1,0 +1,97 @@
+.homeworkContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 8rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+.saveBtn{
+    background-color: #8ad478;
+    border: none;
+    width: 100%;
+    height: 3.5rem!important;
+    font-size: 1.2rem;
+    transition: all .3s;
+}
+.saveBtn:disabled{
+    opacity: .25;
+}
+.saveBtn:not(:disabled):active{
+    background-color: #58b93f;
+}
+.homeworkContainer table{
+    width: 100%;
+    height: max-content;
+    max-height: 20rem;
+    border-collapse: collapse;
+}
+table *{
+    position: relative;
+    text-align: center;
+}
+table thead{
+    background-color: #d3ebe0;
+}
+table tbody tr:nth-child(-n + 4),
+table tbody tr:nth-child(n + 6):nth-child(-n + 10) {
+    height: 3rem;
+}
+table th{
+    height: 2.5rem;
+    width: 80%;
+}
+table th:first-child , table td:first-child{
+    width: 20%;
+    border-left: 1px solid #8d8d8d;
+}
+tbody tr:nth-child(even){
+    background-color: #f1f1f1e5;
+}
+tbody tr:nth-child(odd){
+    background-color: #ffffff;
+}
+.mainTerm{
+    height: 2rem;
+    background-color: #d8e3e9;
+    font-weight: bold;
+}
+.countContainer{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.countContainer>button{
+    width: 25%;
+    height: 100%!important;
+    border: none;
+    background-color: transparent;
+}
+.countContainer>button i{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+}
+.countContainer>button:nth-child(1) i{
+    color: #3fad23;
+}
+.countContainer>button:nth-child(3) i{
+    color: #ad2323;
+}
+.countContainer>button:nth-child(4) i{
+    color: #e29e1e;
+}
+.countContainer>span{
+    width: 25%;
+    height: 100%!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
