@@ -4,13 +4,14 @@ import { updateLesson, getStudent } from "../../services/axiosApi";
 import Loading from "../general/Loading"
 
 const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
+    const [currentLesson, setCurrentLesson] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [saveMode, setSaveMode] = useState(false);
 
-    const [saveMode, setSaveMode] = useState(false)
-    const [loading, setLoading] = useState(false)
-    const [currentLesson, setCurrentLesson] = useState(null)
-    const VALUE_STATES = [null, "نیاز به تلاش", "قابل قبول", "خوب", "خیلی خوب",];
+    const VALUE_STATES = [null, "نیاز به تلاش", "قابل قبول", "خوب", "خیلی خوب"];
 
     useEffect(() => {
+        // هر بار که lesson تغییر کرد، آخرین اطلاعات رو از سرور بگیر
         const fetchLesson = async () => {
             setLoading(true);
             try {
@@ -24,26 +25,13 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
             }
         };
         fetchLesson();
-    }, [st.id, lesson]);
+    }, [lesson, st.id]);
 
-    const renderValue = (val) => {
-        switch (val) {
-            case "نیاز به تلاش":
-                return <span className={styles.niaz}>نیاز به تلاش</span>;
-            case "قابل قبول":
-                return <span className={styles.gabel}>قابل قبول</span>;
-            case "خوب":
-                return <span className={styles.khob}>خوب</span>;
-            case "خیلی خوب":
-                return <span className={styles.khkhob}>خیلی خوب</span>;
-            default:
-                return null;
-        }
-    };
     const getNextValue = (val) => {
         const idx = VALUE_STATES.indexOf(val);
         return VALUE_STATES[(idx + 1) % VALUE_STATES.length];
     };
+
     const handleTable = (monthIndex, weekIndex) => {
         setCurrentLesson(prev => {
             const newScore = prev.score.map((month, mIdx) => {
@@ -51,10 +39,7 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
 
                 const newWeeks = month.value.map((week, wIdx) => {
                     if (wIdx !== weekIndex) return week;
-                    return {
-                        ...week,
-                        value: getNextValue(week.value)
-                    };
+                    return { ...week, value: getNextValue(week.value) };
                 });
                 return { ...month, value: newWeeks };
             });
@@ -62,17 +47,17 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
             return { ...prev, score: newScore };
         });
     };
+
     const handleSave = async () => {
         try {
-            setLoading(true)
+            setLoading(true);
             await updateLesson(st.id, currentLesson);
             await refreshStudent();
             setSaveMode(false);
-            closeOneLesoon()
+            closeOneLesoon();
         } catch (err) {
-            alert(err);
-        }
-        finally {
+            console.error(err);
+        } finally {
             setLoading(false);
         }
     };
@@ -100,40 +85,26 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentLesson.score.length > 2 ? currentLesson.score.map((month, mIdx) => (
+                        {currentLesson.score.map((row, mIdx) => (
                             <tr key={mIdx}>
-                                <td>{month.name}</td>
-                                {month.value.map((week, wIdx) => (
+                                <td>{row.name}</td>
+                                {row.value.map((cell, wIdx) => (
                                     <td key={wIdx}>
                                         <button
                                             className={styles.inputTable}
                                             onClick={() => handleTable(mIdx, wIdx)}
                                         >
-                                            {renderValue(week.value)}
-                                        </button>
-                                    </td>
-                                ))}
-                            </tr>
-                        )) : currentLesson.score.map((term, index) => (
-                            <tr key={index}>
-                                <td>{term.name}</td>
-                                {term.value.map((exam, idx) => (
-                                    <td key={idx}>
-                                        <button
-                                            className={styles.inputTable}
-                                            onClick={() => handleTable(index, idx)}
-                                        >
-                                            {renderValue(exam.value)}
+                                            {cell.value || "-"}
                                         </button>
                                     </td>
                                 ))}
                             </tr>
                         ))}
                     </tbody>
-
                 </table>
             </section>
         </div >
-    )
-}
+    );
+};
+
 export default Lesson;

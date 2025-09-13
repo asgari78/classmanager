@@ -1,6 +1,6 @@
 import styles from "../../styles/teacher/studentPage.module.css"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Lesson from "./Lesson"
 import { getStudent } from "../../services/axiosApi"
 
@@ -13,8 +13,6 @@ const StudentPage = ({ st, setShowStPage }) => {
     const refreshStudent = async () => {
         try {
             const { data } = await getStudent(student.id);
-            console.log();
-
             setStudent(data);
         } catch (err) {
             console.error("خطا در دریافت دانش‌آموز:", err);
@@ -31,6 +29,9 @@ const StudentPage = ({ st, setShowStPage }) => {
         setShowOneLesson(false)
         setLessonData(null)
     }
+    useEffect(() => {
+        refreshStudent()
+    }, [])
 
     return (
         <div className={styles.container}>
