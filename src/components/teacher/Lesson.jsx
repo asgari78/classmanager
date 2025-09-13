@@ -100,30 +100,16 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentLesson.score.length > 2 ? currentLesson.score.map((month, mIdx) => (
+                        {currentLesson.score.map((row, mIdx) => (
                             <tr key={mIdx}>
-                                <td>{month.name}</td>
-                                {month.value.map((week, wIdx) => (
+                                <td>{row.name}</td>
+                                {row.value.map((cell, wIdx) => (
                                     <td key={wIdx}>
                                         <button
                                             className={styles.inputTable}
                                             onClick={() => handleTable(mIdx, wIdx)}
                                         >
-                                            {renderValue(week.value)}
-                                        </button>
-                                    </td>
-                                ))}
-                            </tr>
-                        )) : currentLesson.score.map((term, index) => (
-                            <tr key={index}>
-                                <td>{term.name}</td>
-                                {term.value.map((exam, idx) => (
-                                    <td key={idx}>
-                                        <button
-                                            className={styles.inputTable}
-                                            onClick={() => handleTable(index, idx)}
-                                        >
-                                            {renderValue(exam.value)}
+                                            {cell.value || "-"}
                                         </button>
                                     </td>
                                 ))}
