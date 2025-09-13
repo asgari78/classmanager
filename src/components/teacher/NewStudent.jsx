@@ -3,7 +3,6 @@ import styles from "../../styles/teacher/newStudent.module.css"
 import { addStudent } from "../../services/axiosApi";
 import Loading from "../general/Loading";
 import { supabase } from "../../lib/supabaseClient";
-const BUCKET = "test";
 
 
 const NewStudent = ({ show, onClose, userData }) => {
@@ -1014,7 +1013,47 @@ const NewStudent = ({ show, onClose, userData }) => {
         ]
     })
 
+    const validationImage = async () => {
+        try {
+            let imageUrl = null;
+            const file = fileInputRef.current.files[0];
 
+            const fileName = `students/${Date.now()}-${file.name}`;
+
+            const { data: uploadData, error: uploadError } = await supabase.storage
+                .from('test')
+                .upload(fileName, file, {
+                    cacheControl: '3600',
+                    upsert: false
+                });
+
+            if (uploadError) {
+                console.error('خطا در آپلود عکس:', uploadError);
+                throw uploadError;
+            }
+
+            // دریافت URL عمومی
+            const { data: urlData } = supabase.storage
+                .from('test')
+                .getPublicUrl(fileName);
+            console.log(urlData);
+
+
+            imageUrl = urlData.publicUrl;
+
+            // ارسال داده دانش آموز
+            setFormData(
+                prev => {
+                    return {
+                        ...prev, profileImage: imageUrl
+                    }
+                }
+            )
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
     useEffect(() => {
         if (show) {
             setVisible(true)
@@ -1071,8 +1110,6 @@ const NewStudent = ({ show, onClose, userData }) => {
         }
 
     }
-
-
     const validationForm = async (e) => {
         setFormData(prev => {
             return {
@@ -1095,45 +1132,11 @@ const NewStudent = ({ show, onClose, userData }) => {
     }
     const submitForm = async () => {
         try {
-            setLoading(true);
-
-            // آپلود عکس اگر وجود دارد
-            let imageUrl = null;
-            if (formData.profileImage && fileInputRef.current.files[0]) {
-                const file = fileInputRef.current.files[0];
-                const fileName = `students/${Date.now()}-${file.name}`;
-
-                const { data: uploadData, error: uploadError } = await supabase.storage
-                    .from(BUCKET)
-                    .upload(fileName, file, {
-                        cacheControl: '3600',
-                        upsert: false
-                    });
-
-                if (uploadError) {
-                    console.error('خطا در آپلود عکس:', uploadError);
-                    throw uploadError;
-                }
-
-                // دریافت URL عمومی
-                const { data: urlData } = supabase.storage
-                    .from(BUCKET)
-                    .getPublicUrl(fileName);
-
-                imageUrl = urlData.publicUrl;
-            }
-
-            // ارسال داده دانش آموز
-            const studentData = {
-                ...formData,
-                profileImage: imageUrl
-            };
-
-            const { data } = await addStudent(studentData);
+            const { data } = await addStudent(formData);
             setLoading(false);
             onClose(); // بستن modal پس از موفقیت
-
-        } catch (err) {
+        }
+        catch (err) {
             console.log(err);
             setLoading(false);
         }
@@ -1163,7 +1166,7 @@ const NewStudent = ({ show, onClose, userData }) => {
                                 name="profileImage"
                                 id="profileImage"
                                 accept="image/png, image/jpg, image/jpeg, image/svg"
-                                onChange={validationForm}
+                                onChange={validationImage}
                             />
                             <img
                                 onClick={() => fileInputRef.current.click()}

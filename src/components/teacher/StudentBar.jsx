@@ -8,7 +8,7 @@ const StudentBar = ({ st, index }) => {
     return (
         <>
             <Link className={styles.student} key={index} onClick={() => { setShowStPage(true) }}>
-                <img src={st.image} alt="studentImage" />
+                <img src={st.profileImage} alt="studentImage" />
                 <div className={styles.infoContainer}>
                     <p>{st.namefamily} {<span style={{ color: st.roleId == 1 || st.roleId == 2 ? "#1d6c91" : "#2b2b2be5", fontWeight: st.roleId == 1 || st.roleId == 2 ? "bold" : 0 }} >({st.roleName})</span>}</p>
                     <span>{st.groupName}</span>
