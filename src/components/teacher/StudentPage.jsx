@@ -13,6 +13,8 @@ const StudentPage = ({ st, setShowStPage }) => {
     const refreshStudent = async () => {
         try {
             const { data } = await getStudent(student.id);
+            console.log();
+
             setStudent(data);
         } catch (err) {
             console.error("خطا در دریافت دانش‌آموز:", err);

@@ -104,31 +104,34 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
                         {copyLesson.score.length > 2 ? copyLesson.score.map((month, mIdx) => (
                             <tr key={mIdx}>
                                 <td>{month.name}</td>
-                                {
-                                    month.value.map((week, wIdx) => (
-                                        <td key={wIdx}>
-                                            <button className={styles.inputTable} onClick={() => handleTable(mIdx, wIdx)}>
-                                                {renderValue(week.value)}
-                                            </button>
-                                        </td>
-                                    ))
-                                }
+                                {month.value.map((week, wIdx) => (
+                                    <td key={wIdx}>
+                                        <button
+                                            className={styles.inputTable}
+                                            onClick={() => handleTable(mIdx, wIdx)}
+                                        >
+                                            {renderValue(week.value)}
+                                        </button>
+                                    </td>
+                                ))}
                             </tr>
-                        )) : lesson.score.map((term, index) => (
+                        )) : copyLesson.score.map((term, index) => (
                             <tr key={index}>
                                 <td>{term.name}</td>
-                                {
-                                    term.value.map((exam, index) => (
-                                        <td key={index}>
-                                            <button className={styles.inputTable}>
-                                                {exam.value}
-                                            </button>
-                                        </td>
-                                    ))
-                                }
+                                {term.value.map((exam, idx) => (
+                                    <td key={idx}>
+                                        <button
+                                            className={styles.inputTable}
+                                            onClick={() => handleTable(index, idx)}
+                                        >
+                                            {renderValue(exam.value)}
+                                        </button>
+                                    </td>
+                                ))}
                             </tr>
                         ))}
                     </tbody>
+
                 </table>
             </section>
         </div >
