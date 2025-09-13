@@ -35,7 +35,7 @@ const StudentPage = ({ st, setShowStPage }) => {
             <section className={styles.header}>
                 <i className="fas fa-ellipsis-v"></i>
                 <p>{st.namefamily} {<span style={st.roleId == 1 || st.roleId == 2 ? { color: "#1d6c91", fontWeight: "bold" } : { color: "#2b2b2be5", fontWeight: 0 }}>({st.roleName})</span>}</p>
-                <img src={st.image} alt="studentImage" />
+                <img src={st.profileImage} alt="studentImage" />
                 <i id="backToStudentsPage" onClick={() => { setShowStPage(false) }} className="fas fa-arrow-left"></i>
             </section>
             <section className={styles.contentContainer}>
