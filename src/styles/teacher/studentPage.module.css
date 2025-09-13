@@ -9,6 +9,7 @@
     height: 100vh;
     background-color: #ffffff;
     z-index: 2;
+    overflow: hidden;
 }
 
 .header{
@@ -54,6 +55,7 @@
 }
 
 .content{
+    position: relative;
     width: 100%;
     height: max-content;
     display: grid;
@@ -63,7 +65,6 @@
     align-items: flex-start;
     gap: 1rem 0rem;
     padding: .7rem;
-    margin-top: 1rem;
 }
 
 .lesson{
@@ -92,6 +93,102 @@
     font-size: 1rem;
     color: #2b2b2be5;
 }
+.saveBtn{
+    background-color: #8ad478;
+    border: none;
+    border-radius: .7rem;
+    width: 100%;
+    max-width: 15rem;
+    height: 3.5rem!important;
+    font-size: 1.2rem;
+    transition: all .3s;
+}
+.saveBtn:disabled{
+    opacity: .25;
+}
+.saveBtn:not(:disabled):active{
+    transform: scale(.97) ;
+}
+.homeworkContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    overflow-y: auto;
+}
+.homeworkContainer table{
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+}
+.content table *{
+    height: 3.5rem;
+    position: relative;
+    text-align: center;
+}
+.content table thead{
+    background-color: #d3ebe0;
+}
+.content table th{
+    width: 80%;
+}
+.content table th:first-child , .content table td:first-child{
+    width: 20%;
+    border-left: 1px solid #8d8d8d;
+}
+.content tbody tr:nth-child(even){
+    background-color: #f1f1f1e5;
+}
+.content tbody tr:nth-child(odd){
+    background-color: #ffffff;
+}
+.mainTerm{
+    background-color: #d8e3e9;
+    height: 3rem!important;
+    font-weight: bold;
+}
+.countContainer{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.countContainer>button{
+    width: 25%;
+    height: 100%!important;
+    border: none;
+    background-color: transparent;
+}
+.countContainer>button i{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+}
+.countContainer>button:nth-child(1) i{
+    color: #3fad23;
+}
+.countContainer>button:nth-child(3) i{
+    color: #ad2323;
+}
+.countContainer>button:nth-child(4) i{
+    color: #e29e1e;
+}
+.countContainer>span{
+    width: 25%;
+    height: 100%!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .footer{
     width: 100%;
@@ -158,15 +255,6 @@
 
 .footer button:nth-child(3).active::after{
     animation: rotateBorder 5s linear infinite;
-}
-
-@keyframes rotateBorder {
-    0%{
-        transform: rotate(0deg);
-    }
-    100%{
-        transform: rotate(360deg);
-    }
 }
 
 .footer button i{

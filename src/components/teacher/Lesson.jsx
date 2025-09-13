@@ -77,8 +77,9 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
         }
     };
 
-    if (!currentLesson) return <Loading />;
-
+    if (!currentLesson || !currentLesson.score) {
+        return <Loading />;
+    }
     return (
         <div className={styles.lessonContainer}>
             {loading && <Loading />}
@@ -109,7 +110,7 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
                                             className={styles.inputTable}
                                             onClick={() => handleTable(mIdx, wIdx)}
                                         >
-                                            {cell.value || "-"}
+                                            {renderValue(cell.value)}
                                         </button>
                                     </td>
                                 ))}

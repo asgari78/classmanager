@@ -3,12 +3,15 @@ import styles from "../../styles/teacher/studentPage.module.css"
 import { useEffect, useState } from "react"
 import Lesson from "./Lesson"
 import { getStudent } from "../../services/axiosApi"
+import Loading from "../general/Loading"
 
 const StudentPage = ({ st, setShowStPage }) => {
+    const [saveMode, setSaveMode] = useState(true)
     const [page, setpage] = useState(3)
     const [lessonData, setLessonData] = useState(null)
     const [showOneLesson, setShowOneLesson] = useState(false)
     const [student, setStudent] = useState(st);
+    const [copyHomeWork, setCopyHomeWork] = useState(null)
 
     const refreshStudent = async () => {
         try {
@@ -20,6 +23,7 @@ const StudentPage = ({ st, setShowStPage }) => {
     };
     const changePage = (pageNumber) => {
         setpage(parseInt(pageNumber))
+        setShowOneLesson(false)
     }
     const openOneLesson = (lesson) => {
         setShowOneLesson(true)
@@ -31,8 +35,15 @@ const StudentPage = ({ st, setShowStPage }) => {
     }
     useEffect(() => {
         refreshStudent()
+        setCopyHomeWork(student.homework)
     }, [])
+    const handleSave = async () => {
 
+    }
+    const handleSum = (index) => {
+        let sum = student.homework[index].months.reduce((sum, month) => sum + month.count, 0)
+        return sum
+    }
     return (
         <div className={styles.container}>
             <section className={styles.header}>
@@ -45,11 +56,53 @@ const StudentPage = ({ st, setShowStPage }) => {
                 <section className={styles.content}>
                     {
                         page === 1 &&
-                        student.homework.map((work, index) => (
-                            <div className={styles.course} key={index}>
-                                <span>{work.jobs[0].question}</span>
-                            </div>
-                        ))
+                        <div className={styles.homeworkContainer}>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>نام ماه</th>
+                                        <th>تعداد تکالیف انجام شده</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {student.homework[0].months.map((month, idx) => (
+                                        <tr key={idx}>
+                                            <td>{month.name}</td>
+                                            <td>
+                                                <div className={styles.countContainer}>
+                                                    <button><i className="fas fa-plus"></i></button>
+                                                    <span>{month.count.toLocaleString("fa-IR")}</span>
+                                                    <button><i className="fas fa-minus"></i></button>
+                                                    <button><i className="fas fa-undo-alt"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    <tr>
+                                        <td className={styles.mainTerm}>نوبت اول</td>
+                                        <td className={styles.mainTerm}>مجموعا {handleSum(0).toLocaleString("fa-IR")} تکلیف انجام شده</td>
+                                    </tr>
+                                    {student.homework[1].months.map((month, idx) => (
+                                        <tr key={idx}>
+                                            <td>{month.name}</td>
+                                            <td>
+                                                <div className={styles.countContainer}>
+                                                    <button><i className="fas fa-plus"></i></button>
+                                                    <span>{month.count.toLocaleString("fa-IR")}</span>
+                                                    <button><i className="fas fa-minus"></i></button>
+                                                    <button><i className="fas fa-undo-alt"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    <tr>
+                                        <td className={styles.mainTerm}>نوبت دوم</td>
+                                        <td className={styles.mainTerm}>مجموعا {handleSum(1).toLocaleString("fa-IR")} تکلیف انجام شده</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button className={styles.saveBtn} onClick={handleSave} disabled={!saveMode}>ذخیره</button>
+                        </div>
                     }
                     {
                         page === 2 &&
