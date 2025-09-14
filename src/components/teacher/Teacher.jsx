@@ -50,7 +50,11 @@ const Teacher = ({ userData, setShowNewStPage }) => {
                     <div className={styles.noStudentContainer}>
                         <img src="https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/general/noStudent.jpg" alt="noStudentImage" />
                         <h2>دانش آموزی ندارید</h2>
-                        <p>با زدن ..+.. <span className={styles.addStSpan}>+</span> دانش آموزان خود را اضافه کنید</p>
+                        <div>
+                            <span>با زدن</span>
+                            <span className={styles.addStSpan}>+</span>
+                            <span>دانش آموزان خود را اضافه کنید</span>
+                        </div>
                     </div>
                 : null
             }

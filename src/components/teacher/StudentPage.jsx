@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import Lesson from "./Lesson"
 import { getStudent } from "../../services/axiosApi"
 import HomeWork from "./HomeWork"
+import Activity from "./Activity"
+import Discipline from "./Discipline"
 
 const StudentPage = ({ st, setShowStPage }) => {
     const [page, setpage] = useState(3)
@@ -50,11 +52,7 @@ const StudentPage = ({ st, setShowStPage }) => {
                     }
                     {
                         page === 2 &&
-                        student.activity.map((act, index) => (
-                            <div className={styles.course} key={index}>
-                                <span>{act.jobs[0].question}</span>
-                            </div>
-                        ))
+                        <Activity student={st} />
                     }
                     {
                         page === 3 &&
@@ -66,7 +64,8 @@ const StudentPage = ({ st, setShowStPage }) => {
                         ))
                     }
                     {
-                        page === 4 && <></>
+                        page === 4 &&
+                        <Discipline st={st} />
                     }
                     {
                         page === 5 && <></>

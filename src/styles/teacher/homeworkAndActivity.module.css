@@ -1,4 +1,4 @@
-.homeworkContainer{
+.Container{
     position: absolute;
     top: 0;
     left: 0;
@@ -24,7 +24,7 @@
 .saveBtn:not(:disabled):active{
     background-color: #58b93f;
 }
-.homeworkContainer table{
+.Container table{
     width: 100%;
     height: max-content;
     max-height: 20rem;

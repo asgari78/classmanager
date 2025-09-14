@@ -4,8 +4,8 @@ import styles from "../../styles/teacher/homeworkAndActivity.module.css"
 import { getStudent, putStudent } from "../../services/axiosApi"
 import Loading from "../general/Loading"
 
-const HomeWork = ({ student }) => {
-    const [copyHomeWork, setCopyHomeWork] = useState(null)
+const Activity = ({ student }) => {
+    const [copyActivity, setCopyActivity] = useState(null)
     const [loading, setLoading] = useState(null)
     const [currentStudent, setCurrentStudent] = useState(null)
     const [saveMode, setSaveMode] = useState(false)
@@ -15,7 +15,7 @@ const HomeWork = ({ student }) => {
             setLoading(true)
             const { data } = await getStudent(parseInt(student.id))
             setCurrentStudent(data)
-            setCopyHomeWork(data.homework)
+            setCopyActivity(data.activity)
             setLoading(false)
         } catch (err) {
             console.log(err);
@@ -31,7 +31,7 @@ const HomeWork = ({ student }) => {
             setLoading(true)
             const updatedStudent = {
                 ...currentStudent,
-                homework: copyHomeWork
+                activity: copyActivity
             }
             await putStudent(updatedStudent)
             await fetchGetStudent()
@@ -44,11 +44,11 @@ const HomeWork = ({ student }) => {
         }
     }
     const handleSum = (index) => {
-        let sum = copyHomeWork[index].months.reduce((sum, month) => sum + month.count, 0)
+        let sum = copyActivity[index].months.reduce((sum, month) => sum + month.count, 0)
         return sum
     }
     const handleSetCount = (termIndex, monthIndex, operator) => {
-        setCopyHomeWork(prev => {
+        setCopyActivity(prev => {
             const updated = [...prev];
             const updatedMonths = [...updated[termIndex].months];
             switch (operator) {
@@ -69,7 +69,7 @@ const HomeWork = ({ student }) => {
                 case "undo":
                     updatedMonths[monthIndex] = {
                         ...updatedMonths[monthIndex],
-                        count: currentStudent.homework[termIndex].months[monthIndex].count
+                        count: currentStudent.activity[termIndex].months[monthIndex].count
                     };
                     break;
             }
@@ -80,7 +80,7 @@ const HomeWork = ({ student }) => {
             let changed = false;
             updated.map((term, termIdx) => {
                 term.months.map((month, monthIdx) => {
-                    if (month.count !== currentStudent.homework[termIdx].months[monthIdx].count) {
+                    if (month.count !== currentStudent.activity[termIdx].months[monthIdx].count) {
                         changed = true;
                     }
                 })
@@ -99,11 +99,11 @@ const HomeWork = ({ student }) => {
                     <thead>
                         <tr>
                             <th>نام ماه</th>
-                            <th>تعداد تکالیف</th>
+                            <th>تعداد فعالیت ها</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {copyHomeWork[0].months.map((month, idx) => (
+                        {copyActivity[0].months.map((month, idx) => (
                             <tr key={idx}>
                                 <td>{month.name}</td>
                                 <td>
@@ -120,7 +120,7 @@ const HomeWork = ({ student }) => {
                             <td className={styles.mainTerm}>نوبت اول</td>
                             <td className={styles.mainTerm}>مجموعا {handleSum(0).toLocaleString("fa-IR")} تکلیف انجام شده</td>
                         </tr>
-                        {copyHomeWork[1].months.map((month, idx) => (
+                        {copyActivity[1].months.map((month, idx) => (
                             <tr key={idx}>
                                 <td>{month.name}</td>
                                 <td>
@@ -146,4 +146,4 @@ const HomeWork = ({ student }) => {
     )
 }
 
-export default HomeWork
+export default Activity
