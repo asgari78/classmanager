@@ -18,6 +18,9 @@ export const putStudent = (st) => {
 export const addStudent = (newSt) => {
     return axios.post(`${URL1}`, newSt)
 }
+export const deleteStudent = (stId) => {
+    return axios.delete(`${URL1}/${stId}`)
+}
 export const updateLesson = async (studentId, lesson) => {
     const { data: student } = await getStudent(studentId);
 

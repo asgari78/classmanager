@@ -118,7 +118,7 @@ const Activity = ({ student }) => {
                         ))}
                         <tr>
                             <td className={styles.mainTerm}>نوبت اول</td>
-                            <td className={styles.mainTerm}>مجموعا {handleSum(0).toLocaleString("fa-IR")} تکلیف انجام شده</td>
+                            <td className={styles.mainTerm}>مجموعا {handleSum(0).toLocaleString("fa-IR")} فعالیت انجام شده</td>
                         </tr>
                         {copyActivity[1].months.map((month, idx) => (
                             <tr key={idx}>
@@ -135,7 +135,7 @@ const Activity = ({ student }) => {
                         ))}
                         <tr>
                             <td className={styles.mainTerm}>نوبت دوم</td>
-                            <td className={styles.mainTerm}>مجموعا {handleSum(1).toLocaleString("fa-IR")} تکلیف انجام شده</td>
+                            <td className={styles.mainTerm}>مجموعا {handleSum(1).toLocaleString("fa-IR")} فعالیت انجام شده</td>
                         </tr>
                     </tbody>
                 </table>

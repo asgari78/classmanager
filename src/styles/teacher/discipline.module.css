@@ -57,6 +57,7 @@
 }
 
 .list li {
+    position: relative;
     background-color: #ffffff;
     border: 1px solid #e3e3e3;
     border-radius: .5rem;
@@ -82,6 +83,7 @@
 .list small {
     color: #8d8d8d;
     font-size: .8rem;
+    padding-top: .1rem;
 }
 
 .meta {
@@ -93,16 +95,29 @@
 }
 
 .meta button {
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translate(-50%,-50%);
     border: none;
     background: none;
-    color: #ad2323;
-    font-size: .8rem;
     cursor: pointer;
     transition: color .2s ease;
 }
+.meta button i{
+    font-size: 1.3rem;
+    color: #e49797;
+}
 
-.meta button:hover {
-    color: #ff4b4b;
+.meta button:hover i {
+    color: #d16e6e;
+}
+
+.descriptions{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .3rem;
 }
 
 /* Positive & Negative styles */
@@ -163,7 +178,7 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    gap: .7rem;
+    gap: 1.2rem;
     animation: fadeIn .3s ease;
 }
 
@@ -177,19 +192,22 @@
     font-size: .85rem;
     color: #2b2b2b;
     display: flex;
-    flex-direction: column;
     gap: .3rem;
+    align-items: center;
 }
-
+.modal span {
+    min-width: 4rem;
+}
 .modal select,
 .modal input,
 .modal textarea {
     border: 1px solid #d8e3e9;
     border-radius: .5rem;
-    padding: .5rem;
+    padding: .8rem .5rem;
     font-size: .9rem;
     outline: none;
     transition: border .2s ease;
+    width: 100%;
 }
 
 .modal select:focus,
@@ -199,7 +217,7 @@
 }
 
 .modal textarea {
-    min-height: 80px;
+    min-height: 8rem;
     resize: vertical;
 }
 
@@ -211,12 +229,13 @@
 }
 
 .actions button {
-    padding: .5rem 1rem;
+    padding: 1rem;
     border: none;
     border-radius: .4rem;
-    font-size: .9rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: all .2s;
+    width: 50%;
 }
 
 .actions button:first-child {
@@ -229,7 +248,7 @@
 }
 
 .cancelBtn {
-    background-color: #d3ebe0;
+    background-color: #d3ebe0ad;
     color: #2b2b2b;
 }
 

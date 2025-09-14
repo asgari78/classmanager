@@ -3,7 +3,7 @@ import styles from "../../styles/teacher/lesson.module.css"
 import { updateLesson, getStudent } from "../../services/axiosApi";
 import Loading from "../general/Loading"
 
-const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
+const Lesson = ({ lesson, closeOneLesoon, st, refreshStudents }) => {
 
     const [saveMode, setSaveMode] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -66,7 +66,7 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudent }) => {
         try {
             setLoading(true)
             await updateLesson(st.id, currentLesson);
-            await refreshStudent();
+            await refreshStudents();
             setSaveMode(false);
             closeOneLesoon()
         } catch (err) {

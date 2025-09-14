@@ -103,10 +103,12 @@ const Discipline = ({ st }) => {
                         >
                             <div className={styles.meta}>
                                 <span>{new Date(rec.date).toLocaleDateString("fa-IR")}</span>
-                                <button onClick={(e) => { e.stopPropagation(); handleDeleteRecord(rec.id); }}>حذف</button>
+                                <button onClick={(e) => { e.stopPropagation(); handleDeleteRecord(rec.id); }}><i className="fas fa-trash"></i></button>
                             </div>
-                            <h4>{rec.category}</h4>
-                            <small>{rec.desc}</small>
+                            <div className={styles.descriptions}>
+                                <h4>{rec.category}</h4>
+                                <small>({rec.desc})</small>
+                            </div>
                         </li>
                     ))}
                 </ul>
@@ -148,7 +150,13 @@ const DisciplineModal = ({ onClose, onSave, record }) => {
     const [customCategory, setCustomCategory] = useState(false);
     const [desc, setDesc] = useState(record?.desc || "");
 
-    const categories = [
+    const categories1 = [
+        "نظم در کلاس",
+        "رعایت بهداشت",
+        "پیشرفت تحصیلی",
+        "موارد دیگر",
+    ];
+    const categories2 = [
         "تذکر کلاسی",
         "اخراج از کلاس",
         "صحبت بی اجازه",
@@ -160,7 +168,7 @@ const DisciplineModal = ({ onClose, onSave, record }) => {
             id: record?.id || Date.now().toString(),
             type,
             date,
-            category: customCategory ? "موارد دیگر" : category,
+            category: customCategory ? "موارد دیگر" : (category ? category : (type == "positive" ? categories1[0] : categories2[0])),
             title: customCategory ? customTitle : category,
             desc,
         };
@@ -172,14 +180,14 @@ const DisciplineModal = ({ onClose, onSave, record }) => {
             <div className={styles.modal}>
                 <h3>{record ? "ویرایش مورد" : "افزودن مورد جدید"}</h3>
                 <label>
-                    نوع مورد:
+                    <span>نوع مورد</span>
                     <select value={type} onChange={(e) => setType(e.target.value)}>
                         <option value="positive">مثبت</option>
                         <option value="negative">منفی</option>
                     </select>
                 </label>
                 <label>
-                    تاریخ:
+                    <span>تاریخ</span>
                     <input
                         type="date"
                         value={date.split("T")[0]}
@@ -187,7 +195,7 @@ const DisciplineModal = ({ onClose, onSave, record }) => {
                     />
                 </label>
                 <label>
-                    دسته‌بندی:
+                    <span>دسته بندی</span>
                     <select
                         value={category}
                         onChange={(e) => {
@@ -195,7 +203,10 @@ const DisciplineModal = ({ onClose, onSave, record }) => {
                             setCustomCategory(e.target.value === "موارد دیگر");
                         }}
                     >
-                        {categories.map((cat) => (
+                        {type == "positive" && categories1.map((cat) => (
+                            <option key={cat}>{cat}</option>
+                        ))}
+                        {type == "negative" && categories2.map((cat) => (
                             <option key={cat}>{cat}</option>
                         ))}
                     </select>
@@ -209,8 +220,8 @@ const DisciplineModal = ({ onClose, onSave, record }) => {
                     />
                 )}
                 <label>
-                    توضیحات:
                     <textarea
+                        placeholder="توضیحات"
                         value={desc}
                         onChange={(e) => setDesc(e.target.value)}
                     ></textarea>

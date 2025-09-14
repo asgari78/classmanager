@@ -67,8 +67,6 @@ function App() {
   const loggin = async (user) => {
     setErrorServer("")
     user.login = true;
-    console.log(user);
-
     await (checkTeacher ? putTeacher(user) : putStudent(user));
     setUserData(user);
     localStorage.setItem("user", JSON.stringify(user))
