@@ -1,34 +1,52 @@
 import { useEffect, useState } from "react"
 
 import styles from "../../styles/teacher/homework.module.css"
-import { getStudent } from "../../services/axiosApi"
+import { getStudent, putStudent } from "../../services/axiosApi"
 import Loading from "../general/Loading"
 
 const HomeWork = ({ student }) => {
-    const [copyHomeWork, setCopyHomeWork] = useState(student.homework)
+    const [copyHomeWork, setCopyHomeWork] = useState(null)
     const [loading, setLoading] = useState(null)
-    const [saveMode, setSaveMode] = useState(true)
+    const [currentStudent, setCurrentStudent] = useState(null)
+    const [saveMode, setSaveMode] = useState(false)
 
-    useEffect(() => {
-        const fetchGetStudent = async () => {
-            try {
-                setLoading(true)
-                const { data } = await getStudent(parseInt(student.id))
-                setCopyHomeWork(data.homework)
-                setLoading(false)
-            } catch (err) {
-                console.log(err);
-                setLoading(false)
-            }
+    const fetchGetStudent = async () => {
+        try {
+            setLoading(true)
+            const { data } = await getStudent(parseInt(student.id))
+            setCurrentStudent(data)
+            setCopyHomeWork(data.homework)
+            setLoading(false)
+        } catch (err) {
+            console.log(err);
+            setLoading(false)
         }
+    }
+    useEffect(() => {
         fetchGetStudent()
-    }, [])
+    }, [student.id])
 
     const handleSave = async () => {
-
+        try {
+            setLoading(true)
+            const updatedStudent = {
+                ...currentStudent,
+                homework: copyHomeWork
+            }
+            await putStudent(updatedStudent)
+            await fetchGetStudent()
+            setSaveMode(false)
+            setLoading(false)
+            alert("تکالیف با موفقیت ذخیره شد ✅")
+        } catch (err) {
+            console.error("خطا در ذخیره تکالیف:", err)
+            setLoading(false)
+            setSaveMode(true)
+            alert("ذخیره انجام نشد ❌")
+        }
     }
     const handleSum = (index) => {
-        let sum = student.homework[index].months.reduce((sum, month) => sum + month.count, 0)
+        let sum = copyHomeWork[index].months.reduce((sum, month) => sum + month.count, 0)
         return sum
     }
     const handleSetCount = (termIndex, monthIndex, operator) => {
@@ -53,7 +71,7 @@ const HomeWork = ({ student }) => {
                 case "undo":
                     updatedMonths[monthIndex] = {
                         ...updatedMonths[monthIndex],
-                        count: student.homework[termIndex].months[monthIndex].count
+                        count: currentStudent.homework[termIndex].months[monthIndex].count
                     };
                     break;
             }
@@ -61,6 +79,16 @@ const HomeWork = ({ student }) => {
                 ...updated[termIndex],
                 months: updatedMonths,
             };
+            let changed = false;
+            updated.map((term, termIdx) => {
+                term.months.map((month, monthIdx) => {
+                    if (month.count !== currentStudent.homework[termIdx].months[monthIdx].count) {
+                        changed = true;
+                    }
+                })
+            })
+            setSaveMode(changed);
+
             return updated;
         });
     }
@@ -68,50 +96,53 @@ const HomeWork = ({ student }) => {
     return (
         <div className={styles.homeworkContainer}>
             {loading && <Loading />}
-            <table>
-                <thead>
-                    <tr>
-                        <th>نام ماه</th>
-                        <th>تعداد تکالیف انجام شده</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {copyHomeWork[0].months.map((month, idx) => (
-                        <tr key={idx}>
-                            <td>{month.name}</td>
-                            <td>
-                                <div className={styles.countContainer}>
-                                    <button onClick={() => handleSetCount(0, idx, "+")}><i className="fas fa-plus"></i></button>
-                                    <span>{month.count.toLocaleString("fa-IR")}</span>
-                                    <button onClick={() => handleSetCount(0, idx, "-")}><i className="fas fa-minus"></i></button>
-                                    <button onClick={() => handleSetCount(0, idx, "undo")}><i className="fas fa-undo-alt"></i></button>
-                                </div>
-                            </td>
+            {currentStudent ?
+                <table>
+                    <thead>
+                        <tr>
+                            <th>نام ماه</th>
+                            <th>تعداد تکالیف</th>
                         </tr>
-                    ))}
-                    <tr>
-                        <td className={styles.mainTerm}>نوبت اول</td>
-                        <td className={styles.mainTerm}>مجموعا {handleSum(0).toLocaleString("fa-IR")} تکلیف انجام شده</td>
-                    </tr>
-                    {copyHomeWork[1].months.map((month, idx) => (
-                        <tr key={idx}>
-                            <td>{month.name}</td>
-                            <td>
-                                <div className={styles.countContainer}>
-                                    <button onClick={() => handleSetCount(1, idx, "+")}><i className="fas fa-plus"></i></button>
-                                    <span>{month.count.toLocaleString("fa-IR")}</span>
-                                    <button onClick={() => handleSetCount(1, idx, "-")}><i className="fas fa-minus"></i></button>
-                                    <button onClick={() => handleSetCount(1, idx, "undo")}><i className="fas fa-undo-alt"></i></button>
-                                </div>
-                            </td>
+                    </thead>
+                    <tbody>
+                        {copyHomeWork[0].months.map((month, idx) => (
+                            <tr key={idx}>
+                                <td>{month.name}</td>
+                                <td>
+                                    <div className={styles.countContainer}>
+                                        <button onClick={() => handleSetCount(0, idx, "+")}><i className="fas fa-plus"></i></button>
+                                        <span>{month.count.toLocaleString("fa-IR")}</span>
+                                        <button onClick={() => handleSetCount(0, idx, "-")}><i className="fas fa-minus"></i></button>
+                                        <button onClick={() => handleSetCount(0, idx, "undo")}><i className="fas fa-undo-alt"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                        <tr>
+                            <td className={styles.mainTerm}>نوبت اول</td>
+                            <td className={styles.mainTerm}>مجموعا {handleSum(0).toLocaleString("fa-IR")} تکلیف انجام شده</td>
                         </tr>
-                    ))}
-                    <tr>
-                        <td className={styles.mainTerm}>نوبت دوم</td>
-                        <td className={styles.mainTerm}>مجموعا {handleSum(1).toLocaleString("fa-IR")} تکلیف انجام شده</td>
-                    </tr>
-                </tbody>
-            </table>
+                        {copyHomeWork[1].months.map((month, idx) => (
+                            <tr key={idx}>
+                                <td>{month.name}</td>
+                                <td>
+                                    <div className={styles.countContainer}>
+                                        <button onClick={() => handleSetCount(1, idx, "+")}><i className="fas fa-plus"></i></button>
+                                        <span>{month.count.toLocaleString("fa-IR")}</span>
+                                        <button onClick={() => handleSetCount(1, idx, "-")}><i className="fas fa-minus"></i></button>
+                                        <button onClick={() => handleSetCount(1, idx, "undo")}><i className="fas fa-undo-alt"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                        <tr>
+                            <td className={styles.mainTerm}>نوبت دوم</td>
+                            <td className={styles.mainTerm}>مجموعا {handleSum(1).toLocaleString("fa-IR")} تکلیف انجام شده</td>
+                        </tr>
+                    </tbody>
+                </table>
+                : null
+            }
             <button className={styles.saveBtn} onClick={handleSave} disabled={!saveMode}>ذخیره</button>
         </div>
     )

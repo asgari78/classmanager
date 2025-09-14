@@ -16,9 +16,10 @@
     height: 3.5rem!important;
     font-size: 1.2rem;
     transition: all .3s;
+    opacity: 1;
 }
 .saveBtn:disabled{
-    opacity: .25;
+    opacity: 0;
 }
 .saveBtn:not(:disabled):active{
     background-color: #58b93f;
