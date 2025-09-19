@@ -4,8 +4,10 @@ import { addStudent } from "../../services/axiosApi";
 import Loading from "../general/Loading";
 import { supabase } from "../../lib/supabaseClient";
 import nullStudentData from "../../helpers/dataKeep";
+import { useFormik } from "formik"
+import { studentSchema } from "../../validations/studentValidation";
 
-const NewStudent = ({ show, onClose, userData, refreshStudents }) => {
+const NewStudent = ({ show, setShowNewStPage, userData, refreshStudents }) => {
 
     const fileInputRef = useRef(null);
     const [visible, setVisible] = useState(show)
@@ -13,43 +15,33 @@ const NewStudent = ({ show, onClose, userData, refreshStudents }) => {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState(nullStudentData)
 
-    const validationImage = async () => {
-        try {
-            let imageUrl = null;
-            const file = fileInputRef.current.files[0];
-
-            const fileName = `students/${Date.now()}-${file.name}`;
-
-            const { data: uploadData, error: uploadError } = await supabase.storage
-                .from('test')
-                .upload(fileName, file, {
-                    cacheControl: '3600',
-                    upsert: false
-                });
-
-            if (uploadError) {
-                console.error('خطا در آپلود عکس:', uploadError);
-                throw uploadError;
-            }
-
-            const { data: urlData } = supabase.storage
-                .from('test')
-                .getPublicUrl(fileName);
-
-            imageUrl = urlData.publicUrl;
-
-            setFormData(
-                prev => {
-                    return {
-                        ...prev, profileImage: imageUrl
-                    }
-                }
-            )
-        }
-        catch (err) {
-            console.log(err);
-        }
+    const onClose = () => {
+        setShowNewStPage(false)
+        formik.resetForm();
+        setFormData({
+            namefamily: "",
+            dateBirth: "",
+            selfCode: "",
+            dadName: "",
+            phoneNumber: "",
+            groupId: "",
+            roleId: "",
+            username: "",
+            profileImage: null,
+            profileFile: null,
+            password: "",
+        })
     }
+    const handleImage = () => {
+        const file = fileInputRef.current.files[0];
+        if (!file) return;
+        const previewUrl = URL.createObjectURL(file);
+        setFormData(prev => ({
+            ...prev,
+            profileImage: previewUrl,
+            profileFile: file
+        }));
+    };
     useEffect(() => {
         if (show) {
             setVisible(true)
@@ -82,79 +74,59 @@ const NewStudent = ({ show, onClose, userData, refreshStudents }) => {
             }
         });
     }, [])
-    const focusStatus = (e) => {
-        let inp = e.target;
-        let val = e.target.value;
-        let t = e.type;
-        if (t === "focus") {
-            inp.nextSibling.style.transform = "translate(-0.5rem , -.9rem)"
-            inp.nextSibling.style.color = "#0000006e"
-            inp.nextSibling.style.fontSize = ".75rem"
-            if (inp.name == "dateBirth") {
-                jalaliDatepicker.startWatch();
-            }
-        } else if (t === "blur") {
-            if (val !== "") {
-                inp.nextSibling.style.transform = "translate(-0.5rem , -.9rem)"
-                inp.nextSibling.style.color = "#1f1f1f23!important"
-                inp.nextSibling.style.fontSize = ".75rem"
-            } else {
-                inp.nextSibling.style.transform = "translate(-0.7rem , 0rem)"
-                inp.nextSibling.style.color = "#1f1f1fe7"
-                inp.nextSibling.style.fontSize = ".9rem"
-            }
+    const handleFocusBlur = (e) => {
+        const parent = e.target.closest("div");
+        if (!parent) return;
+        if (e.type === "focus" || e.target.value !== "") {
+            parent.classList.add(styles.active);
+        } else if (e.type === "blur" && e.target.value === "") {
+            parent.classList.remove(styles.active);
         }
-
-    }
-    const validationForm = async (e) => {
-        setFormData(prev => {
-            return {
-                ...prev,
-                [e.target.name]: e.target.value
-            }
-        })
-        if (e.target.name === "groupId") {
-            const listOptions = [...e.target.children]
-            const clickedLi = listOptions.filter(li => li.getAttribute("value") === e.target.value)
-
-            setFormData(prev => {
-                return {
-                    ...prev,
-                    groupId: e.target.value,
-                    groupName: clickedLi[0].getAttribute("name")
+    };
+    const formik = useFormik({
+        initialValues: {
+            namefamily: "",
+            dateBirth: "",
+            selfCode: "",
+            dadName: "",
+            phoneNumber: "",
+            groupId: "",
+            roleId: "",
+            username: ""
+        },
+        validationSchema: studentSchema,
+        onSubmit: async (values) => {
+            try {
+                setLoading(true);
+                let imageUrl = null;
+                if (formData.profileFile) {
+                    const fileName = `students/${Date.now()}-${formData.profileFile.name}`;
+                    const { data: uploadData, error: uploadError } = await supabase.storage
+                        .from("test")
+                        .upload(fileName, formData.profileFile, {
+                            cacheControl: "3600",
+                            upsert: false,
+                        });
+                    if (uploadError) throw uploadError;
+                    const { data: urlData } = supabase.storage.from("test").getPublicUrl(fileName);
+                    imageUrl = urlData.publicUrl;
                 }
-            })
-        }
-    }
-    const submitForm = async () => {
-        try {
-            setLoading(true)
-            const { data } = await addStudent(formData);
-            await refreshStudents()
-            setFormData(prev => {
-                return {
-                    ...prev,
-                    profileImage: null,
-                    namefamily: "",
-                    dateBirth: "",
-                    selfCode: "",
-                    dadName: "",
-                    phoneNumber: "",
-                    groupId: "",
-                    roleId: "",
-                    username: ""
-                }
-            })
-            setLoading(false);
-            onClose();
-        }
-        catch (err) {
-            console.log(err);
-            refreshStudents()
-            setLoading(false);
-        }
-    }
-
+                const submitData = {
+                    ...values,
+                    profileImage: imageUrl,
+                    password: formData.password
+                };
+                await addStudent(submitData);
+                await refreshStudents();
+                formik.resetForm();
+                setLoading(false);
+                onClose();
+            } catch (err) {
+                console.error(err);
+                setLoading(false);
+            }
+        },
+    });
 
     if (!visible) return null
     return (
@@ -169,7 +141,7 @@ const NewStudent = ({ show, onClose, userData, refreshStudents }) => {
                     <button className={styles.closeBtn} onClick={onClose}>لغو</button>
                 </section>
                 <section className={styles.main}>
-                    <form>
+                    <form onSubmit={formik.handleSubmit}>
                         <div className={
                             `${styles.profileImage} ${formData.profileImage !== null && styles.uploadedImg}`
                         }>
@@ -179,7 +151,7 @@ const NewStudent = ({ show, onClose, userData, refreshStudents }) => {
                                 name="profileImage"
                                 id="profileImage"
                                 accept="image/png, image/jpg, image/jpeg, image/svg"
-                                onChange={validationImage}
+                                onChange={handleImage}
                             />
                             <img
                                 onClick={() => fileInputRef.current.click()}
@@ -206,14 +178,76 @@ const NewStudent = ({ show, onClose, userData, refreshStudents }) => {
                                 type="text"
                                 name="namefamily"
                                 id="namefamily"
-                                onFocus={focusStatus}
-                                onBlur={focusStatus}
-                                onChange={validationForm}
-                                value={formData.namefamily}
+                                onFocus={handleFocusBlur}
+                                onBlur={handleFocusBlur}
+                                onChange={formik.handleChange}
+                                value={formik.values.namefamily}
                             />
                             <label htmlFor="namefamily">
                                 نام و نام خانوادگی
                             </label>
+                            {formik.touched.namefamily && formik.errors.namefamily ? (<div className={styles.errText}>{formik.errors.namefamily}</div>) : null}
+                        </div>
+                        <div className={styles.groupId}>
+                            <i className="fas fa-angle-down"></i>
+                            <select
+                                name="groupId"
+                                id="groupId"
+                                value={formik.values.groupId}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                style={{ color: formik.values.groupId ? "#000000" : "#5d5d5d" }}
+                            >
+                                <option value="">گروه کلاسی...</option>
+                                {userData.groups.map((g) => (
+                                    <option key={g.id} value={g.id}>
+                                        {g.name}
+                                    </option>
+                                ))}
+                            </select>
+                            {formik.touched.groupId && formik.errors.groupId ? (<div className={styles.errText}>{formik.errors.groupId}</div>) : null}
+                        </div>
+                        <div className={styles.studentRole}>
+                            <button
+                                type="button"
+                                onClick={() => formik.setFieldValue("roleId", 3)}
+                                className={formik.values.roleId == 3 ? styles.active : null}
+                            >
+                                زیر گروه
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => formik.setFieldValue("roleId", 2)}
+                                className={formik.values.roleId == 2 ? styles.active : null}
+                            >
+                                معاون
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => formik.setFieldValue("roleId", 1)}
+                                className={formik.values.roleId == 1 ? styles.active : null}
+                            >
+                                سرگروه
+                            </button>
+                            {formik.touched.roleId && formik.errors.roleId ? (
+                                <div className={styles.errText}>{formik.errors.roleId}</div>
+                            ) : null}
+                        </div>
+                        <div className={styles.username}>
+                            <input
+                                type="text"
+                                name="username"
+                                id="username"
+                                dir="ltr"
+                                onFocus={handleFocusBlur}
+                                onBlur={(e) => { handleFocusBlur(e); formik.handleBlur(e) }}
+                                onChange={formik.handleChange}
+                                value={formik.values.username}
+                            />
+                            <label htmlFor="username">
+                                نام کاربری دانش آموز
+                            </label>
+                            {formik.touched.username && formik.errors.username ? (<div className={styles.errText}>{formik.errors.username}</div>) : null}
                         </div>
                         <div className={styles.dateBirth}>
                             <input
@@ -222,14 +256,15 @@ const NewStudent = ({ show, onClose, userData, refreshStudents }) => {
                                 name="dateBirth"
                                 id="dateBirth"
                                 dir="ltr"
-                                onFocus={focusStatus}
-                                onBlur={focusStatus}
-                                onChange={validationForm}
-                                value={formData.dateBirth}
+                                onFocus={(e) => { jalaliDatepicker.startWatch(); handleFocusBlur(e) }}
+                                onBlur={(e) => { formik.handleBlur; handleFocusBlur(e) }}
+                                onChange={formik.handleChange}
+                                value={formik.values.dateBirth}
                             />
                             <label htmlFor="dateBirth">
                                 تاریخ تولد
                             </label>
+                            {formik.touched.dateBirth && formik.errors.dateBirth ? (<div className={styles.errText}>{formik.errors.dateBirth}</div>) : null}
                         </div>
                         <div className={styles.selfCode}>
                             <input
@@ -237,73 +272,45 @@ const NewStudent = ({ show, onClose, userData, refreshStudents }) => {
                                 name="selfCode"
                                 id="selfCode"
                                 dir="ltr"
-                                onFocus={focusStatus}
-                                onBlur={focusStatus}
-                                onChange={validationForm}
-                                value={formData.selfCode}
+                                onFocus={handleFocusBlur}
+                                onBlur={(e) => { handleFocusBlur(e); formik.handleBlur(e) }}
+                                onChange={formik.handleChange}
+                                value={formik.values.selfCode}
                             />
                             <label htmlFor="selfCode">
                                 کدملی
                             </label>
+                            {formik.touched.selfCode && formik.errors.selfCode ? (<div className={styles.errText}>{formik.errors.selfCode}</div>) : null}
                         </div>
                         <div className={styles.dadName}>
                             <input
                                 type="text"
                                 name="dadName"
                                 id="dadName"
-                                onFocus={focusStatus}
-                                onBlur={focusStatus}
-                                onChange={validationForm}
-                                value={formData.dadName}
+                                onFocus={handleFocusBlur}
+                                onBlur={(e) => { handleFocusBlur(e); formik.handleBlur(e) }}
+                                onChange={formik.handleChange}
+                                value={formik.values.dadName}
                             />
                             <label htmlFor="dadName">
                                 نام پدر
                             </label>
+                            {formik.touched.dadName && formik.errors.dadName ? (<div className={styles.errText}>{formik.errors.dadName}</div>) : null}
                         </div>
                         <div className={styles.mobile}>
                             <input
                                 type="tel"
                                 name="phoneNumber"
                                 id="phoneNumber"
-                                onFocus={focusStatus}
-                                onBlur={focusStatus}
-                                onChange={validationForm}
-                                value={formData.phoneNumber}
+                                onFocus={handleFocusBlur}
+                                onBlur={(e) => { handleFocusBlur(e); formik.handleBlur(e) }}
+                                onChange={formik.handleChange}
+                                value={formik.values.phoneNumber}
                             />
                             <label htmlFor="phoneNumber">
                                 شماره موبایل
                             </label>
-                        </div>
-                        <div className={styles.groupId}>
-                            <i className="fas fa-angle-down"></i>
-                            <select name="groupId" id="groupId" onChange={validationForm}>
-                                <option value="g00">گروه کلاسی</option>
-                                {
-                                    userData.groups.map((g, index) => (
-                                        <option name={g.name} key={index} value={g.id}>{g.name}</option>
-                                    ))
-                                }
-                            </select>
-                        </div>
-                        <div className={styles.studentRole}>
-                            <button onClick={() => setFormData((prev) => { return { ...prev, roleId: 3, roleName: "زیرگروه" } })} type="button" className={formData.roleId == 3 ? styles.active : null}>زیر گروه</button>
-                            <button onClick={() => setFormData((prev) => { return { ...prev, roleId: 2, roleName: "معاون" } })} type="button" className={formData.roleId == 2 ? styles.active : null}>معاون</button>
-                            <button onClick={() => setFormData((prev) => { return { ...prev, roleId: 1, roleName: "سرگروه" } })} type="button" className={formData.roleId == 1 ? styles.active : null}>سرگروه</button>
-                        </div>
-                        <div className={styles.username}>
-                            <input
-                                type="text"
-                                name="username"
-                                id="username"
-                                dir="ltr"
-                                onFocus={focusStatus}
-                                onBlur={focusStatus}
-                                onChange={validationForm}
-                                value={formData.username}
-                            />
-                            <label htmlFor="username">
-                                نام کاربری دانش آموز
-                            </label>
+                            {formik.touched.phoneNumber && formik.errors.phoneNumber ? (<div className={styles.errText}>{formik.errors.phoneNumber}</div>) : null}
                         </div>
                         <div className={styles.password}>
                             <input
@@ -318,9 +325,9 @@ const NewStudent = ({ show, onClose, userData, refreshStudents }) => {
                                 رمز عبور دانش آموز :
                             </label>
                         </div>
+                        <button type="submit" className={styles.submitBtn}>ثبت</button>
                     </form>
                 </section>
-                <button className={styles.submitBtn} onClick={submitForm}>ثبت</button>
             </div>
         </>
     )

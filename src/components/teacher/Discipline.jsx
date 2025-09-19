@@ -7,7 +7,7 @@ const Discipline = ({ st }) => {
     const [student, setStudent] = useState(null);
     const [activeTab, setActiveTab] = useState("positive");
     const [showAddModal, setShowAddModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(null); // id موردی که در حال ویرایشه
+    const [showEditModal, setShowEditModal] = useState(null);
 
     const fetchStudent = async () => {
         try {

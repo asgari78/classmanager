@@ -1,11 +1,9 @@
 import Login from "./Login";
-import Teacher from "./teacher/Teacher";
+import { Teacher } from "./teacher";
 
 import styles from "../styles/container.module.css"
-import { useState } from "react";
 
 import Loading from "./general/Loading.jsx";
-import NewStudent from "./teacher/NewStudent.jsx"
 
 const Container = ({ userData, requestLogin, errorServer, loading, checkTeacher, setCheckTeacher }) => {
 

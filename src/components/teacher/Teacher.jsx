@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
 import styles from "../../styles/teacher/teacher.module.css"
 
-import StudentBar from "./StudentBar"
 import { getAllStudents, getTeacher } from "../../services/axiosApi"
 import Loading from "../general/Loading"
-import NewStudent from "./NewStudent"
+import { NewStudent, StudentBar } from "./"
 
 const Teacher = ({ userData }) => {
 
@@ -48,7 +47,7 @@ const Teacher = ({ userData }) => {
 
     return (
         <>
-            <NewStudent userData={userData} show={showNewStPage} onClose={() => setShowNewStPage(false)} refreshStudents={refreshStudents} />
+            <NewStudent userData={userData} show={showNewStPage} setShowNewStPage={setShowNewStPage} refreshStudents={refreshStudents} />
             <section className={styles.teacherContent}>
                 <section className={styles.groupsList}>
                     <ul>

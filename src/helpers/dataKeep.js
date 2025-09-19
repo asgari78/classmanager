@@ -1,6 +1,7 @@
 const nullStudentData = {
         id: "",
         profileImage: null,
+        profileFile: null,
         namefamily: "",
         dateBirth: "",
         selfCode: "",
