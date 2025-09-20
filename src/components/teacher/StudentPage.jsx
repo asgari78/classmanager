@@ -1,9 +1,10 @@
 import styles from "../../styles/teacher/studentPage.module.css"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Lesson, HomeWork, Activity, Discipline, Profile } from "./"
 import profileFake from "../../../public/images/emptyProfile.avif"
 import Loading from "../general/Loading"
 import { deleteStudent, getStudent, putStudent } from "../../services/axiosApi"
+import ModalProfileEdit from "./ModalProfileEdit"
 
 const StudentPage = ({ allStudents, userData, st, setShowStPage, refreshStudents }) => {
     const [page, setpage] = useState(3)
@@ -12,6 +13,7 @@ const StudentPage = ({ allStudents, userData, st, setShowStPage, refreshStudents
     const [showOneLesson, setShowOneLesson] = useState(false)
     const [showMore, setShowMore] = useState(false)
     const [student, setStudent] = useState(st)
+    const [showModal, setShowModal] = useState(false)
 
     const fetchStudent = async () => {
         try {
@@ -129,8 +131,10 @@ const StudentPage = ({ allStudents, userData, st, setShowStPage, refreshStudents
                         </ul>
                     </div>
                     : null}
-                <p>{st.namefamily} {<span style={st.roleId == 1 || st.roleId == 2 ? { color: "#1d6c91", fontWeight: "bold" } : { color: "#2b2b2be5", fontWeight: 0 }}>({st.roleName})</span>}</p>
-                <img src={st.profileImage || profileFake} alt="studentImage" />
+                {page !== 5 ? <>
+                    <p>{st.namefamily} {<span style={st.roleId == 1 || st.roleId == 2 ? { color: "#1d6c91", fontWeight: "bold" } : { color: "#2b2b2be5", fontWeight: 0 }}>({st.roleName})</span>}</p>
+                    <img src={st.profileImage || profileFake} alt="studentImage" />
+                </> : null}
                 <i id="backToStudentsPage" onClick={() => { setShowStPage(false) }} className="fas fa-arrow-left"></i>
             </section>
             <section className={styles.contentContainer}>
@@ -162,8 +166,7 @@ const StudentPage = ({ allStudents, userData, st, setShowStPage, refreshStudents
                     }
                     {
                         page === 5 &&
-                        <Profile userData={userData} onUpdateStudent={handleUpdateStudent}
-                            student={student} />
+                        <Profile onUpdateStudent={handleUpdateStudent} student={student} setShowModal={setShowModal} />
                     }
                 </section>
                 {
@@ -193,8 +196,8 @@ const StudentPage = ({ allStudents, userData, st, setShowStPage, refreshStudents
                     <span>پروفایل</span>
                 </button>
             </section>
+            {showModal && <ModalProfileEdit student={student} userData={userData} setStudent={setStudent} setShowModal={setShowModal} />}
         </div>
-
     )
 }
 

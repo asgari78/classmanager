@@ -1,0 +1,156 @@
+.myFormCss{
+    width: 100%;
+    height: calc(100% - 3.7rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: .8rem;
+}
+.myFormCss>div:nth-child(n + 2):nth-child(-n + 5){
+    margin-bottom: 1.4rem;
+}
+.errText{
+    width: 100%;
+    position: absolute;
+    font-size: .8rem;
+    color: red;
+    bottom: -1.5rem;
+    padding-right:.5rem;
+}
+.myFormCss>div:not(:first-child){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.myFormCss>div:not(:first-child) label{
+    position: absolute;
+    transform: translate(-0.7rem , 0rem);
+    transition: all .3s ease;
+    color: #5d5d5d;
+    font-size: .9rem;
+    width: fit-content;
+    right: .8rem;
+    top: 1rem;
+}
+.myFormCss>div:not(:first-child).active label {
+    transform: translate(-0.5rem , -0.9rem);
+    color: #0000006e;
+    font-size: .75rem;
+}
+.myFormCss>div:not(:first-child) input{
+    font-size: 1.2rem;
+    width: 100%;
+    background-color: #ececec;
+    border: none;
+    outline: none;
+    padding: 1.8rem 1.5rem 0.5rem 1.5rem;
+    color: #000000;
+    border-radius: .6rem;
+}
+.profileImage{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    background-color: #ececec;
+    border: 1px solid #949494;
+    border-radius: .5rem;
+}
+.uploadedImg{
+    border: none!important;
+    background-color: transparent!important;
+    padding: .4rem!important;
+}
+.profileImage input{
+    display: none;
+}
+.profileImage label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    text-align: center;
+    width: 100%;
+    border: none;
+    color: #5d5d5d;
+}
+.profileImage img{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.profileImage>i{
+    position: absolute;
+    left: .5rem;
+    top: .5rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+    color: #5d5d5d;
+}
+.groupId{
+    width: 100%;
+    position: relative;
+}
+.groupId select{
+    width: 100%;
+    border: none;
+    padding: 1.2rem .5rem;
+    font-size: .9rem;
+    outline: none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    appearance:none;
+}
+.groupId i{
+    left: 1rem;
+    position: absolute;
+}
+.studentRole{
+    width: 100%;
+    display: flex;
+    gap: .5rem;
+    justify-content: space-between!important;
+}
+.studentRole button{
+    border: none;
+    padding: 1rem 2rem;
+    transition: all .3s;
+    border-radius: .5rem;
+    width: calc(100%/3);
+    color: #5d5d5d;
+}
+.studentRole button.active{
+    background-color: #c5ddff;
+    color: #000000;
+}
+.password{
+    opacity: .3;
+}
+.password input{
+    background-color: #d2e5ff!important;
+    padding:1rem .7rem!important ;
+}
+.submitBtn:active{
+    filter: brightness(.85);
+    transform: translateY(.2rem);
+}
+.submitBtn{
+    background-color: #44a054;
+    width: 100%;
+    height: 3.5rem;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    transition: all .2s ease;
+    color: #dfdfdf;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}

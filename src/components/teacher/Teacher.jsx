@@ -24,7 +24,6 @@ const Teacher = ({ userData }) => {
             console.error("خطا در دریافت دانش‌آموز:", err);
         }
     };
-
     const getTeacherData = async () => {
         try {
             setLoading(true)
