@@ -1,16 +1,7 @@
 import styles from "../../styles/teacher/profile.module.css"
 import profileFake from "../../../public/images/emptyProfile.avif"
 
-const Profile = ({ student, onUpdateStudent, setShowModal }) => {
-
-
-    const editCurrentStudent = async (values) => {
-        try {
-            onClose();
-        } catch (err) {
-            console.error(err);
-        }
-    }
+const Profile = ({ student, setShowModal }) => {
 
     return (
         <>

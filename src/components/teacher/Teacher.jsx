@@ -74,7 +74,7 @@ const Teacher = ({ userData }) => {
                 }
                 {activeSection === 2 &&
                     <section className={styles.lessonsContainer}>
-                        {!serverError ? teacher.lessons.map(lesson => (
+                        {(!serverError && teacher) ? teacher.lessons.map(lesson => (
                             <div className={styles.lesson} key={lesson.id}>
                                 <img src={lesson.image} alt="lessonImg" />
                                 <span>{lesson.name}</span>

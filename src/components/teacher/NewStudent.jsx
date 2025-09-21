@@ -46,6 +46,17 @@ const NewStudent = ({ show, setShowNewStPage, userData, refreshStudents }) => {
         }
     }
     useEffect(() => {
+        let words = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        let word1 = words[Math.floor(Math.random() * 26)] + words[Math.floor(Math.random() * 26)]
+        let word2 = words[Math.floor(Math.random() * 26)]
+        let number = Math.floor(10000 + Math.random() * 90000);
+        let pass = (word1 + number + word2).toUpperCase()
+        setFormData(prev => {
+            return {
+                ...prev,
+                password: pass
+            }
+        })
         if (show) {
             setVisible(true)
             const timer = setTimeout(() => setAnimate(true), 20);

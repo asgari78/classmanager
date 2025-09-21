@@ -25,7 +25,6 @@ const Activity = ({ student }) => {
     useEffect(() => {
         fetchGetStudent()
     }, [student.id])
-
     const handleSave = async () => {
         try {
             setLoading(true)
@@ -45,7 +44,7 @@ const Activity = ({ student }) => {
     }
     const handleSum = (index) => {
         let sum = copyActivity[index].months.reduce((sum, month) => sum + month.count, 0)
-        return sum
+        return sum;
     }
     const handleSetCount = (termIndex, monthIndex, operator) => {
         setCopyActivity(prev => {
@@ -86,7 +85,6 @@ const Activity = ({ student }) => {
                 })
             })
             setSaveMode(changed);
-
             return updated;
         });
     }

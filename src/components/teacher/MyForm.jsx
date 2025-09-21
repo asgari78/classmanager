@@ -1,11 +1,19 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { studentSchema } from "../../validations/studentValidation";
 import styles from "../../styles/teacher/myForm.module.css"
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, setStudent }) => {
 
-
+    const formRef = useRef()
+    useEffect(() => {
+        const fildes = [...formRef.current.children];
+        handleFocus(fildes[1].children[0])
+        handleFocus(fildes[3].children[0])
+        handleFocus(fildes[6].children[0])
+        handleFocus(fildes[7].children[0])
+        handleFocus(fildes[8].children[0])
+    }, [])
     useEffect(() => {
         document.addEventListener("jdp:change", function (e) {
             if (e.target.name === "dateBirth") {
@@ -15,19 +23,7 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, s
                 }))
             }
         });
-        let words = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-        let word1 = words[Math.floor(Math.random() * 26)] + words[Math.floor(Math.random() * 26)]
-        let word2 = words[Math.floor(Math.random() * 26)]
-        let number = Math.floor(10000 + Math.random() * 90000);
-        let pass = (word1 + number + word2).toUpperCase()
-        setStudent(prev => {
-            return {
-                ...prev,
-                password: pass
-            }
-        })
     }, [show])
-
     const handleImage = () => {
         const file = fileInputRef.current.files[0];
         if (!file) return;
@@ -38,16 +34,18 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, s
             profileFile: file
         }));
     };
-
-    const handleFocusBlur = (e) => {
-        const parent = e.target.closest("div");
-        if (!parent) return;
-        if (e.type === "focus" || e.target.value !== "") {
+    const handleFocus = (inp) => {
+        const parent = inp.parentNode;
+        if (inp.value !== "") {
             parent.classList.add(styles.active);
-        } else if (e.type === "blur" && e.target.value === "") {
-            parent.classList.remove(styles.active);
         }
     };
+    const handleBlur = (e) => {
+        const parent = e.target.closest("div")
+        if (e.target.value === "") {
+            parent.classList.remove(styles.active);
+        }
+    }
 
 
     return (
@@ -55,10 +53,10 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, s
             innerRef={formikRef}
             initialValues={student}
             validationSchema={studentSchema}
-            onSubmit={(valuse) => eventForm(valuse)} >
+            onSubmit={(values) => eventForm(values)} >
             {
                 formik => (
-                    <Form className={styles.myFormCss}>
+                    <Form className={styles.myFormCss} ref={formRef}>
                         <div className={
                             `${styles.profileImage} ${student.profileImage !== null && styles.uploadedImg}`
                         }>
@@ -94,8 +92,8 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, s
                             <Field
                                 type="text"
                                 name="namefamily"
-                                onFocus={handleFocusBlur}
-                                onBlur={handleFocusBlur}
+                                onFocus={(e) => handleFocus(e.target)}
+                                onBlur={handleBlur}
                             />
                             <label htmlFor="namefamily">
                                 نام و نام خانوادگی *
@@ -129,8 +127,8 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, s
                                 type="text"
                                 name="username"
                                 dir="ltr"
-                                onFocus={handleFocusBlur}
-                                onBlur={handleFocusBlur}
+                                onFocus={(e) => handleFocus(e.target)}
+                                onBlur={handleBlur}
                             />
                             <label htmlFor="username">
                                 نام کاربری دانش آموز *
@@ -176,8 +174,8 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, s
                                 type="text"
                                 name="dateBirth"
                                 dir="ltr"
-                                onFocus={(e) => { jalaliDatepicker.startWatch(); handleFocusBlur(e) }}
-                                onBlur={handleFocusBlur}
+                                onFocus={(e) => { jalaliDatepicker.startWatch(); handleFocus(e.target) }}
+                                onBlur={handleBlur}
                             />
                             <label htmlFor="dateBirth">
                                 تاریخ تولد
@@ -189,8 +187,8 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, s
                                 type="number"
                                 name="selfCode"
                                 dir="ltr"
-                                onFocus={handleFocusBlur}
-                                onBlur={handleFocusBlur}
+                                onFocus={(e) => handleFocus(e.target)}
+                                onBlur={handleBlur}
                             />
                             <label htmlFor="selfCode">
                                 کدملی
@@ -201,8 +199,8 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, s
                             <Field
                                 type="text"
                                 name="dadName"
-                                onFocus={handleFocusBlur}
-                                onBlur={handleFocusBlur}
+                                onFocus={(e) => handleFocus(e.target)}
+                                onBlur={handleBlur}
                             />
                             <label htmlFor="dadName">
                                 نام پدر
@@ -213,8 +211,8 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, s
                             <Field
                                 type="tel"
                                 name="phoneNumber"
-                                onFocus={handleFocusBlur}
-                                onBlur={handleFocusBlur}
+                                onFocus={(e) => handleFocus(e.target)}
+                                onBlur={handleBlur}
                             />
                             <label htmlFor="phoneNumber">
                                 شماره موبایل
