@@ -5,9 +5,17 @@
        url('../../public/fonts/Vazir.ttf') format('truetype'),
        url('../../public/fonts/Vazir.eot') format('opentype');
 }
-body{
-    height: 100vh;
+html{
     width: 100vw;
+    max-width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+body{
+    overflow: hidden;
+    height: 100vh;
+    width: 100%;
+    max-width: 460px;
     font-family: "Vazir";
     color: #2c2c2c;
 }
