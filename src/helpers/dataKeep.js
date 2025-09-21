@@ -1100,15 +1100,4 @@ const nullStudentData = {
         ]
 }
 
-
-
-
-
-// < a href = "https://uupload.ir/view/screenshot1_8etc.png" target = "_blank" > <img src="https://s6.uupload.ir/files/screenshot1_8etc_thumb.png" border="0" alt="آپلود عکس" /></a>
-// <a href="https://uupload.ir/view/screenshot3_3drq.png" target="_blank"><img src="https://s6.uupload.ir/files/screenshot3_3drq_thumb.png" border="0" alt="آپلود عکس" /></a>
-// <a href="https://uupload.ir/view/screenshot2_u0fr.png" target="_blank"><img src="https://s6.uupload.ir/files/screenshot2_u0fr_thumb.png" border="0" alt="آپلود عکس" /></a>
-// <a href="https://uupload.ir/view/screenshot4_wjf2.png" target="_blank"><img src="https://s6.uupload.ir/files/screenshot4_wjf2_thumb.png" border="0" alt="آپلود عکس" /></a>
-
-
-
 export default nullStudentData
