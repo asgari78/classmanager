@@ -38,4 +38,4 @@
 - ساخته‌شده کاملاً با JS برای شبیه‌سازی تجربه e-commerce واقعی.
 - Responsive و intuitive UI.
 
-Built with ❤️ by [MohammadJavad Asgari](https://github.com/asgari78) | Jan 2025 - Present
+Built with ❤️ by [MohammadJavad Asgari](https://github.com/asgari78) | Jan 2024 - Present
