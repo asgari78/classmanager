@@ -3,7 +3,7 @@ import styles from "../../styles/teacher/lesson.module.css"
 import { updateLesson, getStudent } from "../../services/axiosApi";
 import Loading from "../general/Loading"
 
-const Lesson = ({ lesson, closeOneLesoon, st, refreshStudents }) => {
+const Lesson = ({ lesson, setLessonData, st, refreshStudents }) => {
 
     const [saveMode, setSaveMode] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -68,7 +68,7 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudents }) => {
             await updateLesson(st.id, currentLesson);
             await refreshStudents();
             setSaveMode(false);
-            closeOneLesoon()
+            setLessonData(null)
         } catch (err) {
             alert(err);
         }
@@ -87,7 +87,7 @@ const Lesson = ({ lesson, closeOneLesoon, st, refreshStudents }) => {
                 <span>ثبت نمرات {currentLesson.name}</span>
                 <div className={styles.btnsContainer}>
                     <button className={styles.saveBtn} disabled={!saveMode} onClick={handleSave}>ذخیره</button>
-                    <button className={styles.cancelBtn} onClick={closeOneLesoon}>لغو</button>
+                    <button className={styles.cancelBtn} onClick={() => setLessonData(null)}>لغو</button>
                 </div>
             </section >
             <section className={styles.tableContainer}>

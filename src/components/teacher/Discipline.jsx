@@ -114,11 +114,6 @@ const Discipline = ({ st }) => {
                 </ul>
             )}
 
-            {/* Add Button */}
-            <button className={styles.fab} onClick={() => setShowAddModal(true)}>
-                +
-            </button>
-
             {/* Modal: Add */}
             {showAddModal && (
                 <DisciplineModal
@@ -135,6 +130,9 @@ const Discipline = ({ st }) => {
                     onSave={(updated) => handleEditRecord(showEditModal, updated)}
                 />
             )}
+            <button className={styles.fab} onClick={() => setShowAddModal(true)}>
+                +
+            </button>
         </div>
     );
 };

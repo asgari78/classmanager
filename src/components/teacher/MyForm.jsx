@@ -1,34 +1,32 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { studentSchema } from "../../validations/studentValidation";
 import styles from "../../styles/teacher/myForm.module.css"
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, setStudent }) => {
+const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
 
     const formRef = useRef()
+
+    const [formData, setFormData] = useState(student)
+
     useEffect(() => {
+        const targetInputNums = [1, 3, 6, 7, 8]
         const fildes = [...formRef.current.children];
-        handleFocus(fildes[1].children[0])
-        handleFocus(fildes[3].children[0])
-        handleFocus(fildes[6].children[0])
-        handleFocus(fildes[7].children[0])
-        handleFocus(fildes[8].children[0])
-    }, [])
-    useEffect(() => {
+        targetInputNums.map(num => fildes.map((filde, index) => (index === num) && handleFocus(filde.children[0])))
         document.addEventListener("jdp:change", function (e) {
             if (e.target.name === "dateBirth") {
-                setStudent(prev => ({
+                setFormData(prev => ({
                     ...prev,
                     dateBirth: e.target.value
                 }))
             }
         });
-    }, [show])
+    }, [])
     const handleImage = () => {
         const file = fileInputRef.current.files[0];
         if (!file) return;
         const previewUrl = URL.createObjectURL(file);
-        setStudent(prev => ({
+        setFormData(prev => ({
             ...prev,
             profileImage: previewUrl,
             profileFile: file
@@ -51,14 +49,14 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, s
     return (
         <Formik
             innerRef={formikRef}
-            initialValues={student}
+            initialValues={formData}
             validationSchema={studentSchema}
             onSubmit={(values) => eventForm(values)} >
             {
                 formik => (
                     <Form className={styles.myFormCss} ref={formRef}>
                         <div className={
-                            `${styles.profileImage} ${student.profileImage !== null && styles.uploadedImg}`
+                            `${styles.profileImage} ${formData.profileImage !== null && styles.uploadedImg}`
                         }>
                             <input
                                 ref={fileInputRef}
@@ -70,20 +68,20 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, s
                             />
                             <img
                                 onClick={() => fileInputRef.current.click()}
-                                style={{ display: student.profileImage !== null ? "flex" : "none" }}
-                                src={student.profileImage}
+                                style={{ display: formData.profileImage !== null ? "flex" : "none" }}
+                                src={formData.profileImage}
                                 alt="studentProfileImage"
                             />
                             <label
-                                style={{ display: student.profileImage === null ? "flex" : "none" }} htmlFor="profileImage">
+                                style={{ display: formData.profileImage === null ? "flex" : "none" }} htmlFor="profileImage">
                                 تصویر دانش آموز
                                 <i className="fas fa-upload"></i>
                             </label>
                             <i
-                                style={{ display: student.profileImage !== null ? "flex" : "none" }}
+                                style={{ display: formData.profileImage !== null ? "flex" : "none" }}
                                 className="fas fa-trash-alt"
                                 onClick={() => {
-                                    setStudent((prev) => ({ ...prev, profileImage: null }));
+                                    setFormData((prev) => ({ ...prev, profileImage: null }));
                                     fileInputRef.current.value = "";
                                 }}>
                             </i>
@@ -226,7 +224,7 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, show, student, s
                                 dir="ltr"
                                 name="password"
                                 id="password"
-                                value={student.password}
+                                value={formData.password}
                             />
                             <label htmlFor="password">
                                 رمز عبور دانش آموز :

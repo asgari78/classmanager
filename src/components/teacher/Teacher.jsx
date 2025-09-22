@@ -46,12 +46,12 @@ const Teacher = ({ userData }) => {
 
     return (
         <>
-            <NewStudent userData={userData} show={showNewStPage} setShowNewStPage={setShowNewStPage} refreshStudents={refreshStudents} />
+            <NewStudent userData={userData} show={showNewStPage} setShow={setShowNewStPage} refreshStudents={refreshStudents} />
             <section className={styles.teacherContent}>
                 <section className={styles.groupsList}>
                     <ul>
-                        <li style={{ backgroundColor: activeSection === 1 ? "#e9e9e9ff" : "white" }} className={styles.groupLi} onClick={() => setActiveSection(1)}>دانش آموزان</li>
-                        <li style={{ backgroundColor: activeSection === 2 ? "#e9e9e9ff" : "white" }} className={styles.groupLi} onClick={() => setActiveSection(2)}>دروس</li>
+                        <li className={activeSection === 1 ? `${styles.groupLi} ${styles.activegroupLi}` : styles.groupLi} onClick={() => setActiveSection(1)}>دانش آموزان</li>
+                        <li className={activeSection === 2 ? `${styles.groupLi} ${styles.activegroupLi}` : styles.groupLi} onClick={() => setActiveSection(2)}>دروس</li>
                     </ul>
                 </section>
                 {loading ? <Loading /> : null}
@@ -90,7 +90,7 @@ const Teacher = ({ userData }) => {
                     </section>
                 }
                 {activeSection === 1 ? <button className={styles.addStBtn} onClick={() => { setShowNewStPage(true); }}>+</button> : null}
-            </section>
+            </section >
         </>
     )
 }

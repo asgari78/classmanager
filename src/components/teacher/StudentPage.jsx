@@ -1,16 +1,15 @@
 import styles from "../../styles/teacher/studentPage.module.css"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { Lesson, HomeWork, Activity, Discipline, Profile } from "./"
 import profileFake from "../../../public/images/emptyProfile.avif"
 import Loading from "../general/Loading"
 import { deleteStudent, getStudent, putStudent } from "../../services/axiosApi"
 import ModalProfileEdit from "./ModalProfileEdit"
 
-const StudentPage = ({ allStudents, userData, st, setShowStPage, refreshStudents }) => {
+const StudentPage = ({ userData, st, setShowStPage }) => {
     const [page, setpage] = useState(3)
     const [lessonData, setLessonData] = useState(null)
     const [loading, setLoading] = useState(false)
-    const [showOneLesson, setShowOneLesson] = useState(false)
     const [showMore, setShowMore] = useState(false)
     const [student, setStudent] = useState(st)
     const [showModal, setShowModal] = useState(false)
@@ -18,7 +17,7 @@ const StudentPage = ({ allStudents, userData, st, setShowStPage, refreshStudents
     const fetchStudent = async () => {
         try {
             setLoading(true);
-            const { data } = await getStudent(st.id); // همین API که Profile استفاده می‌کرد
+            const { data } = await getStudent(st.id);
             setStudent(data);
             setLoading(false);
         } catch (err) {
@@ -26,82 +25,54 @@ const StudentPage = ({ allStudents, userData, st, setShowStPage, refreshStudents
             setLoading(false);
         }
     };
+    useEffect(() => {
+        fetchStudent()
+    }, [st]);
     const handleUpdateStudent = async (updatedData) => {
         try {
             setLoading(true);
             await putStudent(updatedData);
-            await fetchStudent();
-            await refreshStudents();
             setLoading(false);
+            await fetchStudent();
         } catch (err) {
             console.error("خطا در آپدیت دانش‌آموز:", err);
             setLoading(false);
         }
     };
-    const changePage = (pageNumber) => {
-        setpage(parseInt(pageNumber))
-        setShowOneLesson(false)
-    }
-    const openOneLesson = (lesson) => {
-        setShowOneLesson(true)
-        setLessonData(lesson)
-    }
-    const closeOneLesoon = () => {
-        setShowOneLesson(false)
-        setLessonData(null)
-    }
-    useEffect(() => {
-        refreshStudents()
-        allStudents.map(s => s.id === st.id && setStudent(s))
-    }, [])
-    useEffect(() => {
-        const updated = userData.students?.find(s => s.id === st.id);
-        if (updated) {
-            setStudent(updated);
-        }
-        fetchStudent()
-    }, [allStudents]);
     const formatData = async () => {
+        const confirmFormat = window.confirm(`آیا مطمئن هستی می‌خواهی ${student.namefamily} را حذف کنی؟`);
+        if (!confirmFormat) return;
         try {
-            setLoading(true)
             st.homework.map(term => term.months.map(month => month.count = 0))
             st.activity.map(term => term.months.map(month => month.count = 0))
             st.lessons.map(less => less.score.map(month => month.value.map(week => week.value = null)))
             st.discipline = [];
             setShowMore(false)
-            await putStudent(st)
-            await refreshStudents()
-            setLoading(false)
+            await handleUpdateStudent(st)
         } catch (err) {
             console.log(err);
             setShowMore(false)
-            setLoading(false)
         }
     }
     const logoutAccount = async () => {
         try {
-            setLoading(true)
             st.login = false
             setShowMore(false)
-            await putStudent(st)
-            await refreshStudents()
-            setLoading(false)
+            await handleUpdateStudent(st)
         } catch (err) {
             console.log(err);
             setShowMore(false)
-            setLoading(false)
         }
     }
     const removeStudent = async () => {
         const confirmDelete = window.confirm(`آیا مطمئن هستی می‌خواهی ${student.namefamily} را حذف کنی؟`);
         if (!confirmDelete) return;
-
         try {
             setLoading(true);
             await deleteStudent(student.id);
-            await refreshStudents();
-            setShowStPage(false);
             setLoading(false);
+            await fetchStudent();
+            setShowStPage(false);
         } catch (err) {
             console.error("خطا در حذف دانش آموز:", err);
             setLoading(false);
@@ -152,7 +123,7 @@ const StudentPage = ({ allStudents, userData, st, setShowStPage, refreshStudents
                         <div className={styles.lessonContainer}>
                             {
                                 student.lessons.map((lesson, index) => (
-                                    <div className={styles.lesson} key={index} onClick={() => openOneLesson(lesson)}>
+                                    <div className={styles.lesson} key={index} onClick={() => setLessonData(lesson)}>
                                         <img src={lesson.image} alt="lessonImg" />
                                         <span>{lesson.name}</span>
                                     </div>
@@ -166,37 +137,37 @@ const StudentPage = ({ allStudents, userData, st, setShowStPage, refreshStudents
                     }
                     {
                         page === 5 &&
-                        <Profile onUpdateStudent={handleUpdateStudent} student={student} setShowModal={setShowModal} />
+                        <Profile student={student} setShowModal={setShowModal} />
                     }
                 </section>
                 {
-                    showOneLesson &&
-                    <Lesson lesson={lessonData} closeOneLesoon={closeOneLesoon} st={st} refreshStudents={refreshStudents} />
+                    lessonData !== null ?
+                        <Lesson lesson={lessonData} setLessonData={setLessonData} st={student} /> : null
                 }
             </section>
             <section className={styles.footer}>
-                <button className={page == 1 ? styles.active : ""} onClick={() => changePage(1)}>
+                <button className={page == 1 ? styles.active : ""} onClick={() => setpage(1)}>
                     <i className="fas fa-pen"></i>
                     <span>تکالیف</span>
                 </button>
-                <button className={page == 2 ? styles.active : ""} onClick={() => changePage(2)}>
+                <button className={page == 2 ? styles.active : ""} onClick={() => setpage(2)}>
                     <i className="fa fa-calendar-check"></i>
                     <span>فعالیت ها</span>
                 </button>
-                <button className={page == 3 ? styles.active : ""} onClick={() => changePage(3)}>
+                <button className={page == 3 ? styles.active : ""} onClick={() => setpage(3)}>
                     <i className="fa fa-pie-chart"></i>
                     <span>نمرات</span>
                 </button>
-                <button className={page == 4 ? styles.active : ""} onClick={() => changePage(4)}>
+                <button className={page == 4 ? styles.active : ""} onClick={() => setpage(4)}>
                     <i className="fas fa-theater-masks"></i>
                     <span>انضباط</span>
                 </button>
-                <button className={page == 5 ? styles.active : ""} onClick={() => changePage(5)}>
+                <button className={page == 5 ? styles.active : ""} onClick={() => setpage(5)}>
                     <i className="fa fa-user"></i>
                     <span>پروفایل</span>
                 </button>
             </section>
-            {showModal && <ModalProfileEdit student={student} userData={userData} setStudent={setStudent} setShowModal={setShowModal} />}
+            {showModal && <ModalProfileEdit handleUpdateStudent={handleUpdateStudent} student={student} userData={userData} setShowModal={setShowModal} />}
         </div>
     )
 }

@@ -2,14 +2,11 @@ import MyForm from "./MyForm"
 
 import styles from "../../styles/teacher/modalProfileEdit.module.css"
 import { useRef, useState } from "react"
-import { putStudent } from "../../services/axiosApi"
-import Loading from "../general/Loading"
 
-const ModalProfileEdit = ({ student, setStudent, setShowModal, userData }) => {
+const ModalProfileEdit = ({ handleUpdateStudent, student, userData, setShowModal }) => {
 
     const formikRef = useRef()
     const fileInputRef = useRef()
-    const [loading, setLoading] = useState(false)
 
     const onClose = () => {
         setShowModal(false)
@@ -17,9 +14,8 @@ const ModalProfileEdit = ({ student, setStudent, setShowModal, userData }) => {
     }
 
     const editStudent = async (values) => {
-        setLoading(true)
-        await putStudent(values)
-        setLoading(false)
+        await handleUpdateStudent(values)
+        onClose()
     }
 
     return (
@@ -28,8 +24,7 @@ const ModalProfileEdit = ({ student, setStudent, setShowModal, userData }) => {
                 <span>ویرایش پروفایل</span>
                 <button className={styles.closeBtn} onClick={onClose}>لغو</button>
             </section>
-            <MyForm formikRef={formikRef} fileInputRef={fileInputRef} userData={userData} eventForm={editStudent} setStudent={setStudent} student={student} />
-            {loading ? <Loading /> : null}
+            <MyForm formikRef={formikRef} fileInputRef={fileInputRef} userData={userData} eventForm={editStudent} student={student} />
         </div>
     )
 }

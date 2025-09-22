@@ -139,11 +139,11 @@
 }
 .submitBtn:active{
     filter: brightness(.85);
-    transform: translateY(.2rem);
 }
 .submitBtn{
     background-color: #44a054;
     width: 100%;
+    max-width: 460px;
     height: 3.5rem;
     border: none;
     outline: none;
@@ -152,5 +152,6 @@
     color: #dfdfdf;
     position: fixed;
     bottom: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }

@@ -10,12 +10,14 @@ html{
     max-width: 100vw;
     display: flex;
     justify-content: center;
+    position: relative;
 }
 body{
     overflow: hidden;
     height: 100vh;
     width: 100%;
     max-width: 460px;
+    position: relative;
     font-family: "Vazir";
     color: #2c2c2c;
 }
@@ -25,6 +27,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 *{

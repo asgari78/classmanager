@@ -6,51 +6,19 @@ import { supabase } from "../../lib/supabaseClient";
 import nullStudentData from "../../helpers/dataKeep";
 import MyForm from "./MyForm";
 
-const NewStudent = ({ show, setShowNewStPage, userData, refreshStudents }) => {
+const NewStudent = ({ show, setShow, userData }) => {
 
     const [visible, setVisible] = useState(show)
     const [animate, setAnimate] = useState(false);
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState(nullStudentData)
+
     const formikRef = useRef();
     const fileInputRef = useRef(null);
 
-    const addNewStudent = async (values) => {
-        try {
-            setLoading(true);
-            let imageUrl = null;
-            if (formData.profileFile) {
-                const fileName = `students/${Date.now()}-${formData.profileFile.name}`;
-                const { data: uploadData, error: uploadError } = await supabase.storage
-                    .from("test")
-                    .upload(fileName, formData.profileFile, {
-                        cacheControl: "3600",
-                        upsert: false,
-                    });
-                if (uploadError) throw uploadError;
-                const { data: urlData } = supabase.storage.from("test").getPublicUrl(fileName);
-                imageUrl = urlData.publicUrl;
-            }
-            const submitData = {
-                ...values,
-                profileImage: imageUrl,
-                password: formData.password
-            };
-            await addStudent(submitData);
-            await refreshStudents();
-            setLoading(false);
-            onClose();
-        } catch (err) {
-            console.error(err);
-            setLoading(false);
-        }
-    }
+
     useEffect(() => {
-        let words = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-        let word1 = words[Math.floor(Math.random() * 26)] + words[Math.floor(Math.random() * 26)]
-        let word2 = words[Math.floor(Math.random() * 26)]
-        let number = Math.floor(10000 + Math.random() * 90000);
-        let pass = (word1 + number + word2).toUpperCase()
+        const s = 'abcdefghijklmnopqrstuvwxyz', r = n => crypto.getRandomValues(new Uint32Array(1))[0] % n, pass = (s[r(26)] + s[r(26)] + (10000 + r(90000)) + s[r(26)]).toUpperCase();
         setFormData(prev => {
             return {
                 ...prev,
@@ -67,8 +35,39 @@ const NewStudent = ({ show, setShowNewStPage, userData, refreshStudents }) => {
             return () => clearTimeout(timer)
         }
     }, [show])
+
+    const addNewStudent = async (values) => {
+        try {
+            setLoading(true);
+            let imageUrl = null;
+            if (values.profileFile) {
+                const fileName = `students/${Date.now()}-${values.profileFile.name}`;
+                const { data: uploadData, error: uploadError } = await supabase.storage
+                    .from("test")
+                    .upload(fileName, values.profileFile, {
+                        cacheControl: "3600",
+                        upsert: false,
+                    });
+                if (uploadError) throw uploadError;
+                const { data: urlData } = supabase.storage.from("test").getPublicUrl(fileName);
+                imageUrl = urlData.publicUrl;
+            }
+            const submitData = {
+                ...values,
+                profileImage: imageUrl,
+                password: formData.password
+            };
+            await addStudent(submitData);
+            setLoading(false);
+            onClose();
+        } catch (err) {
+            console.error(err);
+            setLoading(false);
+        }
+    }
+
     const onClose = () => {
-        setShowNewStPage(false)
+        setShow(false)
         formikRef.current.resetForm();
         setFormData(nullStudentData)
     }
@@ -87,7 +86,7 @@ const NewStudent = ({ show, setShowNewStPage, userData, refreshStudents }) => {
                     <button className={styles.closeBtn} onClick={onClose}>لغو</button>
                 </section>
                 <section className={styles.main}>
-                    <MyForm formikRef={formikRef} fileInputRef={fileInputRef} show={show} userData={userData} eventForm={addNewStudent} student={formData} setStudent={setFormData} />
+                    <MyForm formikRef={formikRef} fileInputRef={fileInputRef} userData={userData} eventForm={addNewStudent} student={formData} />
                 </section>
             </div >
         </>
