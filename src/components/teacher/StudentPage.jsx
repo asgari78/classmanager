@@ -6,7 +6,7 @@ import Loading from "../general/Loading"
 import { deleteStudent, getStudent, putStudent } from "../../services/axiosApi"
 import ModalProfileEdit from "./ModalProfileEdit"
 
-const StudentPage = ({ userData, st, setShowStPage }) => {
+const StudentPage = ({ userData, st, setShowStPage, refreshStudents }) => {
     const [page, setpage] = useState(3)
     const [lessonData, setLessonData] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -71,8 +71,8 @@ const StudentPage = ({ userData, st, setShowStPage }) => {
             setLoading(true);
             await deleteStudent(student.id);
             setLoading(false);
-            await fetchStudent();
             setShowStPage(false);
+            await refreshStudents()
         } catch (err) {
             console.error("خطا در حذف دانش آموز:", err);
             setLoading(false);

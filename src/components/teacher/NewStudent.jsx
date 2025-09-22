@@ -6,7 +6,7 @@ import { supabase } from "../../lib/supabaseClient";
 import nullStudentData from "../../helpers/dataKeep";
 import MyForm from "./MyForm";
 
-const NewStudent = ({ show, setShow, userData }) => {
+const NewStudent = ({ show, setShow, userData, refreshStudents }) => {
 
     const [visible, setVisible] = useState(show)
     const [animate, setAnimate] = useState(false);
@@ -59,6 +59,7 @@ const NewStudent = ({ show, setShow, userData }) => {
             };
             await addStudent(submitData);
             setLoading(false);
+            await refreshStudents()
             onClose();
         } catch (err) {
             console.error(err);

@@ -105,11 +105,11 @@
 }
 .meta button i{
     font-size: 1.3rem;
-    color: #e49797;
+    color: #c9c9c9;
 }
 
 .meta button:hover i {
-    color: #d16e6e;
+    color: #a3a3a3;
 }
 
 .descriptions{
@@ -121,11 +121,11 @@
 
 /* Positive & Negative styles */
 .positive {
-    border-left: 5px solid #58b93f;
+    border-right: 5px solid #58b93f!important;
 }
 
 .negative {
-    border-left: 5px solid #ad2323;
+    border-right: 5px solid #ad2323!important;
 }
 
 /* Empty state */

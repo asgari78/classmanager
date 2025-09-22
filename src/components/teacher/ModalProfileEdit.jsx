@@ -1,7 +1,7 @@
 import MyForm from "./MyForm"
 
 import styles from "../../styles/teacher/modalProfileEdit.module.css"
-import { useRef, useState } from "react"
+import { useRef } from "react"
 
 const ModalProfileEdit = ({ handleUpdateStudent, student, userData, setShowModal }) => {
 

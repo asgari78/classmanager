@@ -139,13 +139,15 @@ const Discipline = ({ st }) => {
 
 export default Discipline;
 
+
 // ================= Modal ==================
+
 const DisciplineModal = ({ onClose, onSave, record }) => {
     const [type, setType] = useState(record?.type || "positive");
     const [date, setDate] = useState(record?.date || new Date().toISOString());
     const [category, setCategory] = useState(record?.category || "");
     const [customTitle, setCustomTitle] = useState(record?.title || "");
-    const [customCategory, setCustomCategory] = useState(false);
+    const [customCategory, setCustomCategory] = useState(record?.category === "موارد دیگر" || false);
     const [desc, setDesc] = useState(record?.desc || "");
 
     const categories1 = [
@@ -161,37 +163,97 @@ const DisciplineModal = ({ onClose, onSave, record }) => {
         "موارد دیگر",
     ];
 
+    useEffect(() => {
+        const handler = (e) => {
+            if (!e?.target) return;
+            const hasJdpAttr = e.target.getAttribute && e.target.getAttribute("data-jdp") !== null;
+            if (!hasJdpAttr) return;
+            const val = e.target.value;
+            if (!val) return;
+            if (/^\d{4}-\d{2}-\d{2}$/.test(val)) {
+                setDate(new Date(val).toISOString());
+            } else {
+                setDate(val);
+            }
+        };
+        document.addEventListener("jdp:change", handler);
+        return () => document.removeEventListener("jdp:change", handler);
+    }, []);
+
+    const handleTypeChange = (newType) => {
+        setType(newType);
+        setCategory("");
+        setCustomCategory(false);
+        setCustomTitle("");
+    };
+
     const handleSubmit = () => {
+        if (!category) {
+            alert("لطفاً یک دسته‌بندی انتخاب کنید.");
+            return;
+        }
+        if (category === "موارد دیگر" && !customTitle.trim()) {
+            alert("لطفاً عنوان دلخواه را وارد کنید.");
+            return;
+        }
+
+        const finalCategory = customCategory ? "موارد دیگر" : category;
+        const finalTitle = customCategory ? customTitle : category;
+
         const newRecord = {
             id: record?.id || Date.now().toString(),
             type,
             date,
-            category: customCategory ? "موارد دیگر" : (category ? category : (type == "positive" ? categories1[0] : categories2[0])),
-            title: customCategory ? customTitle : category,
+            category: finalCategory,
+            title: finalTitle,
             desc,
         };
         onSave(newRecord);
     };
 
+    const dateInputValue = (() => {
+        if (!date) return "";
+        if (typeof date === "string" && date.includes("T")) {
+            return date.split("T")[0];
+        }
+        return date;
+    })();
+
     return (
-        <section className={styles.modalOverlay} onClick={(e) => { (e.target.nodeName == "SECTION") && onClose() }}>
+        <section className={styles.modalOverlay} onClick={(e) => { (e.target.nodeName === "SECTION") && onClose() }}>
             <div className={styles.modal}>
                 <h3>{record ? "ویرایش مورد" : "افزودن مورد جدید"}</h3>
+
                 <label>
                     <span>نوع مورد</span>
-                    <select value={type} onChange={(e) => setType(e.target.value)}>
+                    <select
+                        value={type}
+                        onChange={(e) => handleTypeChange(e.target.value)}
+                    >
                         <option value="positive">مثبت</option>
                         <option value="negative">منفی</option>
                     </select>
                 </label>
+
                 <label>
                     <span>تاریخ</span>
                     <input
-                        type="date"
-                        value={date.split("T")[0]}
-                        onChange={(e) => setDate(new Date(e.target.value).toISOString())}
+                        type="text"
+                        data-jdp
+                        dir="ltr"
+                        value={dateInputValue}
+                        onChange={(e) => {
+                            const v = e.target.value;
+                            if (/^\d{4}-\d{2}-\d{2}$/.test(v)) {
+                                setDate(new Date(v).toISOString());
+                            } else {
+                                setDate(v);
+                            }
+                        }}
+                        onFocus={() => jalaliDatepicker.startWatch()}
                     />
                 </label>
+
                 <label>
                     <span>دسته بندی</span>
                     <select
@@ -201,14 +263,14 @@ const DisciplineModal = ({ onClose, onSave, record }) => {
                             setCustomCategory(e.target.value === "موارد دیگر");
                         }}
                     >
-                        {type == "positive" && categories1.map((cat) => (
-                            <option key={cat}>{cat}</option>
-                        ))}
-                        {type == "negative" && categories2.map((cat) => (
-                            <option key={cat}>{cat}</option>
-                        ))}
+                        <option value="">یک مورد را انتخاب کنید...</option>
+                        {type === "positive" &&
+                            categories1.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
+                        {type === "negative" &&
+                            categories2.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
                     </select>
                 </label>
+
                 {customCategory && (
                     <input
                         type="text"
@@ -217,6 +279,7 @@ const DisciplineModal = ({ onClose, onSave, record }) => {
                         onChange={(e) => setCustomTitle(e.target.value)}
                     />
                 )}
+
                 <label>
                     <textarea
                         placeholder="توضیحات"
@@ -224,11 +287,10 @@ const DisciplineModal = ({ onClose, onSave, record }) => {
                         onChange={(e) => setDesc(e.target.value)}
                     ></textarea>
                 </label>
+
                 <div className={styles.actions}>
                     <button onClick={handleSubmit}>ثبت</button>
-                    <button onClick={onClose} className={styles.cancelBtn}>
-                        انصراف
-                    </button>
+                    <button onClick={onClose} className={styles.cancelBtn}>انصراف</button>
                 </div>
             </div>
         </section>
