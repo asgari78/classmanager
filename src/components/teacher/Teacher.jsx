@@ -2,16 +2,14 @@ import { useEffect, useState } from "react"
 import styles from "../../styles/teacher/teacher.module.css"
 
 import { getAllStudents, getTeacher } from "../../services/axiosApi"
-import Loading from "../general/Loading"
 import { NewStudent, StudentBar } from "./"
 
-const Teacher = ({ userData }) => {
+const Teacher = ({ userData, setLoading }) => {
 
     const [activeSection, setActiveSection] = useState(1)
     const [teacher, setTeacher] = useState({})
     const [allStudents, setAllStudents] = useState([])
     const [serverError, setServerError] = useState(false)
-    const [loading, setLoading] = useState(false)
     const [showNewStPage, setShowNewStPage] = useState(false)
 
     const refreshStudents = async () => {
@@ -54,11 +52,10 @@ const Teacher = ({ userData }) => {
                         <li className={activeSection === 2 ? `${styles.groupLi} ${styles.activegroupLi}` : styles.groupLi} onClick={() => setActiveSection(2)}>دروس</li>
                     </ul>
                 </section>
-                {loading ? <Loading /> : null}
                 {activeSection === 1 ?
                     allStudents.length > 0 ?
                         allStudents.map((st, index) => (
-                            <StudentBar allStudents={allStudents} userData={userData} st={st} key={index} refreshStudents={refreshStudents} />
+                            <StudentBar setLoading={setLoading} allStudents={allStudents} userData={userData} st={st} key={index} refreshStudents={refreshStudents} />
                         ))
                         :
                         <div className={styles.noStudentContainer}>

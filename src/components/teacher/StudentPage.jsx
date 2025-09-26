@@ -2,14 +2,12 @@ import styles from "../../styles/teacher/studentPage.module.css"
 import { useEffect, useState } from "react"
 import { Lesson, HomeWork, Activity, Discipline, Profile } from "./"
 import profileFake from "../../../public/images/emptyProfile.avif"
-import Loading from "../general/Loading"
 import { deleteStudent, getStudent, putStudent } from "../../services/axiosApi"
 import ModalProfileEdit from "./ModalProfileEdit"
 
-const StudentPage = ({ userData, st, setShowStPage, refreshStudents }) => {
+const StudentPage = ({ userData = null, st, setShowStPage = null, refreshStudents = null, setLoading }) => {
     const [page, setpage] = useState(3)
     const [lessonData, setLessonData] = useState(null)
-    const [loading, setLoading] = useState(false)
     const [showMore, setShowMore] = useState(false)
     const [student, setStudent] = useState(st)
     const [showModal, setShowModal] = useState(false)
@@ -81,10 +79,9 @@ const StudentPage = ({ userData, st, setShowStPage, refreshStudents }) => {
 
     return (
         <div className={styles.container}>
-            {loading && <Loading />}
             <section className={styles.header}>
-                <i className="fas fa-ellipsis-v" onClick={() => setShowMore(!showMore)}></i>
-                {showMore ?
+                {userData ? <i className="fas fa-ellipsis-v" onClick={() => setShowMore(!showMore)}></i> : null}
+                {(showMore && userData) ?
                     <div className={styles.moreLay} onClick={(e) => { e.target.nodeName === "DIV" && setShowMore(false) }}>
                         <ul>
                             <li onClick={formatData}>
@@ -103,20 +100,20 @@ const StudentPage = ({ userData, st, setShowStPage, refreshStudents }) => {
                     </div>
                     : null}
                 {page !== 5 ? <>
-                    <p>{st.namefamily} {<span style={st.roleId == 1 || st.roleId == 2 ? { color: "#1d6c91", fontWeight: "bold" } : { color: "#2b2b2be5", fontWeight: 0 }}>({st.roleName})</span>}</p>
+                    <p className={!userData ? styles.paddingOn : null}>{st.namefamily} {<span style={st.roleId == 1 || st.roleId == 2 ? { color: "#1d6c91", fontWeight: "bold" } : { color: "#2b2b2be5", fontWeight: 0 }}>({st.roleName})</span>}</p>
                     <img src={st.profileImage || profileFake} alt="studentImage" />
                 </> : null}
-                <i id="backToStudentsPage" onClick={() => { setShowStPage(false) }} className="fas fa-arrow-left"></i>
+                {userData ? <i id="backToStudentsPage" onClick={() => { setShowStPage(false) }} className="fas fa-arrow-left"></i> : null}
             </section>
             <section className={styles.contentContainer}>
                 <section className={styles.content}>
                     {
                         page === 1 &&
-                        <HomeWork student={student} />
+                        <HomeWork student={student} userData={userData} />
                     }
                     {
                         page === 2 &&
-                        <Activity student={student} />
+                        <Activity student={student} userData={userData} />
                     }
                     {
                         page === 3 &&
@@ -133,36 +130,36 @@ const StudentPage = ({ userData, st, setShowStPage, refreshStudents }) => {
                     }
                     {
                         page === 4 &&
-                        <Discipline st={student} />
+                        <Discipline st={student} userData={userData} />
                     }
                     {
                         page === 5 &&
-                        <Profile student={student} setShowModal={setShowModal} />
+                        <Profile student={student} setShowModal={setShowModal} userData={userData} />
                     }
                 </section>
                 {
                     lessonData !== null ?
-                        <Lesson lesson={lessonData} setLessonData={setLessonData} st={student} /> : null
+                        <Lesson userData={userData} lesson={lessonData} setLessonData={setLessonData} st={student} /> : null
                 }
             </section>
             <section className={styles.footer}>
-                <button className={page == 1 ? styles.active : ""} onClick={() => setpage(1)}>
+                <button className={page == 1 ? styles.active : ""} onClick={() => { setpage(1); setLessonData(null) }}>
                     <i className="fas fa-pen"></i>
                     <span>تکالیف</span>
                 </button>
-                <button className={page == 2 ? styles.active : ""} onClick={() => setpage(2)}>
+                <button className={page == 2 ? styles.active : ""} onClick={() => { setpage(2); setLessonData(null) }}>
                     <i className="fa fa-calendar-check"></i>
                     <span>فعالیت ها</span>
                 </button>
-                <button className={page == 3 ? styles.active : ""} onClick={() => setpage(3)}>
+                <button className={page == 3 ? styles.active : ""} onClick={() => { setpage(3); setLessonData(null) }}>
                     <i className="fa fa-pie-chart"></i>
                     <span>نمرات</span>
                 </button>
-                <button className={page == 4 ? styles.active : ""} onClick={() => setpage(4)}>
+                <button className={page == 4 ? styles.active : ""} onClick={() => { setpage(4); setLessonData(null) }}>
                     <i className="fas fa-theater-masks"></i>
                     <span>انضباط</span>
                 </button>
-                <button className={page == 5 ? styles.active : ""} onClick={() => setpage(5)}>
+                <button className={page == 5 ? styles.active : ""} onClick={() => { setpage(5); setLessonData(null) }}>
                     <i className="fa fa-user"></i>
                     <span>پروفایل</span>
                 </button>

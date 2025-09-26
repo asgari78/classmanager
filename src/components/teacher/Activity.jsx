@@ -4,7 +4,7 @@ import styles from "../../styles/teacher/homeworkAndActivity.module.css"
 import { getStudent, putStudent } from "../../services/axiosApi"
 import Loading from "../general/Loading"
 
-const Activity = ({ student }) => {
+const Activity = ({ student, userData }) => {
     const [copyActivity, setCopyActivity] = useState(null)
     const [loading, setLoading] = useState(null)
     const [currentStudent, setCurrentStudent] = useState(null)
@@ -90,57 +90,62 @@ const Activity = ({ student }) => {
     }
 
     return (
-        <div className={styles.Container}>
-            {loading && <Loading />}
-            {currentStudent ?
-                <table>
-                    <thead>
-                        <tr>
-                            <th>نام ماه</th>
-                            <th>تعداد فعالیت ها</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {copyActivity[0].months.map((month, idx) => (
-                            <tr key={idx}>
-                                <td>{month.name}</td>
-                                <td>
-                                    <div className={styles.countContainer}>
-                                        <button onClick={() => handleSetCount(0, idx, "+")}><i className="fas fa-plus"></i></button>
-                                        <span>{month.count.toLocaleString("fa-IR")}</span>
-                                        <button onClick={() => handleSetCount(0, idx, "-")}><i className="fas fa-minus"></i></button>
-                                        <button onClick={() => handleSetCount(0, idx, "undo")}><i className="fas fa-undo-alt"></i></button>
-                                    </div>
-                                </td>
+        userData ?
+            <div className={styles.Container}>
+                {loading && <Loading />}
+                {currentStudent ?
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>نام ماه</th>
+                                <th>تعداد فعالیت ها</th>
                             </tr>
-                        ))}
-                        <tr>
-                            <td className={styles.mainTerm}>نوبت اول</td>
-                            <td className={styles.mainTerm}>مجموعا {handleSum(0).toLocaleString("fa-IR")} فعالیت انجام شده</td>
-                        </tr>
-                        {copyActivity[1].months.map((month, idx) => (
-                            <tr key={idx}>
-                                <td>{month.name}</td>
-                                <td>
-                                    <div className={styles.countContainer}>
-                                        <button onClick={() => handleSetCount(1, idx, "+")}><i className="fas fa-plus"></i></button>
-                                        <span>{month.count.toLocaleString("fa-IR")}</span>
-                                        <button onClick={() => handleSetCount(1, idx, "-")}><i className="fas fa-minus"></i></button>
-                                        <button onClick={() => handleSetCount(1, idx, "undo")}><i className="fas fa-undo-alt"></i></button>
-                                    </div>
-                                </td>
+                        </thead>
+                        <tbody>
+                            {copyActivity[0].months.map((month, idx) => (
+                                <tr key={idx}>
+                                    <td>{month.name}</td>
+                                    <td>
+                                        <div className={styles.countContainer}>
+                                            <button onClick={() => handleSetCount(0, idx, "+")}><i className="fas fa-plus"></i></button>
+                                            <span>{month.count.toLocaleString("fa-IR")}</span>
+                                            <button onClick={() => handleSetCount(0, idx, "-")}><i className="fas fa-minus"></i></button>
+                                            <button onClick={() => handleSetCount(0, idx, "undo")}><i className="fas fa-undo-alt"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                            <tr>
+                                <td className={styles.mainTerm}>نوبت اول</td>
+                                <td className={styles.mainTerm}>مجموعا {handleSum(0).toLocaleString("fa-IR")} فعالیت انجام شده</td>
                             </tr>
-                        ))}
-                        <tr>
-                            <td className={styles.mainTerm}>نوبت دوم</td>
-                            <td className={styles.mainTerm}>مجموعا {handleSum(1).toLocaleString("fa-IR")} فعالیت انجام شده</td>
-                        </tr>
-                    </tbody>
-                </table>
-                : null
-            }
-            <button className={styles.saveBtn} onClick={handleSave} disabled={!saveMode}>ذخیره</button>
-        </div>
+                            {copyActivity[1].months.map((month, idx) => (
+                                <tr key={idx}>
+                                    <td>{month.name}</td>
+                                    <td>
+                                        <div className={styles.countContainer}>
+                                            <button onClick={() => handleSetCount(1, idx, "+")}><i className="fas fa-plus"></i></button>
+                                            <span>{month.count.toLocaleString("fa-IR")}</span>
+                                            <button onClick={() => handleSetCount(1, idx, "-")}><i className="fas fa-minus"></i></button>
+                                            <button onClick={() => handleSetCount(1, idx, "undo")}><i className="fas fa-undo-alt"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                            <tr>
+                                <td className={styles.mainTerm}>نوبت دوم</td>
+                                <td className={styles.mainTerm}>مجموعا {handleSum(1).toLocaleString("fa-IR")} فعالیت انجام شده</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    : null
+                }
+                <button className={styles.saveBtn} onClick={handleSave} disabled={!saveMode}>ذخیره</button>
+            </div>
+            :
+            <div className={styles.comming}>
+                <p>به زودی فعال می شود🙏</p>
+            </div>
     )
 }
 

@@ -87,6 +87,9 @@
     justify-content: center;
     gap: .2rem;
 }
+.paddingOn{
+    padding: 0 2rem 0 0;
+}
 
 .header img{
     width: 3rem;

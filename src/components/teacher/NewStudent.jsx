@@ -35,7 +35,6 @@ const NewStudent = ({ show, setShow, userData, refreshStudents }) => {
             return () => clearTimeout(timer)
         }
     }, [show])
-
     const addNewStudent = async (values) => {
         try {
             setLoading(true);
@@ -66,7 +65,6 @@ const NewStudent = ({ show, setShow, userData, refreshStudents }) => {
             setLoading(false);
         }
     }
-
     const onClose = () => {
         setShow(false)
         formikRef.current.resetForm();

@@ -1,7 +1,7 @@
 import styles from "../../styles/teacher/profile.module.css"
 import profileFake from "../../../public/images/emptyProfile.avif"
 
-const Profile = ({ student, setShowModal }) => {
+const Profile = ({ student, setShowModal, userData }) => {
 
     return (
         <div className={styles.profileContainer}>
@@ -19,7 +19,7 @@ const Profile = ({ student, setShowModal }) => {
                     <p><strong>وضعیت: </strong>{student.login ? "وارد شده" : "وارد نشده"}</p>
                     <p><strong>نام کاربری: </strong>{student.username}</p>
                     <p><strong>رمز عبور: </strong>{student.password}</p>
-                    <button className={styles.editBtn} onClick={() => setShowModal(true)}>ویرایش</button>
+                    {userData ? <button className={styles.editBtn} onClick={() => setShowModal(true)}>ویرایش</button> : null}
                 </section>
             }
         </div >

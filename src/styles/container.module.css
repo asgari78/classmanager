@@ -6,6 +6,9 @@
     height: 100%;
     max-width: 1280px;
 }
+.blueContainer{
+    filter: blur(10px);
+}
 
 .header{
     display: flex;

@@ -1,11 +1,11 @@
 import Login from "./Login";
-import { Teacher } from "./teacher";
+import { StudentPage, Teacher } from "./teacher";
 
 import styles from "../styles/container.module.css"
 
 import Loading from "./general/Loading.jsx";
 
-const Container = ({ userData, requestLogin, errorServer, loading, checkTeacher, setCheckTeacher }) => {
+const Container = ({ userData = null, requestLogin, errorServer, loading, checkTeacher, setCheckTeacher, setLoading }) => {
 
     return (
         <>
@@ -16,7 +16,7 @@ const Container = ({ userData, requestLogin, errorServer, loading, checkTeacher,
             {userData.length == 0 ?
                 <Login requestLogin={requestLogin} errorServer={errorServer} checkTeacher={checkTeacher} setCheckTeacher={setCheckTeacher} />
                 :
-                <div className={styles.Container}>
+                <div className={`${styles.Container} ${loading ? styles.blueContainer : null}`}>
                     <section className={styles.header}>
                         <i className="fas fa-bars"></i>
                         <p>نقش : <span>{userData.isTeacher ? "آموزگار" : "دانش آموز"}</span></p>
@@ -27,9 +27,9 @@ const Container = ({ userData, requestLogin, errorServer, loading, checkTeacher,
                     </section>
                     {
                         userData.isTeacher ?
-                            <Teacher userData={userData} />
+                            <Teacher userData={userData} setLoading={setLoading} />
                             :
-                            <p><span>{userData.namefamily}</span> خوش آمدید </p>
+                            <StudentPage setLoading={setLoading} userData={null} st={userData} setShowStPage={null} refreshStudents={null} />
                     }
                 </div>
             }

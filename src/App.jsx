@@ -19,7 +19,7 @@ function App() {
       let localUser = JSON.parse(localStorage.getItem("user"));
       if (localUser) {
         setLoading(true)
-        const { data: serverUser } = await (checkTeacher ? getStudent(localUser.id) : getTeacher(localUser.id))
+        const { data: serverUser } = await (localUser.isTeacher ? getTeacher(localUser.id) : getStudent(localUser.id))
         if (serverUser.login) {
           setUserData(serverUser)
           setLoading(false)
@@ -43,32 +43,35 @@ function App() {
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);
     };
-  }, [])
+  }, [checkTeacher])
   const requestLogin = async (data) => {
-    setLoading(true)
+    setLoading(true);
     const username = data.username;
     const password = data.password;
     const { data: usersData } = await (checkTeacher ? getAllTeacher() : getAllStudents());
 
     if (usersData) {
-      usersData.map(user => {
-        if (user.username === username && user.password === password) {
-          loggin(user)
-        } else {
-          setLoading(false)
-          setErrorServer("نام کاربری یا رمز عبور اشتباه است")
-        }
-      })
+      const user = usersData.find(
+        (u) => u.username === username && u.password === password
+      );
+
+      if (user) {
+        loggin(user);
+      } else {
+        setLoading(false);
+        setErrorServer("نام کاربری یا رمز عبور اشتباه است");
+      }
     } else {
-      setLoading(false)
-      setErrorServer("خطا در ارتباط با سرور")
+      setLoading(false);
+      setErrorServer("خطا در ارتباط با سرور");
     }
-  }
+  };
   const loggin = async (user) => {
     setErrorServer("")
     user.login = true;
     await (checkTeacher ? putTeacher(user) : putStudent(user));
     setUserData(user);
+    localStorage.clear()
     localStorage.setItem("user", JSON.stringify(user))
     setLoading(false)
   }
@@ -77,7 +80,7 @@ function App() {
     <BrowserRouter>
       {isOnline ?
         <Routes>
-          <Route path='/' element={<Container checkTeacher={checkTeacher} loading={loading} errorServer={errorServer} userData={userData} requestLogin={requestLogin} setCheckTeacher={setCheckTeacher} />} />
+          <Route path='/' element={<Container setLoading={setLoading} checkTeacher={checkTeacher} loading={loading} errorServer={errorServer} userData={userData} requestLogin={requestLogin} setCheckTeacher={setCheckTeacher} />} />
         </Routes>
         :
         <NetworkStatus />

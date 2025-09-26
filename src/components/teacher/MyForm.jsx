@@ -102,7 +102,7 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                 </label>
                                 <ErrorMessage name="namefamily" render={msg => <span className={styles.errText}>{msg}</span>} />
                             </div>
-                            <div className={styles.groupId}>
+                            <div className={styles.selction}>
                                 <i className="fas fa-angle-down"></i>
                                 <select
                                     id="groupId"
@@ -117,10 +117,34 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                     style={{ color: formik.values.groupId ? "#000000" : "#5d5d5d" }}
                                 >
 
-                                    <option value="">گروه کلاسی... *</option>
+                                    <option value="">گروه کلاسی *</option>
                                     {userData.groups.map((g) => (
                                         <option key={g.id} value={g.id}>
                                             {g.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <ErrorMessage name="groupId" render={msg => <span className={styles.errText}>{msg}</span>} />
+                            </div>
+                            <div className={styles.selction}>
+                                <i className="fas fa-angle-down"></i>
+                                <select
+                                    id="roleId"
+                                    name="roleId"
+                                    value={formik.values.roleId}
+                                    onChange={(e) => {
+                                        const selectedId = e.target.value;
+                                        const selectedRole = userData.roles.find(g => g.id == selectedId);
+                                        formik.setFieldValue("roleId", selectedId);
+                                        formik.setFieldValue("roleName", selectedRole?.name || "");
+                                    }}
+                                    style={{ color: formik.values.roleId ? "#000000" : "#5d5d5d" }}
+                                >
+
+                                    <option value="">نقش دانش آموز *</option>
+                                    {userData.roles.map((r) => (
+                                        <option key={r.id} value={r.id}>
+                                            {r.name}
                                         </option>
                                     ))}
                                 </select>
@@ -139,7 +163,7 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                 </label>
                                 <ErrorMessage name="username" render={msg => <span className={styles.errText}>{msg}</span>} />
                             </div>
-                            <div className={styles.studentRole}>
+                            {/* <div className={styles.studentRole}>
                                 <button
                                     type="button"
                                     onClick={() => {
@@ -171,7 +195,7 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                     سرگروه
                                 </button>
                                 <ErrorMessage name="roleId" render={msg => <span className={styles.errText}>{msg}</span>} />
-                            </div>
+                            </div> */}
                             <div className={styles.dateBirth}>
                                 <Field
                                     data-jdp

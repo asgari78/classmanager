@@ -94,11 +94,11 @@
     font-size: 1.5rem;
     color: #5d5d5d;
 }
-.groupId{
+.selction{
     width: 100%;
     position: relative;
 }
-.groupId select{
+.selction select{
     width: 100%;
     border: none;
     padding: 1.2rem .5rem;
@@ -108,7 +108,7 @@
     -webkit-appearance:none;
     appearance:none;
 }
-.groupId i{
+.selction i{
     left: 1rem;
     position: absolute;
 }

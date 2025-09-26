@@ -4,7 +4,7 @@ import { useState } from "react"
 import { StudentPage } from "./"
 import profileFake from "../../../public/images/emptyProfile.avif"
 
-const StudentBar = ({ allStudents, userData, st, index, refreshStudents }) => {
+const StudentBar = ({ allStudents, userData, st, index, refreshStudents, setLoading }) => {
     const [showStPage, setShowStPage] = useState(false)
     return (
         <>
@@ -15,7 +15,7 @@ const StudentBar = ({ allStudents, userData, st, index, refreshStudents }) => {
                     <span>{st.groupName}</span>
                 </div>
             </Link>
-            {showStPage === true ? <StudentPage allStudents={allStudents} userData={userData} refreshStudents={refreshStudents} setShowStPage={setShowStPage} st={st} /> : null}
+            {showStPage === true ? <StudentPage setLoading={setLoading} allStudents={allStudents} userData={userData} refreshStudents={refreshStudents} setShowStPage={setShowStPage} st={st} /> : null}
         </>
     )
 }

@@ -4,7 +4,7 @@ import styles from "../../styles/teacher/homeworkAndActivity.module.css"
 import { getStudent, putStudent } from "../../services/axiosApi"
 import Loading from "../general/Loading"
 
-const HomeWork = ({ student }) => {
+const HomeWork = ({ student, userData }) => {
     const [copyHomeWork, setCopyHomeWork] = useState(null)
     const [loading, setLoading] = useState(null)
     const [currentStudent, setCurrentStudent] = useState(null)
@@ -25,7 +25,6 @@ const HomeWork = ({ student }) => {
     useEffect(() => {
         fetchGetStudent()
     }, [student.id])
-
     const handleSave = async () => {
         try {
             setLoading(true)
@@ -108,10 +107,10 @@ const HomeWork = ({ student }) => {
                                 <td>{month.name}</td>
                                 <td>
                                     <div className={styles.countContainer}>
-                                        <button onClick={() => handleSetCount(0, idx, "+")}><i className="fas fa-plus"></i></button>
+                                        {userData ? <button onClick={() => handleSetCount(0, idx, "+")}><i className="fas fa-plus"></i></button> : null}
                                         <span>{month.count.toLocaleString("fa-IR")}</span>
-                                        <button onClick={() => handleSetCount(0, idx, "-")}><i className="fas fa-minus"></i></button>
-                                        <button onClick={() => handleSetCount(0, idx, "undo")}><i className="fas fa-undo-alt"></i></button>
+                                        {userData ? <button onClick={() => handleSetCount(0, idx, "-")}><i className="fas fa-minus"></i></button> : null}
+                                        {userData ? <button onClick={() => handleSetCount(0, idx, "undo")}><i className="fas fa-undo-alt"></i></button> : null}
                                     </div>
                                 </td>
                             </tr>
@@ -125,10 +124,10 @@ const HomeWork = ({ student }) => {
                                 <td>{month.name}</td>
                                 <td>
                                     <div className={styles.countContainer}>
-                                        <button onClick={() => handleSetCount(1, idx, "+")}><i className="fas fa-plus"></i></button>
+                                        {userData ? <button onClick={() => handleSetCount(1, idx, "+")}><i className="fas fa-plus"></i></button> : null}
                                         <span>{month.count.toLocaleString("fa-IR")}</span>
-                                        <button onClick={() => handleSetCount(1, idx, "-")}><i className="fas fa-minus"></i></button>
-                                        <button onClick={() => handleSetCount(1, idx, "undo")}><i className="fas fa-undo-alt"></i></button>
+                                        {userData ? <button onClick={() => handleSetCount(1, idx, "-")}><i className="fas fa-minus"></i></button> : null}
+                                        {userData ? <button onClick={() => handleSetCount(1, idx, "undo")}><i className="fas fa-undo-alt"></i></button> : null}
                                     </div>
                                 </td>
                             </tr>

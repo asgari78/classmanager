@@ -3,7 +3,7 @@ import styles from "../../styles/teacher/lesson.module.css"
 import { updateLesson, getStudent } from "../../services/axiosApi";
 import Loading from "../general/Loading"
 
-const Lesson = ({ lesson, setLessonData, st, refreshStudents }) => {
+const Lesson = ({ userData, lesson, setLessonData, st, refreshStudents }) => {
 
     const [saveMode, setSaveMode] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -45,22 +45,27 @@ const Lesson = ({ lesson, setLessonData, st, refreshStudents }) => {
         return VALUE_STATES[(idx + 1) % VALUE_STATES.length];
     };
     const handleTable = (monthIndex, weekIndex) => {
-        setCurrentLesson(prev => {
-            const newScore = prev.score.map((month, mIdx) => {
-                if (mIdx !== monthIndex) return month;
+        if (userData) {
+            setCurrentLesson(prev => {
+                const newScore = prev.score.map((month, mIdx) => {
+                    if (mIdx !== monthIndex) return month;
 
-                const newWeeks = month.value.map((week, wIdx) => {
-                    if (wIdx !== weekIndex) return week;
-                    return {
-                        ...week,
-                        value: getNextValue(week.value)
-                    };
+                    const newWeeks = month.value.map((week, wIdx) => {
+                        if (wIdx !== weekIndex) return week;
+                        return {
+                            ...week,
+                            value: getNextValue(week.value)
+                        };
+                    });
+                    return { ...month, value: newWeeks };
                 });
-                return { ...month, value: newWeeks };
+                setSaveMode(true);
+                return { ...prev, score: newScore };
             });
-            setSaveMode(true);
-            return { ...prev, score: newScore };
-        });
+        }
+        else {
+            return null
+        }
     };
     const handleSave = async () => {
         try {
@@ -83,13 +88,13 @@ const Lesson = ({ lesson, setLessonData, st, refreshStudents }) => {
     return (
         <div className={styles.lessonContainer}>
             {loading && <Loading />}
-            <section className={styles.header}>
+            {userData ? <section className={styles.header}>
                 <span>ثبت نمرات {currentLesson.name}</span>
                 <div className={styles.btnsContainer}>
                     <button className={styles.saveBtn} disabled={!saveMode} onClick={handleSave}>ذخیره</button>
                     <button className={styles.cancelBtn} onClick={() => setLessonData(null)}>لغو</button>
                 </div>
-            </section >
+            </section > : null}
             <section className={styles.tableContainer}>
                 <table className={styles.table}>
                     <thead>
@@ -117,7 +122,6 @@ const Lesson = ({ lesson, setLessonData, st, refreshStudents }) => {
                             </tr>
                         ))}
                     </tbody>
-
                 </table>
             </section>
         </div >

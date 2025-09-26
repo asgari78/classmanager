@@ -3,7 +3,7 @@ import styles from "../../styles/teacher/discipline.module.css";
 import { getStudent, putStudent } from "../../services/axiosApi";
 import Loading from "../general/Loading"
 
-const Discipline = ({ st }) => {
+const Discipline = ({ st, userData }) => {
     const [student, setStudent] = useState(null);
     const [activeTab, setActiveTab] = useState("positive");
     const [showAddModal, setShowAddModal] = useState(false);
@@ -130,9 +130,7 @@ const Discipline = ({ st }) => {
                     onSave={(updated) => handleEditRecord(showEditModal, updated)}
                 />
             )}
-            <button className={styles.fab} onClick={() => setShowAddModal(true)}>
-                +
-            </button>
+            {userData ? <button className={styles.fab} onClick={() => setShowAddModal(true)}>+</button> : null}
         </div>
     );
 };
