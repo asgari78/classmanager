@@ -13,7 +13,7 @@
 }
 
 .overLay{
-    transition: opacity .2s;
+    transition: opacity .3s ease-in-out;
     z-index: 19;
     transform: translateX(100%);
     opacity: 0;
