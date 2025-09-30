@@ -4,8 +4,12 @@ import { StudentPage, Teacher } from "./teacher";
 import styles from "../styles/container.module.css"
 
 import Loading from "./general/Loading.jsx";
+import { useState } from "react";
+import MenuRight from "./teacher/MenuRight.jsx";
 
 const Container = ({ userData = null, requestLogin, errorServer, loading, checkTeacher, setCheckTeacher, setLoading }) => {
+
+    const [showMenuRight, setShowMenuRight] = useState(false)
 
     return (
         <>
@@ -18,7 +22,7 @@ const Container = ({ userData = null, requestLogin, errorServer, loading, checkT
                 :
                 <div className={`${styles.Container} ${loading ? styles.blueContainer : null}`}>
                     <section className={styles.header}>
-                        <i className="fas fa-bars"></i>
+                        <i className="fas fa-bars" onClick={() => setShowMenuRight(true)}></i>
                         <p>نقش : <span>{userData.isTeacher ? "آموزگار" : "دانش آموز"}</span></p>
                         <div className={styles.profile}>
                             <i className="fa fa-user"></i>
@@ -33,6 +37,7 @@ const Container = ({ userData = null, requestLogin, errorServer, loading, checkT
                     }
                 </div>
             }
+            <MenuRight showMenuRight={showMenuRight} setShowMenuRight={setShowMenuRight} />
         </>
     );
 }
