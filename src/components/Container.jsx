@@ -37,7 +37,7 @@ const Container = ({ userData = null, requestLogin, errorServer, loading, checkT
                     }
                 </div>
             }
-            <MenuRight showMenuRight={showMenuRight} setShowMenuRight={setShowMenuRight} />
+            <MenuRight userData={userData} showMenuRight={showMenuRight} setShowMenuRight={setShowMenuRight} />
         </>
     );
 }

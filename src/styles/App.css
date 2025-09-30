@@ -11,6 +11,7 @@ html{
     display: flex;
     justify-content: center;
     position: relative;
+    overflow: hidden;
 }
 body{
     overflow: hidden;
