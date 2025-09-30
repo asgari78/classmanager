@@ -2,7 +2,11 @@ import { useEffect } from "react"
 import styles from "../../styles/teacher/menuRight.module.css"
 import iconApp from "../../../public/icons/icon192.png"
 
-const MenuRight = ({ showMenuRight, setShowMenuRight, userData }) => {
+const MenuRight = ({ showMenuRight, setMenuPage, setShowMenuRight, userData }) => {
+    const goToPage = (page) => {
+        setShowMenuRight(false)
+        setMenuPage(page)
+    }
     return (
         <>
             <div className={`${styles.overLay} ${showMenuRight ? styles.active : null}`} onClick={() => setShowMenuRight(false)}></div>
@@ -14,19 +18,19 @@ const MenuRight = ({ showMenuRight, setShowMenuRight, userData }) => {
                 </div>
                 <div className={styles.main}>
                     <ul>
-                        <li>
+                        <li onClick={() => goToPage(1)}>
                             <i className="fas fa-cog"></i>
                             <span>تنظیمات</span>
                         </li>
-                        <li>
+                        <li onClick={() => goToPage(2)}>
                             <i className="fas fa-info"></i>
                             <span>درباره ما</span>
                         </li>
-                        <li>
+                        <li onClick={() => goToPage(3)}>
                             <i className="fas fa-phone"></i>
                             <span>تماس با ما</span>
                         </li>
-                        <li>
+                        <li onClick={() => goToPage(4)}>
                             <i className="fas fa-sign-out"></i>
                             <span>خروج</span>
                         </li>

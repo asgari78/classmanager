@@ -4,12 +4,18 @@ import { StudentPage, Teacher } from "./teacher";
 import styles from "../styles/container.module.css"
 
 import Loading from "./general/Loading.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuRight from "./teacher/MenuRight.jsx";
+import Setting from "./teacher/Setting.jsx";
+import ExitAlert from "./general/ExitAlert.jsx";
+import { getAllStudents } from "../services/axiosApi.js";
 
-const Container = ({ userData = null, requestLogin, errorServer, loading, checkTeacher, setCheckTeacher, setLoading }) => {
+const Container = ({ setUserData, userData = null, requestLogin, errorServer, loading, checkTeacher, setCheckTeacher, setLoading }) => {
 
     const [showMenuRight, setShowMenuRight] = useState(false)
+    const [menuPage, setMenuPage] = useState(0)
+
+
 
     return (
         <>
@@ -37,7 +43,11 @@ const Container = ({ userData = null, requestLogin, errorServer, loading, checkT
                     }
                 </div>
             }
-            <MenuRight userData={userData} showMenuRight={showMenuRight} setShowMenuRight={setShowMenuRight} />
+            <MenuRight userData={userData} setMenuPage={setMenuPage} showMenuRight={showMenuRight} setShowMenuRight={setShowMenuRight} />
+            {menuPage === 1 ? <Setting setMenuPage={setMenuPage} /> : null}
+            {menuPage === 2 ? <Setting setMenuPage={setMenuPage} /> : null}
+            {menuPage === 3 ? <Setting setMenuPage={setMenuPage} /> : null}
+            {menuPage === 4 ? <ExitAlert setUserData={setUserData} userData={userData} setMenuPage={setMenuPage} /> : null}
         </>
     );
 }

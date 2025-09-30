@@ -8,20 +8,10 @@ const Teacher = ({ userData, setLoading }) => {
 
     const [activeSection, setActiveSection] = useState(1)
     const [teacher, setTeacher] = useState({})
-    const [allStudents, setAllStudents] = useState([])
     const [serverError, setServerError] = useState(false)
     const [showNewStPage, setShowNewStPage] = useState(false)
+    const [allStudents, setAllStudents] = useState([])
 
-    const refreshStudents = async () => {
-        try {
-            setLoading(true)
-            const { data } = await getAllStudents();
-            setAllStudents(data);
-            setLoading(false)
-        } catch (err) {
-            console.error("خطا در دریافت دانش‌آموز:", err);
-        }
-    };
     const getTeacherData = async () => {
         try {
             setLoading(true)
@@ -41,6 +31,16 @@ const Teacher = ({ userData, setLoading }) => {
         getTeacherData()
         refreshStudents()
     }, [])
+    const refreshStudents = async () => {
+        try {
+            setLoading(true)
+            const { data } = await getAllStudents();
+            setAllStudents(data);
+            setLoading(false)
+        } catch (err) {
+            console.error("خطا در دریافت دانش‌آموز:", err);
+        }
+    };
 
     return (
         <>
