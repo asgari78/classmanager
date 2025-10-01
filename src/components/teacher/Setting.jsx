@@ -2,13 +2,17 @@ import { useEffect } from "react";
 import styles from "../../styles/teacher/setting.module.css"
 const Setting = ({ setMenuPage }) => {
 
-    const handleBackButton = (e) => {
-        e.preventDefault();
-        window.history.pushState(null, "", window.location.href);
-        setMenuPage(0)
-    }
     useEffect(() => {
+        window.history.pushState(null, "", window.location.href);
+        const handleBackButton = (e) => {
+            e.preventDefault();
+            window.history.pushState(null, "", window.location.href);
+            setMenuPage(0)
+        }
         window.addEventListener("popstate", handleBackButton);
+        return () => {
+            window.removeEventListener("popstate", handleBackButton);
+        };
     }, [])
     return (
         <div className={styles.container}>
