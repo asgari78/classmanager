@@ -32,8 +32,11 @@ const Teacher = ({ userData, setLoading, back, setBack }) => {
         refreshStudents()
     }, [])
     useEffect(() => {
+        alert(`back : ${back}`)
+        alert(`showNewStPage : ${showNewStPage}`)
         if (back === false) {
             setShowNewStPage(false)
+            alert("okkkkk")
         }
     }, [back])
     const refreshStudents = async () => {
