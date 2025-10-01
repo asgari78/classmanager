@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import styles from "../../styles/teacher/setting.module.css"
 const Setting = ({ setMenuPage }) => {
 
-    const handleBackButton = () => {
+    const handleBackButton = (e) => {
+        e.preventDefault();
         setMenuPage(0)
     }
     useEffect(() => {
