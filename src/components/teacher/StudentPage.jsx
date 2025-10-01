@@ -12,6 +12,19 @@ const StudentPage = ({ userData = null, st, setShowStPage = null, refreshStudent
     const [student, setStudent] = useState(st)
     const [showModal, setShowModal] = useState(false)
 
+    useEffect(() => {
+        window.history.pushState(null, "", window.location.href);
+        const handleBackButton = (e) => {
+            e.preventDefault();
+            window.history.pushState(null, "", window.location.href);
+            setShowStPage(false)
+        }
+        window.addEventListener("popstate", handleBackButton);
+        return () => {
+            window.removeEventListener("popstate", handleBackButton);
+        };
+    }, [])
+
     const fetchStudent = async () => {
         try {
             setLoading(true);
