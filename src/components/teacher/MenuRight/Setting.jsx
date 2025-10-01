@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import styles from "../../../styles/teacher/MenuRight/setting.module.css"
 import HeaderPages from "./HeaderPages";
+
 const Setting = ({ setMenuPage, backPage }) => {
     useEffect(() => {
         backPage("menuRight")
