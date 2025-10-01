@@ -4,6 +4,7 @@ const Setting = ({ setMenuPage }) => {
 
     const handleBackButton = (e) => {
         e.preventDefault();
+        window.history.pushState(null, "", window.location.href);
         setMenuPage(0)
     }
     useEffect(() => {
