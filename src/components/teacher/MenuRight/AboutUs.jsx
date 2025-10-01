@@ -1,5 +1,6 @@
 import HeaderPages from "./HeaderPages";
 import styles from "../../../styles/teacher/MenuRight/aboutUs.module.css"
+import { useEffect } from "react";
 
 const AboutUs = ({ setMenuPage, backPage }) => {
     useEffect(() => {

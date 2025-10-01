@@ -4,7 +4,7 @@ import styles from "../../styles/teacher/teacher.module.css"
 import { getAllStudents, getTeacher } from "../../services/axiosApi"
 import { NewStudent, StudentBar } from "./"
 
-const Teacher = ({ userData, setLoading }) => {
+const Teacher = ({ userData, setLoading, back, setBack }) => {
 
     const [activeSection, setActiveSection] = useState(1)
     const [teacher, setTeacher] = useState({})
@@ -31,6 +31,11 @@ const Teacher = ({ userData, setLoading }) => {
         getTeacherData()
         refreshStudents()
     }, [])
+    useEffect(() => {
+        if (back === false) {
+            setShowNewStPage(false)
+        }
+    }, [back])
     const refreshStudents = async () => {
         try {
             setLoading(true)

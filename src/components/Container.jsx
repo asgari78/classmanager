@@ -9,18 +9,24 @@ import MenuRight from "./teacher/MenuRight/MenuRight.jsx";
 import Setting from "./teacher/MenuRight/Setting.jsx";
 import ExitAlert from "./general/ExitAlert.jsx";
 import AboutUs from "./teacher/MenuRight/AboutUs.jsx";
+import CallUs from "./teacher/MenuRight/CallUs.jsx";
 
 const Container = ({ setUserData, userData = null, requestLogin, errorServer, loading, checkTeacher, setCheckTeacher, setLoading }) => {
 
     const [showMenuRight, setShowMenuRight] = useState(false)
     const [menuPage, setMenuPage] = useState(0)
+    const [back, setBack] = useState(false)
 
-    const backPage = () => {
+    const backPage = (event) => {
         window.history.pushState(null, "", window.location.href);
         const handleBackButton = (e) => {
             e.preventDefault();
             window.history.pushState(null, "", window.location.href);
-            setMenuPage(0)
+            switch (event) {
+                case "menuRight" || "alert":
+                    setMenuPage(0)
+                    break;
+            }
         }
         window.addEventListener("popstate", handleBackButton);
         return () => {
@@ -48,7 +54,7 @@ const Container = ({ setUserData, userData = null, requestLogin, errorServer, lo
                     </section>
                     {
                         userData.isTeacher ?
-                            <Teacher userData={userData} setLoading={setLoading} />
+                            <Teacher userData={userData} setLoading={setLoading} back={back} setBack={setBack} />
                             :
                             <StudentPage setLoading={setLoading} userData={null} st={userData} setShowStPage={null} refreshStudents={null} />
                     }
@@ -57,7 +63,7 @@ const Container = ({ setUserData, userData = null, requestLogin, errorServer, lo
             <MenuRight userData={userData} setMenuPage={setMenuPage} showMenuRight={showMenuRight} setShowMenuRight={setShowMenuRight} />
             {menuPage === 1 ? <Setting setMenuPage={setMenuPage} backPage={backPage} /> : null}
             {menuPage === 2 ? <AboutUs setMenuPage={setMenuPage} backPage={backPage} /> : null}
-            {menuPage === 3 ? <Setting setMenuPage={setMenuPage} backPage={backPage} /> : null}
+            {menuPage === 3 ? <CallUs setMenuPage={setMenuPage} backPage={backPage} /> : null}
             {menuPage === 4 ? <ExitAlert setUserData={setUserData} userData={userData} setMenuPage={setMenuPage} /> : null}
         </>
     );
