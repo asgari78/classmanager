@@ -15,7 +15,18 @@ const Container = ({ setUserData, userData = null, requestLogin, errorServer, lo
     const [showMenuRight, setShowMenuRight] = useState(false)
     const [menuPage, setMenuPage] = useState(0)
 
-
+    const backPage = () => {
+        window.history.pushState(null, "", window.location.href);
+        const handleBackButton = (e) => {
+            e.preventDefault();
+            window.history.pushState(null, "", window.location.href);
+            setMenuPage(0)
+        }
+        window.addEventListener("popstate", handleBackButton);
+        return () => {
+            window.removeEventListener("popstate", handleBackButton);
+        };
+    }
 
     return (
         <>
@@ -44,9 +55,9 @@ const Container = ({ setUserData, userData = null, requestLogin, errorServer, lo
                 </div>
             }
             <MenuRight userData={userData} setMenuPage={setMenuPage} showMenuRight={showMenuRight} setShowMenuRight={setShowMenuRight} />
-            {menuPage === 1 ? <Setting setMenuPage={setMenuPage} /> : null}
-            {menuPage === 2 ? <AboutUs setMenuPage={setMenuPage} /> : null}
-            {menuPage === 3 ? <Setting setMenuPage={setMenuPage} /> : null}
+            {menuPage === 1 ? <Setting setMenuPage={setMenuPage} backPage={backPage} /> : null}
+            {menuPage === 2 ? <AboutUs setMenuPage={setMenuPage} backPage={backPage} /> : null}
+            {menuPage === 3 ? <Setting setMenuPage={setMenuPage} backPage={backPage} /> : null}
             {menuPage === 4 ? <ExitAlert setUserData={setUserData} userData={userData} setMenuPage={setMenuPage} /> : null}
         </>
     );
