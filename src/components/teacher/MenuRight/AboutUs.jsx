@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 const AboutUs = ({ setMenuPage, backPage }) => {
     useEffect(() => {
-        backPage()
+        backPage("menuRight")
     }, [])
     return (
         <div className={styles.container}>

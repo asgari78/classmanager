@@ -3,7 +3,7 @@ import styles from "../../../styles/teacher/MenuRight/setting.module.css"
 import HeaderPages from "./HeaderPages";
 const Setting = ({ setMenuPage, backPage }) => {
     useEffect(() => {
-        backPage()
+        backPage("menuRight")
     }, [])
     return (
         <div className={styles.container}>
