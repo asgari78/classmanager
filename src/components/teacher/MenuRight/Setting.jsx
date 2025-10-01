@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import styles from "../../styles/teacher/setting.module.css"
+import styles from "../../../styles/teacher/MenuRight/setting.module.css"
+import HeaderPages from "./HeaderPages";
 const Setting = ({ setMenuPage }) => {
-
     useEffect(() => {
         window.history.pushState(null, "", window.location.href);
         const handleBackButton = (e) => {
@@ -16,10 +16,7 @@ const Setting = ({ setMenuPage }) => {
     }, [])
     return (
         <div className={styles.container}>
-            <div className={styles.header}>
-                <span>تنظیمات</span>
-                <i className="fas fa-close" onClick={() => setMenuPage(0)}></i>
-            </div>
+            <HeaderPages setMenuPage={setMenuPage} title="تنظیمات" />
         </div>
     )
 }

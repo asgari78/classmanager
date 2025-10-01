@@ -1,6 +1,5 @@
-import { useEffect } from "react"
-import styles from "../../styles/teacher/menuRight.module.css"
-import iconApp from "../../../public/icons/icon192.png"
+import styles from "../../../styles/teacher/MenuRight/menuRight.module.css"
+import iconApp from "../../../../public/icons/icon192.png"
 
 const MenuRight = ({ showMenuRight, setMenuPage, setShowMenuRight, userData }) => {
     const goToPage = (page) => {
