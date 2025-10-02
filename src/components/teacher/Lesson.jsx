@@ -3,15 +3,15 @@ import styles from "../../styles/teacher/lesson.module.css"
 import { updateLesson, getStudent } from "../../services/axiosApi";
 import Loading from "../general/Loading"
 
-const Lesson = ({ userData, lesson, setLessonData, st, refreshStudents }) => {
+const Lesson = ({ userData, lesson, setLessonData, st }) => {
 
     const [saveMode, setSaveMode] = useState(false)
     const [loading, setLoading] = useState(false)
     const [currentLesson, setCurrentLesson] = useState(null)
     const VALUE_STATES = [null, "نیاز به تلاش", "قابل قبول", "خوب", "خیلی خوب",];
-
+    let fetchLesson = null;
     useEffect(() => {
-        const fetchLesson = async () => {
+        fetchLesson = async () => {
             setLoading(true);
             try {
                 const { data } = await getStudent(st.id);
@@ -71,60 +71,60 @@ const Lesson = ({ userData, lesson, setLessonData, st, refreshStudents }) => {
         try {
             setLoading(true)
             await updateLesson(st.id, currentLesson);
-            await refreshStudents();
             setSaveMode(false);
             setLessonData(null)
+            setLoading(false);
         } catch (err) {
             alert(err);
-        }
-        finally {
-            setLoading(false);
         }
     };
 
     if (!currentLesson || !currentLesson.score) {
-        return <Loading />;
+        return <p>داده ای یافت نشد <button onClick={fetchLesson}>تلاش مجدد</button></p>;
     }
     return (
-        <div className={styles.lessonContainer}>
-            {loading && <Loading />}
-            {userData ? <section className={styles.header}>
-                <span>ثبت نمرات {currentLesson.name}</span>
-                <div className={styles.btnsContainer}>
-                    <button className={styles.saveBtn} disabled={!saveMode} onClick={handleSave}>ذخیره</button>
-                    <button className={styles.cancelBtn} onClick={() => setLessonData(null)}>لغو</button>
-                </div>
-            </section > : null}
-            <section className={styles.tableContainer}>
-                <table className={styles.table}>
-                    <thead>
-                        <tr>
-                            <th>{currentLesson.score.length > 2 ? "نام ماه" : "نام نوبت"}</th>
-                            {currentLesson.score[0].value.map((v, i) => (
-                                <th key={i}>{v.name}</th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {currentLesson.score.map((row, mIdx) => (
-                            <tr key={mIdx}>
-                                <td>{row.name}</td>
-                                {row.value.map((cell, wIdx) => (
-                                    <td key={wIdx}>
-                                        <button
-                                            className={styles.inputTable}
-                                            onClick={() => handleTable(mIdx, wIdx)}
-                                        >
-                                            {renderValue(cell.value)}
-                                        </button>
-                                    </td>
+        <>
+            {loading ? <Loading /> :
+                <div className={`${styles.lessonContainer} ${loading ? styles.blurContainer : null}`}>
+                    {userData ? <section className={styles.header}>
+                        <span>ثبت نمرات {currentLesson.name}</span>
+                        <div className={styles.btnsContainer}>
+                            <button className={styles.saveBtn} disabled={!saveMode} onClick={handleSave}>ذخیره</button>
+                            <button className={styles.cancelBtn} onClick={() => setLessonData(null)}>لغو</button>
+                        </div>
+                    </section > : null}
+                    <section className={styles.tableContainer}>
+                        <table className={styles.table}>
+                            <thead>
+                                <tr>
+                                    <th>{currentLesson.score.length > 2 ? "نام ماه" : "نام نوبت"}</th>
+                                    {currentLesson.score[0].value.map((v, i) => (
+                                        <th key={i}>{v.name}</th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {currentLesson.score.map((row, mIdx) => (
+                                    <tr key={mIdx}>
+                                        <td>{row.name}</td>
+                                        {row.value.map((cell, wIdx) => (
+                                            <td key={wIdx}>
+                                                <button
+                                                    className={styles.inputTable}
+                                                    onClick={() => handleTable(mIdx, wIdx)}
+                                                >
+                                                    {renderValue(cell.value)}
+                                                </button>
+                                            </td>
+                                        ))}
+                                    </tr>
                                 ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </section>
-        </div >
+                            </tbody>
+                        </table>
+                    </section>
+                </div >
+            }
+        </>
     )
 }
 export default Lesson;

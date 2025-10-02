@@ -10,6 +10,7 @@
     gap: .8rem;
     transition: all .3s;
     border-radius: .7rem;
+    cursor: pointer;
 }
 .student:hover{
     background-color: #efefef;

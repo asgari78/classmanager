@@ -10,7 +10,9 @@
     gap: 1rem;
     padding: 0;
 }
-
+.blurContainer{
+    filter:blur(10px)
+}
 .header{
     width: 100%;
     height: 2.5rem;

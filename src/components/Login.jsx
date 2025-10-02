@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "../styles/login.module.css"
 
-const Login = ({ requestLogin, errorServer, checkTeacher, setCheckTeacher }) => {
+const Login = ({ requestLogin, errorServer, checkTeacher, setCheckTeacher, loading }) => {
 
     const [formData, setFormData] = useState({
         username: "",
@@ -65,7 +65,7 @@ const Login = ({ requestLogin, errorServer, checkTeacher, setCheckTeacher }) => 
     }
 
     return (
-        <div className={styles.loginContainer}>
+        <div className={`${styles.loginContainer} ${loading ? styles.blurContainer : null}`}>
             <section>
                 <div className={styles.header}>
                     <span>ورود <span>{checkTeacher ? "آموزگار" : "دانش آموز"}</span></span>

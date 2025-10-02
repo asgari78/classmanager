@@ -8,7 +8,7 @@ import "../node_modules/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css"
 import "../node_modules/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"
 
 function App() {
-  const [userData, setUserData] = useState([])
+  const [userData, setUserData] = useState(null)
   const [errorServer, setErrorServer] = useState("")
   const [loading, setLoading] = useState(false)
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -18,18 +18,14 @@ function App() {
     const loginStatus = async () => {
       let localUser = JSON.parse(localStorage.getItem("user"));
       if (localUser) {
-        setLoading(true)
         const { data: serverUser } = await (localUser.isTeacher ? getTeacher(localUser.id) : getStudent(localUser.id))
         if (serverUser.login) {
           setUserData(serverUser)
-          setLoading(false)
         } else {
           setUserData([])
-          setLoading(false)
         }
       } else {
         setUserData([])
-        setLoading(false)
       }
     }
     const handleOnline = () => { setIsOnline(true); loginStatus() };
@@ -73,7 +69,6 @@ function App() {
     setUserData(user);
     localStorage.clear()
     localStorage.setItem("user", JSON.stringify(user))
-    setLoading(false)
   }
 
   return (

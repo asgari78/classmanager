@@ -58,7 +58,6 @@ const NewStudent = ({ show, setShow, userData, refreshStudents }) => {
             };
             await addStudent(submitData);
             setLoading(false);
-            await refreshStudents()
             onClose();
         } catch (err) {
             console.error(err);

@@ -1,65 +1,82 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import styles from "../../styles/teacher/teacher.module.css"
 
 import { getAllStudents, getTeacher } from "../../services/axiosApi"
 import { NewStudent, StudentBar } from "./"
+import Loading from "../general/Loading"
 
-const Teacher = ({ userData, setLoading }) => {
-
+const Teacher = ({ userData, setShowStPage, allStudents, setAllStudents }) => {
     const [activeSection, setActiveSection] = useState(1)
     const [teacher, setTeacher] = useState({})
     const [serverError, setServerError] = useState(false)
     const [showNewStPage, setShowNewStPage] = useState(false)
-    const [allStudents, setAllStudents] = useState([])
+    const [localLoading, setLocalLoading] = useState(false)
 
     const getTeacherData = async () => {
         try {
-            setLoading(true)
-            const { data: teacherData } = await getTeacher(userData.id);
+            setLocalLoading(true)
             const { data: studentsData } = await getAllStudents();
-            setTeacher(teacherData);
             setAllStudents(studentsData)
+            const { data: teacherData } = await getTeacher(userData.id);
+            setTeacher(teacherData);
             setServerError(false)
-            setLoading(false)
         } catch (err) {
-            setLoading(false)
             setServerError(true)
+            setAllStudents(null)
             console.log("Server error:", err);
-        }
-    };
-    useEffect(() => {
-        getTeacherData()
-        refreshStudents()
-    }, [])
-    const refreshStudents = async () => {
-        try {
-            setLoading(true)
-            const { data } = await getAllStudents();
-            setAllStudents(data);
-            setLoading(false)
-        } catch (err) {
-            console.error("خطا در دریافت دانش‌آموز:", err);
+        } finally {
+            setLocalLoading(false)
         }
     };
 
+    useEffect(() => {
+        getTeacherData()
+    }, [])
+
     return (
         <>
-            <NewStudent userData={userData} show={showNewStPage} setShow={setShowNewStPage} refreshStudents={refreshStudents} />
-            <section className={styles.teacherContent}>
+            <NewStudent userData={userData} show={showNewStPage} setShow={setShowNewStPage} />
+            {localLoading && <Loading />}
+            <section className={`${styles.teacherContent} ${localLoading ? styles.blueContaqiner : null}`}>
+                {/* بخش تب‌ها */}
                 <section className={styles.groupsList}>
                     <ul>
-                        <li className={activeSection === 1 ? `${styles.groupLi} ${styles.activegroupLi}` : styles.groupLi} onClick={() => setActiveSection(1)}>دانش آموزان</li>
-                        <li className={activeSection === 2 ? `${styles.groupLi} ${styles.activegroupLi}` : styles.groupLi} onClick={() => setActiveSection(2)}>دروس</li>
+                        <li
+                            className={activeSection === 1 ? `${styles.groupLi} ${styles.activegroupLi}` : styles.groupLi}
+                            onClick={() => setActiveSection(1)}
+                        >
+                            دانش آموزان
+                        </li>
+                        <li
+                            className={activeSection === 2 ? `${styles.groupLi} ${styles.activegroupLi}` : styles.groupLi}
+                            onClick={() => setActiveSection(2)}
+                        >
+                            دروس
+                        </li>
                     </ul>
                 </section>
+
+                {/* بخش دانش آموزان */}
                 {activeSection === 1 ?
+
                     allStudents.length > 0 ?
                         allStudents.map((st, index) => (
-                            <StudentBar setLoading={setLoading} allStudents={allStudents} userData={userData} st={st} key={index} refreshStudents={refreshStudents} />
+                            <StudentBar
+                                setShowStPage={setShowStPage}
+                                allStudents={allStudents}
+                                userData={userData}
+                                st={st}
+                                key={index}
+                                index={index}
+                                setLoading={setLocalLoading}
+                            />
                         ))
                         :
                         <div className={styles.noStudentContainer}>
-                            <img src="https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/general/noStudent.jpg" alt="noStudentImage" />
+                            <img
+                                src="https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/general/noStudent.jpg"
+                                alt="noStudentImage"
+                            />
                             <h2>دانش آموزی ندارید</h2>
                             <div>
                                 <span>با زدن</span>
@@ -69,25 +86,35 @@ const Teacher = ({ userData, setLoading }) => {
                         </div>
                     : null
                 }
-                {activeSection === 2 &&
+
+                {/* بخش دروس */}
+                {activeSection === 2 && (
                     <section className={styles.lessonsContainer}>
-                        {(!serverError && teacher) ? teacher.lessons.map(lesson => (
-                            <div className={styles.lesson} key={lesson.id}>
-                                <img src={lesson.image} alt="lessonImg" />
-                                <span>{lesson.name}</span>
-                            </div>
-                        )) :
-                            (
-                                <div className={styles.errorContainer}>
-                                    <p>درسی یافت نشد!</p>
-                                    <button className={styles.tryButton} onClick={getTeacherData}>تلاش مجدد</button>
+                        {(!serverError && teacher?.lessons) ? (
+                            teacher.lessons.map(lesson => (
+                                <div className={styles.lesson} key={lesson.id}>
+                                    <img src={lesson.image} alt="lessonImg" />
+                                    <span>{lesson.name}</span>
                                 </div>
-                            )
-                        }
+                            ))
+                        ) : (
+                            <div className={styles.errorContainer}>
+                                <p>درسی یافت نشد!</p>
+                                <button className={styles.tryButton} onClick={getTeacherData}>تلاش مجدد</button>
+                            </div>
+                        )}
                     </section>
-                }
-                {activeSection === 1 ? <button className={styles.addStBtn} onClick={() => { setShowNewStPage(true); }}>+</button> : null}
-            </section >
+                )}
+
+                {activeSection === 1 && (
+                    <button
+                        className={styles.addStBtn}
+                        onClick={() => { setShowNewStPage(true); }}
+                    >
+                        +
+                    </button>
+                )}
+            </section>
         </>
     )
 }
