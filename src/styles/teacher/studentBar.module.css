@@ -7,10 +7,12 @@
     align-items: center;
     text-decoration: none;
     height: 4rem;
+    min-height: 4rem;
     gap: .8rem;
     transition: all .3s;
     border-radius: .7rem;
     cursor: pointer;
+    padding-right: .5rem;
 }
 .student:hover{
     background-color: #efefef;

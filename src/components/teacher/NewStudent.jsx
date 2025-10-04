@@ -6,7 +6,7 @@ import { supabase } from "../../lib/supabaseClient";
 import nullStudentData from "../../helpers/dataKeep";
 import MyForm from "./MyForm";
 
-const NewStudent = ({ show, setShow, userData, refreshStudents }) => {
+const NewStudent = ({ show, setShow, userData, getTeacherData }) => {
 
     const [visible, setVisible] = useState(show)
     const [animate, setAnimate] = useState(false);
@@ -57,6 +57,7 @@ const NewStudent = ({ show, setShow, userData, refreshStudents }) => {
                 password: formData.password
             };
             await addStudent(submitData);
+            await getTeacherData()
             setLoading(false);
             onClose();
         } catch (err) {
@@ -84,7 +85,7 @@ const NewStudent = ({ show, setShow, userData, refreshStudents }) => {
                     <button className={styles.closeBtn} onClick={onClose}>لغو</button>
                 </section>
                 <section className={styles.main}>
-                    <MyForm formikRef={formikRef} fileInputRef={fileInputRef} userData={userData} eventForm={addNewStudent} student={formData} />
+                    <MyForm formikRef={formikRef} fileInputRef={fileInputRef} userData={userData} eventForm={addNewStudent} student={formData} loading={loading} />
                 </section>
             </div >
         </>

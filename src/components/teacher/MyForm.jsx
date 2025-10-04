@@ -2,8 +2,9 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { studentSchema } from "../../validations/studentValidation";
 import styles from "../../styles/teacher/myForm.module.css"
 import { useEffect, useRef, useState } from "react";
+import Loading from "../general/Loading";
 
-const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
+const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student, loading }) => {
 
     const formRef = useRef()
 
@@ -69,6 +70,7 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                     id="profileImage"
                                     accept="image/png, image/jpg, image/jpeg, image/svg"
                                     onChange={() => handleImage(formik)}
+                                    disabled={loading}
                                 />
                                 <img
                                     onClick={() => fileInputRef.current.click()}
@@ -96,6 +98,7 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                     name="namefamily"
                                     onFocus={(e) => handleFocus(e.target)}
                                     onBlur={handleBlur}
+                                    disabled={loading}
                                 />
                                 <label htmlFor="namefamily">
                                     نام و نام خانوادگی *
@@ -108,6 +111,7 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                     id="groupId"
                                     name="groupId"
                                     value={formik.values.groupId}
+                                    disabled={loading}
                                     onChange={(e) => {
                                         const selectedId = e.target.value;
                                         const selectedGroup = userData.groups.find(g => g.id == selectedId);
@@ -132,6 +136,7 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                     id="roleId"
                                     name="roleId"
                                     value={formik.values.roleId}
+                                    disabled={loading}
                                     onChange={(e) => {
                                         const selectedId = e.target.value;
                                         const selectedRole = userData.roles.find(g => g.id == selectedId);
@@ -157,45 +162,13 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                     dir="ltr"
                                     onFocus={(e) => handleFocus(e.target)}
                                     onBlur={handleBlur}
+                                    disabled={loading}
                                 />
                                 <label htmlFor="username">
                                     نام کاربری دانش آموز *
                                 </label>
                                 <ErrorMessage name="username" render={msg => <span className={styles.errText}>{msg}</span>} />
                             </div>
-                            {/* <div className={styles.studentRole}>
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        formik.setFieldValue("roleId", 3);
-                                        formik.setFieldValue("roleName", "زیرگروه")
-                                    }}
-                                    className={formik.values.roleId == 3 ? styles.active : null}
-                                >
-                                    زیر گروه
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        formik.setFieldValue("roleId", 2);
-                                        formik.setFieldValue("roleName", "معاون")
-                                    }}
-                                    className={formik.values.roleId == 2 ? styles.active : null}
-                                >
-                                    معاون
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        formik.setFieldValue("roleId", 1);
-                                        formik.setFieldValue("roleName", "سرگروه")
-                                    }}
-                                    className={formik.values.roleId == 1 ? styles.active : null}
-                                >
-                                    سرگروه
-                                </button>
-                                <ErrorMessage name="roleId" render={msg => <span className={styles.errText}>{msg}</span>} />
-                            </div> */}
                             <div className={styles.dateBirth}>
                                 <Field
                                     data-jdp
@@ -204,6 +177,7 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                     dir="ltr"
                                     onFocus={(e) => { jalaliDatepicker.startWatch(); handleFocus(e.target) }}
                                     onBlur={handleBlur}
+                                    disabled={loading}
                                 />
                                 <label htmlFor="dateBirth">
                                     تاریخ تولد
@@ -217,6 +191,7 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                     dir="ltr"
                                     onFocus={(e) => handleFocus(e.target)}
                                     onBlur={handleBlur}
+                                    disabled={loading}
                                 />
                                 <label htmlFor="selfCode">
                                     کدملی
@@ -229,6 +204,7 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                     name="dadName"
                                     onFocus={(e) => handleFocus(e.target)}
                                     onBlur={handleBlur}
+                                    disabled={loading}
                                 />
                                 <label htmlFor="dadName">
                                     نام پدر
@@ -237,10 +213,12 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                             </div>
                             <div className={styles.mobile}>
                                 <Field
+
                                     type="tel"
                                     name="phoneNumber"
                                     onFocus={(e) => handleFocus(e.target)}
                                     onBlur={handleBlur}
+                                    disabled={loading}
                                 />
                                 <label htmlFor="phoneNumber">
                                     شماره موبایل
@@ -260,7 +238,14 @@ const MyForm = ({ formikRef, fileInputRef, userData, eventForm, student }) => {
                                     رمز عبور دانش آموز :
                                 </label>
                             </div>
-                            <button type="submit" className={styles.submitBtn}>ثبت</button>
+                            {
+                                loading ?
+                                    <button type="button" className={styles.pendingLoading}>
+                                        <img src="https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/general/loading.gif" alt="loading-image" />
+                                    </button>
+                                    :
+                                    <button type="submit" className={styles.submitBtn}>ثبت</button>
+                            }
                         </Form>
                     )
                 }

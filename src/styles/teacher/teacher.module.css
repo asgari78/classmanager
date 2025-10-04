@@ -14,7 +14,6 @@
     display: flex;
     list-style: none;
     justify-content: space-between;
-    margin-bottom: .8rem;
 }
 
 .groupLi{
@@ -36,6 +35,20 @@
 .activegroupLi:hover{
     background-color:  #d9d9d9;
 }
+
+.studentListContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: calc(100% - 6rem);
+    max-height: calc(100% - 6rem);
+    overflow-y: auto;
+    position: relative;
+    padding-top: .5rem;
+    scrollbar-width: thin;
+}
+
+/* lesson */
 .lessonsContainer{
     margin-top: .5rem;
     width: 100%;
@@ -59,7 +72,6 @@
     object-fit: cover;
     border: 1px solid #dbdbdbe5;
 }
-
 .lesson span{
     color: #2b2b2be5;
     text-align: center;

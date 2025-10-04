@@ -34,7 +34,7 @@ const Teacher = ({ userData, setShowStPage, allStudents, setAllStudents }) => {
 
     return (
         <>
-            <NewStudent userData={userData} show={showNewStPage} setShow={setShowNewStPage} />
+            <NewStudent getTeacherData={getTeacherData} userData={userData} show={showNewStPage} setShow={setShowNewStPage} />
             {loading && <Loading />}
             <section className={styles.teacherContent}>
                 {/* بخش تب‌ها */}
@@ -56,35 +56,36 @@ const Teacher = ({ userData, setShowStPage, allStudents, setAllStudents }) => {
                 </section>
 
                 {/* بخش دانش آموزان */}
-                {activeSection === 1 ?
-
-                    allStudents.length > 0 ?
-                        allStudents.map((st, index) => (
-                            <StudentBar
-                                setShowStPage={setShowStPage}
-                                allStudents={allStudents}
-                                userData={userData}
-                                st={st}
-                                key={index}
-                                index={index}
-                                setLoading={setLoading}
-                            />
-                        ))
-                        :
-                        <div className={styles.noStudentContainer}>
-                            <img
-                                src="https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/general/noStudent.jpg"
-                                alt="noStudentImage"
-                            />
-                            <h2>دانش آموزی ندارید</h2>
-                            <div>
-                                <span>با زدن</span>
-                                <span className={styles.addStSpan}>+</span>
-                                <span>دانش آموزان خود را اضافه کنید</span>
+                <div className={styles.studentListContainer}>
+                    {activeSection === 1 ?
+                        allStudents.length > 0 ?
+                            allStudents.map((st, index) => (
+                                <StudentBar
+                                    setShowStPage={setShowStPage}
+                                    allStudents={allStudents}
+                                    userData={userData}
+                                    st={st}
+                                    key={index}
+                                    index={index}
+                                    setLoading={setLoading}
+                                />
+                            ))
+                            :
+                            <div className={styles.noStudentContainer}>
+                                <img
+                                    src="https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/general/noStudent.jpg"
+                                    alt="noStudentImage"
+                                />
+                                <h2>دانش آموزی ندارید</h2>
+                                <div>
+                                    <span>با زدن</span>
+                                    <span className={styles.addStSpan}>+</span>
+                                    <span>دانش آموزان خود را اضافه کنید</span>
+                                </div>
                             </div>
-                        </div>
-                    : null
-                }
+                        : null
+                    }
+                </div>
 
                 {/* بخش دروس */}
                 {activeSection === 2 && (
