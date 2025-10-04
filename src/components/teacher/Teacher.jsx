@@ -36,7 +36,7 @@ const Teacher = ({ userData, setShowStPage, allStudents, setAllStudents }) => {
         <>
             <NewStudent userData={userData} show={showNewStPage} setShow={setShowNewStPage} />
             {loading && <Loading />}
-            <section className={`${styles.teacherContent} ${loading ? styles.blueContaqiner : null}`}>
+            <section className={styles.teacherContent}>
                 {/* بخش تب‌ها */}
                 <section className={styles.groupsList}>
                     <ul>
