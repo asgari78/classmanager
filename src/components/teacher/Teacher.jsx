@@ -10,11 +10,11 @@ const Teacher = ({ userData, setShowStPage, allStudents, setAllStudents }) => {
     const [teacher, setTeacher] = useState({})
     const [serverError, setServerError] = useState(false)
     const [showNewStPage, setShowNewStPage] = useState(false)
-    const [localLoading, setLocalLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const getTeacherData = async () => {
         try {
-            setLocalLoading(true)
+            setLoading(true)
             const { data: studentsData } = await getAllStudents();
             setAllStudents(studentsData)
             const { data: teacherData } = await getTeacher(userData.id);
@@ -25,10 +25,9 @@ const Teacher = ({ userData, setShowStPage, allStudents, setAllStudents }) => {
             setAllStudents(null)
             console.log("Server error:", err);
         } finally {
-            setLocalLoading(false)
+            setLoading(false)
         }
     };
-
     useEffect(() => {
         getTeacherData()
     }, [])
@@ -36,8 +35,8 @@ const Teacher = ({ userData, setShowStPage, allStudents, setAllStudents }) => {
     return (
         <>
             <NewStudent userData={userData} show={showNewStPage} setShow={setShowNewStPage} />
-            {localLoading && <Loading />}
-            <section className={`${styles.teacherContent} ${localLoading ? styles.blueContaqiner : null}`}>
+            {loading && <Loading />}
+            <section className={`${styles.teacherContent} ${loading ? styles.blueContaqiner : null}`}>
                 {/* بخش تب‌ها */}
                 <section className={styles.groupsList}>
                     <ul>
@@ -68,7 +67,7 @@ const Teacher = ({ userData, setShowStPage, allStudents, setAllStudents }) => {
                                 st={st}
                                 key={index}
                                 index={index}
-                                setLoading={setLocalLoading}
+                                setLoading={setLoading}
                             />
                         ))
                         :

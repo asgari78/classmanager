@@ -16,7 +16,6 @@ const Container = ({
     userData,
     requestLogin,
     errorServer,
-    loading,
     checkTeacher,
     setCheckTeacher,
 }) => {
@@ -24,6 +23,7 @@ const Container = ({
     const [menuPage, setMenuPage] = useState(0)
     const [showStPage, setShowStPage] = useState(false)
     const [allStudents, setAllStudents] = useState([])
+    const [loading, setLoading] = useState(false)
 
     // حالت لاگین نشده
     if (!userData?.id) {
@@ -42,7 +42,7 @@ const Container = ({
     return (
         (loading || userData === null) ? <Loading /> :
             <>
-                <div className={`${styles.Container} ${loading ? styles.blurContainer : ""}`}>
+                <div className={styles.Container}>
                     <section className={styles.header}>
                         <i className="fas fa-bars" onClick={() => setShowMenuRight(true)}></i>
                         <p>

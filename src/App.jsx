@@ -10,7 +10,6 @@ import "../node_modules/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"
 function App() {
   const [userData, setUserData] = useState(null)
   const [errorServer, setErrorServer] = useState("")
-  const [loading, setLoading] = useState(false)
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [checkTeacher, setCheckTeacher] = useState(false)
 
@@ -41,7 +40,6 @@ function App() {
     };
   }, [checkTeacher])
   const requestLogin = async (data) => {
-    setLoading(true);
     const username = data.username;
     const password = data.password;
     const { data: usersData } = await (checkTeacher ? getAllTeacher() : getAllStudents());
@@ -54,11 +52,9 @@ function App() {
       if (user) {
         loggin(user);
       } else {
-        setLoading(false);
         setErrorServer("نام کاربری یا رمز عبور اشتباه است");
       }
     } else {
-      setLoading(false);
       setErrorServer("خطا در ارتباط با سرور");
     }
   };
@@ -75,7 +71,7 @@ function App() {
     <BrowserRouter>
       {isOnline ?
         <Routes>
-          <Route path='/' element={<Container setUserData={setUserData} setLoading={setLoading} checkTeacher={checkTeacher} loading={loading} errorServer={errorServer} userData={userData} requestLogin={requestLogin} setCheckTeacher={setCheckTeacher} />} />
+          <Route path='/' element={<Container setUserData={setUserData} checkTeacher={checkTeacher} errorServer={errorServer} userData={userData} requestLogin={requestLogin} setCheckTeacher={setCheckTeacher} />} />
         </Routes>
         :
         <NetworkStatus />

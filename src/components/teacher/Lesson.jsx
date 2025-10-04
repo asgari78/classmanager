@@ -6,13 +6,13 @@ import Loading from "../general/Loading"
 const Lesson = ({ userData, lesson, setLessonData, st }) => {
 
     const [saveMode, setSaveMode] = useState(false)
-    const [loading, setLoading] = useState(false)
-    const [currentLesson, setCurrentLesson] = useState(null)
+    const [loadingFetch, setLoadingFetch] = useState(false)
+    const [loadingSave, setLoadingSave] = useState(false)
+    const [currentLesson, setCurrentLesson] = useState(lesson)
     const VALUE_STATES = [null, "نیاز به تلاش", "قابل قبول", "خوب", "خیلی خوب",];
-    let fetchLesson = null;
     useEffect(() => {
-        fetchLesson = async () => {
-            setLoading(true);
+        let fetchLesson = async () => {
+            setLoadingFetch(true);
             try {
                 const { data } = await getStudent(st.id);
                 const freshLesson = data.lessons.find(l => l.id === lesson.id);
@@ -20,12 +20,11 @@ const Lesson = ({ userData, lesson, setLessonData, st }) => {
             } catch (err) {
                 console.error("خطا در گرفتن درس:", err);
             } finally {
-                setLoading(false);
+                setLoadingFetch(false);
             }
         };
         fetchLesson();
     }, [st.id, lesson]);
-
     const renderValue = (val) => {
         switch (val) {
             case "نیاز به تلاش":
@@ -69,23 +68,21 @@ const Lesson = ({ userData, lesson, setLessonData, st }) => {
     };
     const handleSave = async () => {
         try {
-            setLoading(true)
+            setLoadingSave(true)
             await updateLesson(st.id, currentLesson);
             setSaveMode(false);
             setLessonData(null)
-            setLoading(false);
+            setLoadingSave(false);
         } catch (err) {
             alert(err);
+            setLoadingSave(false)
         }
     };
 
-    if (!currentLesson || !currentLesson.score) {
-        return <p>داده ای یافت نشد <button onClick={fetchLesson}>تلاش مجدد</button></p>;
-    }
     return (
         <>
-            {loading ? <Loading /> :
-                <div className={`${styles.lessonContainer} ${loading ? styles.blurContainer : null}`}>
+            {(loadingFetch || loadingSave) ? <Loading /> :
+                <div className={styles.lessonContainer}>
                     {userData ? <section className={styles.header}>
                         <span>ثبت نمرات {currentLesson.name}</span>
                         <div className={styles.btnsContainer}>

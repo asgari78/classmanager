@@ -95,7 +95,7 @@ const StudentPage = ({ userData = null, st, setShowStPage = null, refreshStudent
     return (
         <>
             {loading && <Loading />}
-            <div className={`${styles.container} ${loading ? styles.blurContainer : null}`}>
+            <div className={styles.container}>
                 <section className={styles.header}>
                     {userData ? <i className="fas fa-ellipsis-v" onClick={() => setShowMore(!showMore)}></i> : null}
                     {(showMore && userData) ?
