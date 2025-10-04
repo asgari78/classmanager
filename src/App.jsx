@@ -77,7 +77,7 @@ function App() {
       <ToastContainer
         closeOnClick
         style={{
-          width: "10rem", maxWidth: "90%"
+          width: "90%", maxWidth: "90%"
         }}
       />
       <BrowserRouter>
