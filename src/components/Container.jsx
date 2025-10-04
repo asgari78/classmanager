@@ -24,20 +24,6 @@ const Container = ({
     const [loading, setLoading] = useState(false)
     const [showLogOut, setShowLogOut] = useState(false)
 
-
-    useEffect(() => {
-        window.history.pushState(null, "", window.location.href);
-        const handleBackButton = (e) => {
-            e.preventDefault();
-            window.history.pushState(null, "", window.location.href);
-            setMenuPage(4)
-        }
-        window.addEventListener("popstate", handleBackButton);
-        return () => {
-            window.removeEventListener("popstate", handleBackButton);
-        };
-    }, [])
-
     const logOutAccount = async () => {
         setMenuPage(0)
         const copyUserData = JSON.parse(JSON.stringify(userData))
