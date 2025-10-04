@@ -67,12 +67,19 @@ function App() {
     setUserData(user);
     localStorage.clear()
     localStorage.setItem("user", JSON.stringify(user))
-    toast.success(`${user.namefamily} خوش آمدید`)
+    toast.success(<div className='myToast'>{user.namefamily} خوش آمدید</div>, {
+      position: "bottom-center",
+    })
   }
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        closeOnClick
+        style={{
+          width: "10rem", maxWidth: "90%"
+        }}
+      />
       <BrowserRouter>
         {isOnline ?
           <Routes>
