@@ -5,11 +5,8 @@ import styles from "../styles/container.module.css"
 
 import Loading from "./general/Loading.jsx";
 import { useState } from "react";
-import MenuRight from "./teacher/MenuRight/MenuRight.jsx";
-import Setting from "./teacher/MenuRight/Setting.jsx";
 import ExitAlert from "./general/ExitAlert.jsx";
-import AboutUs from "./teacher/MenuRight/AboutUs.jsx";
-import CallUs from "./teacher/MenuRight/CallUs.jsx";
+import { CallUs, AboutUs, Setting, MenuRight } from "./teacher/MenuRight"
 
 const Container = ({
     setUserData,
@@ -21,16 +18,15 @@ const Container = ({
 }) => {
     const [showMenuRight, setShowMenuRight] = useState(false)
     const [menuPage, setMenuPage] = useState(0)
-    const [showStPage, setShowStPage] = useState(false)
+    const [showStPage, setShowStPage] = useState({ active: false, st: null })
     const [allStudents, setAllStudents] = useState([])
     const [loading, setLoading] = useState(false)
 
-    // حالت لاگین نشده
+    // حالت لاگین نشده  
     if (!userData?.id) {
         return (
             <Login
                 requestLogin={requestLogin}
-                loading={loading}
                 errorServer={errorServer}
                 checkTeacher={checkTeacher}
                 setCheckTeacher={setCheckTeacher}
@@ -55,14 +51,12 @@ const Container = ({
                     </section>
 
                     {userData.isTeacher ? (
-                        showStPage.active ? <StudentPage allStudents={allStudents} userData={userData} setShowStPage={setShowStPage} st={showStPage.st} /> :
+                        showStPage.active ? <StudentPage userData={userData} st={showStPage.st} allStudents={allStudents} setShowStPage={setShowStPage} /> :
                             <Teacher userData={userData} setShowStPage={setShowStPage} allStudents={allStudents} setAllStudents={setAllStudents} />
                     ) : (
                         <StudentPage
-                            userData={userData}
                             st={userData}
-                            setShowStPage={{ active: false, st: st }}
-                            refreshStudents={null}
+                            setShowStPage={setShowStPage}
                         />
                     )}
                 </div>

@@ -77,12 +77,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: .7rem 2rem;
     gap: .4rem;
-}
-.loginContainer section form>div label{
-    font-size: 1rem;
-    color: #585858;
 }
 .loginContainer section form>div input{
     border: none;
@@ -93,33 +89,63 @@
     outline: none;
     font-size: 1.3rem;
 }
-
+.loginContainer section form>div input::placeholder{
+    font-size: .9rem;
+}
 .submitBtn{
     border: none;
     padding: 1rem;
     width: 100%;
+    height: 3.5rem;
+    max-width: 25rem;
+    margin: 0 auto;
+    border-radius: .5rem;
     font-size: 1.2rem;
     outline: none;
-    background-color: #c9eeff;
+    background-color: #ececec;
     margin-top: 2rem;
-    cursor: pointer;
     transition: all .3s ease;
+    cursor: not-allowed;
+}
+.active{
+    background-color: #9fdca2;
+    cursor: pointer;
+}
+.active:hover{
+    background-color: #70bb73;
+}
+.pendingBtn{
+    border: none;
+    width: 100%;
+    max-width: 25rem;
+    height: 3.5rem;
+    margin: 0 auto;
+    border-radius: .5rem;
+    font-size: 1.2rem;
+    outline: none;
+    background-color: #f2f2f2;
+    margin-top: 2rem;
+    transition: all .3s ease;
+    cursor: wait;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pendingBtn img{
+    height: 3rem;
+    width: 3rem;
+    object-fit: cover;
 }
 
-.submitBtn:hover{
-    background-color: #96deff;
-}
 
 .errorTxtNo{
     display: none;
     color: red;
 }
-
 .errorTxtYes{
     display: flex;
     color: red;
 }
-
 .errorServer{
     width: 100%;
     font-size: .9rem;

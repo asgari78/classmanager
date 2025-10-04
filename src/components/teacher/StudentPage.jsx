@@ -6,7 +6,7 @@ import { deleteStudent, getStudent, putStudent } from "../../services/axiosApi"
 import ModalProfileEdit from "./ModalProfileEdit"
 import Loading from "../general/Loading"
 
-const StudentPage = ({ userData = null, st, setShowStPage = null, refreshStudents = null }) => {
+const StudentPage = ({ userData = null, st, setShowStPage }) => {
     const [page, setpage] = useState(3)
     const [lessonData, setLessonData] = useState(null)
     const [showMore, setShowMore] = useState(false)
@@ -19,7 +19,7 @@ const StudentPage = ({ userData = null, st, setShowStPage = null, refreshStudent
         const handleBackButton = (e) => {
             e.preventDefault();
             window.history.pushState(null, "", window.location.href);
-            setShowStPage({ active: false, st: st })
+            setShowStPage(false)
         }
         window.addEventListener("popstate", handleBackButton);
         return () => {
@@ -84,7 +84,7 @@ const StudentPage = ({ userData = null, st, setShowStPage = null, refreshStudent
             setLoading(true);
             await deleteStudent(student.id);
             setLoading(false);
-            setShowStPage({ active: false, st: st });
+            setShowStPage(false);
             await refreshStudents()
         } catch (err) {
             console.error("خطا در حذف دانش آموز:", err);
@@ -120,7 +120,7 @@ const StudentPage = ({ userData = null, st, setShowStPage = null, refreshStudent
                         <p className={!userData ? styles.paddingOn : null}>{st.namefamily} {<span style={st.roleId == 1 || st.roleId == 2 ? { color: "#1d6c91", fontWeight: "bold" } : { color: "#2b2b2be5", fontWeight: 0 }}>({st.roleName})</span>}</p>
                         <img src={st.profileImage || profileFake} alt="studentImage" />
                     </> : null}
-                    {userData ? <i id="backToStudentsPage" onClick={() => { setShowStPage({ active: false, st: st }) }} className="fas fa-arrow-left"></i> : null}
+                    {userData ? <i id="backToStudentsPage" onClick={() => { setShowStPage(false) }} className="fas fa-arrow-left"></i> : null}
                 </section>
                 <section className={styles.contentContainer}>
                     <section className={styles.content}>

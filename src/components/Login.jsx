@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/login.module.css"
 
-const Login = ({ requestLogin, errorServer, checkTeacher, setCheckTeacher, loading }) => {
+const Login = ({ requestLogin, errorServer, checkTeacher, setCheckTeacher }) => {
 
     const [formData, setFormData] = useState({
         username: "",
@@ -11,9 +11,29 @@ const Login = ({ requestLogin, errorServer, checkTeacher, setCheckTeacher, loadi
         username: false,
         password: false
     })
+    const [showErrServer, setShowErrServer] = useState(false)
     const [allowed, setAllowed] = useState(false)
+    const [pending, setPending] = useState(false)
+
+    useEffect(() => {
+        if (formData.username != '' && formData.password != '') {
+            setAllowed(true)
+        } else {
+            setAllowed(false)
+        }
+    }, [formData])
+    useEffect(() => {
+        if (errorServer) {
+            setShowErrServer(true)
+            setPending(false)
+            setAllowed(false)
+        } else {
+            setShowErrServer(false)
+        }
+    }, [errorServer])
 
     const setUsername = (event) => {
+        setShowErrServer(false)
         let value = event.target.value;
         setFormData(prev => ({ ...prev, username: value }))
         if (errors.username && value.trim() !== "") {
@@ -21,43 +41,47 @@ const Login = ({ requestLogin, errorServer, checkTeacher, setCheckTeacher, loadi
         }
     }
     const setPassword = (event) => {
+        setShowErrServer(false)
         let value = event.target.value;
-        setFormData(prev => ({ ...prev, password: event.target.value }))
+        setFormData(prev => ({ ...prev, password: value }))
         if (errors.password && value.trim() !== "") {
             setErrors(prev => ({ ...prev, password: false }));
         }
     }
-    const formValidation = () => {
-        if (formData.username == '') {
-            setErrors(prev => ({
-                ...prev,
-                username: true
-            }))
-        } else {
-            setErrors(prev => ({
-                ...prev,
-                username: false
-            }))
+    const formValidation = (e) => {
+        const nameValid = () => {
+            if (formData.username == '') {
+                setErrors(prev => ({
+                    ...prev,
+                    username: true
+                }))
+            } else {
+                setErrors(prev => ({
+                    ...prev,
+                    username: false
+                }))
+            }
         }
-        if (formData.password == '') {
-            setErrors(prev => ({
-                ...prev,
-                password: true
-            }))
-        } else {
-            setErrors(prev => ({
-                ...prev,
-                password: false
-            }))
+        const passValid = () => {
+            if (formData.password == '') {
+                setErrors(prev => ({
+                    ...prev,
+                    password: true
+                }))
+            } else {
+                setErrors(prev => ({
+                    ...prev,
+                    password: false
+                }))
+            }
         }
-        if (formData.username != '' && formData.password != '') {
-            setAllowed(true)
-        } else {
-            setAllowed(false)
-        }
+        if (e && e.target.name === "username") { nameValid() }
+        if (e && e.target.name === "password") { passValid() }
+        if (!e) { nameValid(); passValid() }
     }
     const submitForm = () => {
         if (allowed) {
+            setPending(true)
             requestLogin(formData)
         } else {
             formValidation()
@@ -65,7 +89,7 @@ const Login = ({ requestLogin, errorServer, checkTeacher, setCheckTeacher, loadi
     }
 
     return (
-        <div className={`${styles.loginContainer} ${loading ? styles.blurContainer : null}`}>
+        <div className={styles.loginContainer}>
             <section>
                 <div className={styles.header}>
                     <span>ورود <span>{checkTeacher ? "آموزگار" : "دانش آموز"}</span></span>
@@ -76,20 +100,33 @@ const Login = ({ requestLogin, errorServer, checkTeacher, setCheckTeacher, loadi
                 </div>
                 <form method="POST">
                     <div className="username-section">
-                        <label htmlFor="username">نام کاربری</label>
-                        <input onChange={setUsername} type="text" name="username" id="username" />
+                        <input disabled={pending} onBlur={formValidation} onChange={setUsername} type="text" name="username" id="username" placeholder="نام کاربری" />
                         <span className={errors.username ? styles.errorTxtYes : styles.errorTxtNo}>نام کاربری وارد نشده است</span>
                     </div>
                     <div className="password-section">
-                        <label htmlFor="password">رمز عبور</label>
-                        <input onChange={setPassword} type="password" name="password" id="password" />
+                        <input disabled={pending} onBlur={formValidation} onChange={setPassword} type="password" name="password" id="password" placeholder="رمز عبور" />
                         <span className={errors.password ? styles.errorTxtYes : styles.errorTxtNo}>رمز عبور وارد نشده است</span>
                     </div>
                     {
-                        errorServer !== "" &&
+                        showErrServer &&
                         <span className={styles.errorServer}>نام کاربری یا رمز عبور اشتباه است</span>
                     }
-                    <button type="button" onClick={submitForm} className={styles.submitBtn}>ورود</button>
+                    {pending
+                        ?
+                        showErrServer === false && <button
+                            type="button"
+                            className={styles.pendingBtn}>
+                            <img src="https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/general/loading.gif" alt="loading-image" />
+                        </button>
+                        :
+                        <button
+                            type="button"
+                            onClick={submitForm}
+                            className={`${styles.submitBtn} ${allowed ? styles.active : null}`}>
+                            ورود
+                        </button>
+                    }
+
                 </form>
             </section>
         </div>

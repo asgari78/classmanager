@@ -6,6 +6,7 @@ import { getAllStudents, getAllTeacher, getStudent, getTeacher, putStudent, putT
 import NetworkStatus from './components/general/NetworkStatus'
 import "../node_modules/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css"
 import "../node_modules/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"
+import { toast, ToastContainer } from 'react-toastify'
 
 function App() {
   const [userData, setUserData] = useState(null)
@@ -40,6 +41,7 @@ function App() {
     };
   }, [checkTeacher])
   const requestLogin = async (data) => {
+    setErrorServer("")
     const username = data.username;
     const password = data.password;
     const { data: usersData } = await (checkTeacher ? getAllTeacher() : getAllStudents());
@@ -65,18 +67,22 @@ function App() {
     setUserData(user);
     localStorage.clear()
     localStorage.setItem("user", JSON.stringify(user))
+    toast.success(`${user.namefamily} خوش آمدید`)
   }
 
   return (
-    <BrowserRouter>
-      {isOnline ?
-        <Routes>
-          <Route path='/' element={<Container setUserData={setUserData} checkTeacher={checkTeacher} errorServer={errorServer} userData={userData} requestLogin={requestLogin} setCheckTeacher={setCheckTeacher} />} />
-        </Routes>
-        :
-        <NetworkStatus />
-      }
-    </BrowserRouter>
+    <>
+      <ToastContainer />
+      <BrowserRouter>
+        {isOnline ?
+          <Routes>
+            <Route path='/' element={<Container setUserData={setUserData} checkTeacher={checkTeacher} errorServer={errorServer} userData={userData} requestLogin={requestLogin} setCheckTeacher={setCheckTeacher} />} />
+          </Routes>
+          :
+          <NetworkStatus />
+        }
+      </BrowserRouter>
+    </>
   )
 }
 
