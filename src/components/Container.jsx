@@ -4,9 +4,10 @@ import { StudentPage, Teacher } from "./teacher";
 import styles from "../styles/container.module.css"
 
 import Loading from "./general/Loading.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ExitAlert from "./general/ExitAlert.jsx";
 import { CallUs, AboutUs, Setting, MenuRight } from "./teacher/MenuRight"
+import { putTeacher } from "../services/axiosApi.js";
 
 const Container = ({
     setUserData,
@@ -21,7 +22,30 @@ const Container = ({
     const [showStPage, setShowStPage] = useState({ active: false, st: null })
     const [allStudents, setAllStudents] = useState([])
     const [loading, setLoading] = useState(false)
+    const [showLogOut, setShowLogOut] = useState(false)
 
+
+    useEffect(() => {
+        window.history.pushState(null, "", window.location.href);
+        const handleBackButton = (e) => {
+            e.preventDefault();
+            window.history.pushState(null, "", window.location.href);
+            setMenuPage(4)
+        }
+        window.addEventListener("popstate", handleBackButton);
+        return () => {
+            window.removeEventListener("popstate", handleBackButton);
+        };
+    }, [])
+
+    const logOutAccount = async () => {
+        setMenuPage(0)
+        const copyUserData = JSON.parse(JSON.stringify(userData))
+        copyUserData.login = false;
+        putTeacher(copyUserData)
+        localStorage.clear()
+        setUserData([])
+    }
     // حالت لاگین نشده  
     if (!userData?.id) {
         return (
@@ -33,7 +57,6 @@ const Container = ({
             />
         )
     }
-
     // حالت لاگین شده
     return (
         (loading || userData === null) ? <Loading /> :
@@ -46,7 +69,8 @@ const Container = ({
                         </p>
                         <div className={styles.profile}>
                             <i className="fa fa-user"></i>
-                            <p>{userData.namefamily}</p>
+                            <p onClick={() => setShowLogOut(!showLogOut)}>{userData.namefamily}</p>
+                            {showLogOut ? <div onClick={() => setShowLogOut(false)} className={styles.logoutContainer}><span className={styles.logOutBtn} onClick={logOutAccount}>خروج از حساب</span><i className="fas fa-sign-out"></i> </div> : null}
                         </div>
                     </section>
 

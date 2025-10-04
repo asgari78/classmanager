@@ -1,14 +1,28 @@
-import { putTeacher } from "../../services/axiosApi"
+import { useEffect, useState } from "react";
 import styles from "../../styles/general/exitAlert.module.css"
 
-const ExitAlert = ({ setUserData, setMenuPage, userData }) => {
+const ExitAlert = ({ setMenuPage }) => {
+    const [realyExit, setRealyExit] = useState(true)
+    useEffect(() => {
+        window.history.pushState(null, "", window.location.href);
+        const handleBackButton = (e) => {
+            e.preventDefault();
+            window.history.pushState(null, "", window.location.href);
+            setMenuPage(0)
+        }
+        if (realyExit) {
+            window.addEventListener("popstate", handleBackButton);
+        }
+        return () => {
+            window.removeEventListener("popstate", handleBackButton);
+        };
+    }, [])
+
     const exitApp = async () => {
-        setMenuPage(0)
-        const copyUserData = JSON.parse(JSON.stringify(userData))
-        copyUserData.login = false;
-        putTeacher(copyUserData)
-        localStorage.clear()
-        setUserData([])
+        setRealyExit(false)
+        for (let i = 1; i < 100; i++) {
+            window.history.back()
+        }
     }
     return (
         <div className={styles.overLay}>
