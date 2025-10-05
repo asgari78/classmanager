@@ -164,8 +164,8 @@
 
 .footer{
     width: 100%;
-    height: 5rem;
-    max-height: 5rem;
+    height: 4.5rem;
+    max-height: 4.5rem;
     display: grid;
     grid-template-columns: repeat(5,1fr);
     justify-content: space-between;
@@ -175,14 +175,14 @@
     border-top: 2px solid #93cbe6;
     bottom: 0rem;
     left: 0;
-    border-radius: 2rem;
+    border-radius: 4rem;
     z-index: 9;
 }
 
 .footer button{
     border: none;
     width: 100%;
-    height: 5rem;
+    height: 4.5rem;
     background-color: transparent;
     outline: none;
     cursor: pointer;
@@ -191,24 +191,24 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: .6rem;
-    color: #758992;
+    gap: .3rem;
+    color: #99abb3;
 }
 
-.footer button:nth-child(4){
+/* .footer button:nth-child(4){
     grid-column: 4/5;
 }
 .footer button:nth-child(5){
     grid-column: 5/6;
-}
+} */
 
 .footer button:nth-child(3){
     position: absolute;
-    height: 6rem;
-    width: 6rem;
-    bottom: 1.8rem;
+    height: 5.5rem;
+    width: 5.5rem;
+    bottom: 2rem;
     left: calc(50% - 3rem);
-    border-radius: 50%;
+    border-radius: 2rem;
     position: relative;
     background-color: #ffffff;
     border: 2px solid #93cbe6;
@@ -217,26 +217,44 @@
 .footer button:nth-child(3)::after{
     border: 2px dashed #93cbe6;
     content: "";
-    width: 5rem;
-    height: 5rem;
+    width: 4.5rem;
+    height: 4.5rem;
     position: absolute;
     left: .25rem;
     top: .25rem;
-    border-radius: 50%;
-}
-
-.footer button:nth-child(3).active::after{
-    animation: rotateBorder 5s linear infinite;
+    border-radius: 2rem;
 }
 
 .footer button i{
-    font-size: 1.5rem;
+    font-size: 1.55rem;
 }
 
 .footer button span{
-    font-size: .8rem;
+    font-size: .85rem;
+    font-weight: bold;
 }
 .footer button.active{
-    color: #053952;
-    filter: drop-shadow(0px 0px 8px #68cfff);
+    color: #0b4763;
+}
+
+.footer button.active i{
+    animation: activeAnim 1s infinite both;
+}
+
+@keyframes activeAnim {
+    0%{
+        transform: rotate(-30deg);
+    }
+    25%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(30deg);
+    }
+    75%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(-30deg);
+    }
 }
