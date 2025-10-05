@@ -56,7 +56,7 @@ const Teacher = ({ userData, setShowStPage, allStudents, setAllStudents }) => {
                 </section>
 
                 {/* بخش دانش آموزان */}
-                <div className={styles.studentListContainer}>
+                <div className={activeSection === 1 ? styles.studentListContainer : null}>
                     {activeSection === 1 ?
                         allStudents.length > 0 ?
                             allStudents.map((st, index) => (

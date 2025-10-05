@@ -22,16 +22,7 @@ const Container = ({
     const [showStPage, setShowStPage] = useState({ active: false, st: null })
     const [allStudents, setAllStudents] = useState([])
     const [loading, setLoading] = useState(false)
-    const [showLogOut, setShowLogOut] = useState(false)
 
-    const logOutAccount = async () => {
-        setMenuPage(0)
-        const copyUserData = JSON.parse(JSON.stringify(userData))
-        copyUserData.login = false;
-        putTeacher(copyUserData)
-        localStorage.clear()
-        setUserData([])
-    }
     // حالت لاگین نشده  
     if (!userData?.id) {
         return (
@@ -53,10 +44,9 @@ const Container = ({
                         <p>
                             نقش : <span>{userData.isTeacher ? "آموزگار" : "دانش آموز"}</span>
                         </p>
-                        <div className={styles.profile}>
-                            <i className="fa fa-user"></i>
-                            <p onClick={() => setShowLogOut(!showLogOut)}>{userData.namefamily}</p>
-                            {showLogOut ? <div onClick={() => setShowLogOut(false)} className={styles.logoutContainer}><span className={styles.logOutBtn} onClick={logOutAccount}>خروج از حساب</span><i className="fas fa-sign-out"></i> </div> : null}
+                        <div className={styles.profile} onClick={() => { setMenuPage(4) }}>
+                            <i className="fa fa-sign-out"></i>
+                            <p>{userData.namefamily}</p>
                         </div>
                     </section>
 
