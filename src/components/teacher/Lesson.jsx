@@ -11,6 +11,18 @@ const Lesson = ({ userData, lesson, setLessonData, st }) => {
     const [currentLesson, setCurrentLesson] = useState(lesson)
     const VALUE_STATES = [null, "نیاز به تلاش", "قابل قبول", "خوب", "خیلی خوب",];
     useEffect(() => {
+        window.history.pushState(null, "", window.location.href);
+        const handleBackButton = (e) => {
+            e.preventDefault();
+            window.history.pushState(null, "", window.location.href);
+            setLessonData(null)
+        }
+        window.addEventListener("popstate", handleBackButton);
+        return () => {
+            window.removeEventListener("popstate", handleBackButton);
+        };
+    }, [])
+    useEffect(() => {
         let fetchLesson = async () => {
             setLoadingFetch(true);
             try {

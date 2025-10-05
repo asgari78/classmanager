@@ -13,20 +13,23 @@ const StudentPage = ({ userData = null, st, setShowStPage }) => {
     const [student, setStudent] = useState(st)
     const [showModal, setShowModal] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [showAddModal, setShowAddModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(null);
 
     useEffect(() => {
-        window.history.pushState(null, "", window.location.href);
-        const handleBackButton = (e) => {
-            e.preventDefault();
+        if (lessonData === null && showAddModal === false && showEditModal === null) {
             window.history.pushState(null, "", window.location.href);
-            setShowStPage(false)
+            const handleBackButton = (e) => {
+                e.preventDefault();
+                window.history.pushState(null, "", window.location.href);
+                setShowStPage(false)
+            }
+            window.addEventListener("popstate", handleBackButton);
+            return () => {
+                window.removeEventListener("popstate", handleBackButton);
+            };
         }
-        window.addEventListener("popstate", handleBackButton);
-        return () => {
-            window.removeEventListener("popstate", handleBackButton);
-        };
-    }, [])
-
+    }, [lessonData, showAddModal, showEditModal])
     const fetchStudent = async () => {
         try {
             setLoading(true);
@@ -147,7 +150,7 @@ const StudentPage = ({ userData = null, st, setShowStPage }) => {
                         }
                         {
                             page === 4 &&
-                            <Discipline st={student} userData={userData} />
+                            <Discipline showAddModal={showAddModal} setShowAddModal={setShowAddModal} showEditModal={showEditModal} setShowEditModal={setShowEditModal} st={student} userData={userData} />
                         }
                         {
                             page === 5 &&

@@ -3,11 +3,26 @@ import styles from "../../styles/teacher/discipline.module.css";
 import { getStudent, putStudent } from "../../services/axiosApi";
 import Loading from "../general/Loading"
 
-const Discipline = ({ st, userData }) => {
+const Discipline = ({ st, userData, showAddModal, setShowAddModal, showEditModal, setShowEditModal }) => {
     const [student, setStudent] = useState(null);
     const [activeTab, setActiveTab] = useState("positive");
-    const [showAddModal, setShowAddModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(null);
+
+
+    useEffect(() => {
+        if (showAddModal || showEditModal) {
+            window.history.pushState(null, "", window.location.href);
+            const handleBackButton = (e) => {
+                e.preventDefault();
+                window.history.pushState(null, "", window.location.href);
+                setShowAddModal(false)
+                setShowEditModal(null)
+            }
+            window.addEventListener("popstate", handleBackButton);
+            return () => {
+                window.removeEventListener("popstate", handleBackButton);
+            };
+        }
+    }, [showAddModal, showEditModal])
 
     const fetchStudent = async () => {
         try {
