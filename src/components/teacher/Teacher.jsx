@@ -1,36 +1,13 @@
 import { useEffect, useState, useRef } from "react"
 import styles from "../../styles/teacher/teacher.module.css"
 
-import { getAllStudents, getTeacher } from "../../services/axiosApi"
 import { NewStudent, StudentBar } from "./"
 import Loading from "../general/Loading"
 
-const Teacher = ({ userData, setShowStPage, allStudents, setAllStudents }) => {
+const Teacher = ({ userData, setShowStPage, allStudents, teacher, serverError, getTeacherData }) => {
     const [activeSection, setActiveSection] = useState(1)
-    const [teacher, setTeacher] = useState({})
-    const [serverError, setServerError] = useState(false)
     const [showNewStPage, setShowNewStPage] = useState(false)
     const [loading, setLoading] = useState(false)
-
-    const getTeacherData = async () => {
-        try {
-            setLoading(true)
-            const { data: studentsData } = await getAllStudents();
-            setAllStudents(studentsData)
-            const { data: teacherData } = await getTeacher(userData.id);
-            setTeacher(teacherData);
-            setServerError(false)
-        } catch (err) {
-            setServerError(true)
-            setAllStudents(null)
-            console.log("Server error:", err);
-        } finally {
-            setLoading(false)
-        }
-    };
-    useEffect(() => {
-        getTeacherData()
-    }, [])
 
     return (
         <>

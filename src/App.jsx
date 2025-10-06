@@ -67,8 +67,8 @@ function App() {
     setUserData(user);
     localStorage.clear()
     localStorage.setItem("user", JSON.stringify(user))
-    toast.success(<div className='myToast'>{user.namefamily} خوش آمدید</div>, {
-      position: "bottom-center",
+    toast.success(<div className='myToast'><span style={{ fontWeight: "bolder" }}>{user.namefamily}</span> خوش آمدید</div>, {
+      position: "top-center",
     })
   }
 
@@ -76,9 +76,9 @@ function App() {
     <>
       <ToastContainer
         closeOnClick
-        style={{
-          width: "90%", maxWidth: "90%"
-        }}
+        closeButton={false}
+        draggablePercent={60}
+        autoClose={4000}
       />
       <BrowserRouter>
         {isOnline ?

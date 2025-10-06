@@ -8,8 +8,10 @@ const Lesson = ({ userData, lesson, setLessonData, st }) => {
     const [saveMode, setSaveMode] = useState(false)
     const [loadingFetch, setLoadingFetch] = useState(false)
     const [loadingSave, setLoadingSave] = useState(false)
-    const [currentLesson, setCurrentLesson] = useState(lesson)
+    const [currentLesson, setCurrentLesson] = useState(null)
+    const [copyCurrentLesson, setCopyCurrentLesson] = useState()
     const VALUE_STATES = [null, "نیاز به تلاش", "قابل قبول", "خوب", "خیلی خوب",];
+
     useEffect(() => {
         window.history.pushState(null, "", window.location.href);
         const handleBackButton = (e) => {
@@ -28,6 +30,7 @@ const Lesson = ({ userData, lesson, setLessonData, st }) => {
             try {
                 const { data } = await getStudent(st.id);
                 const freshLesson = data.lessons.find(l => l.id === lesson.id);
+                setCopyCurrentLesson(freshLesson);
                 setCurrentLesson(freshLesson);
             } catch (err) {
                 console.error("خطا در گرفتن درس:", err);
@@ -56,49 +59,57 @@ const Lesson = ({ userData, lesson, setLessonData, st }) => {
         return VALUE_STATES[(idx + 1) % VALUE_STATES.length];
     };
     const handleTable = (monthIndex, weekIndex) => {
-        if (userData) {
-            setCurrentLesson(prev => {
-                const newScore = prev.score.map((month, mIdx) => {
-                    if (mIdx !== monthIndex) return month;
+        if (!userData) return;
 
-                    const newWeeks = month.value.map((week, wIdx) => {
-                        if (wIdx !== weekIndex) return week;
-                        return {
-                            ...week,
-                            value: getNextValue(week.value)
-                        };
-                    });
-                    return { ...month, value: newWeeks };
+        const newLesson = {
+            ...currentLesson,
+            score: currentLesson.score.map((month, mIdx) => {
+                if (mIdx !== monthIndex) return month;
+                const newWeeks = month.value.map((week, wIdx) => {
+                    if (wIdx !== weekIndex) return week;
+                    return { ...week, value: getNextValue(week.value) };
                 });
-                setSaveMode(true);
-                return { ...prev, score: newScore };
-            });
-        }
-        else {
-            return null
-        }
+                return { ...month, value: newWeeks };
+            })
+        };
+        setCurrentLesson(newLesson);
+        const isDifferent = JSON.stringify(newLesson) !== JSON.stringify(copyCurrentLesson);
+        setSaveMode(isDifferent);
     };
+
     const handleSave = async () => {
         try {
-            setLoadingSave(true)
-            await updateLesson(st.id, currentLesson);
+            setLoadingSave(true);
             setSaveMode(false);
-            setLessonData(null)
-            setLoadingSave(false);
+
+            const { status } = await updateLesson(st.id, currentLesson);
+
+            if (status === 200) {
+                setLoadingFetch(true);
+
+                setTimeout(() => {
+                    setLessonData(null);
+                    setLoadingFetch(false);
+                    setLoadingSave(false);
+                }, 900);
+            }
         } catch (err) {
-            alert(err);
-            setLoadingSave(false)
+            console.error(err);
+            setLoadingSave(false);
+            setSaveMode(true);
+            setLoadingFetch(false);
         }
     };
+
 
     return (
         <>
-            {(loadingFetch || loadingSave) ? <Loading /> :
+            {(loadingFetch || currentLesson === null) ? <Loading /> :
                 <div className={styles.lessonContainer}>
                     {userData ? <section className={styles.header}>
                         <span>ثبت نمرات {currentLesson.name}</span>
                         <div className={styles.btnsContainer}>
-                            <button className={styles.saveBtn} disabled={!saveMode} onClick={handleSave}>ذخیره</button>
+                            <button className={`${loadingSave ? styles.loadingBtn : styles.saveBtn}`} disabled={!saveMode} onClick={handleSave}>{loadingSave ? " صبرکنید..." : "ذخیره"}</button>
                             <button className={styles.cancelBtn} onClick={() => setLessonData(null)}>لغو</button>
                         </div>
                     </section > : null}

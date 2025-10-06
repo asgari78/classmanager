@@ -5,8 +5,9 @@ import profileFake from "../../../public/images/emptyProfile.avif"
 import { deleteStudent, getStudent, putStudent } from "../../services/axiosApi"
 import ModalProfileEdit from "./ModalProfileEdit"
 import Loading from "../general/Loading"
+import { toast } from "react-toastify"
 
-const StudentPage = ({ userData = null, st, setShowStPage }) => {
+const StudentPage = ({ userData = null, st, setShowStPage, getTeacherData }) => {
     const [page, setpage] = useState(3)
     const [lessonData, setLessonData] = useState(null)
     const [showMore, setShowMore] = useState(false)
@@ -88,7 +89,10 @@ const StudentPage = ({ userData = null, st, setShowStPage }) => {
             await deleteStudent(student.id);
             setLoading(false);
             setShowStPage(false);
-            await refreshStudents()
+            toast.success(<div className='myToast'><span style={{ fontWeight: "bolder" }}>{student.namefamily}</span> حذف شد</div>, {
+                position: "top-center",
+            })
+            await getTeacherData()
         } catch (err) {
             console.error("خطا در حذف دانش آموز:", err);
             setLoading(false);

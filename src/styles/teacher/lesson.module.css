@@ -40,11 +40,14 @@
 }
 .saveBtn{
     background-color: #8ad478;
-    border: 1px solid #25800e!important;
+    border: 1px solid #529740!important;
 }
-
+.loadingBtn{
+    background-color: #8ad#e3e3e3;
+    border: 1px solid #529740!important;
+}
 .saveBtn:disabled{
-    opacity: .25;
+    opacity: .65;
 }
 
 .cancelBtn{

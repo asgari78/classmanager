@@ -1,7 +1,4 @@
-import { Link } from "react-router-dom"
 import styles from "../../styles/teacher/studentBar.module.css"
-import { useState } from "react"
-import { StudentPage } from "./"
 import profileFake from "../../../public/images/emptyProfile.avif"
 
 const StudentBar = ({ st, index, setShowStPage }) => {

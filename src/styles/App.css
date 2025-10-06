@@ -36,3 +36,18 @@ body{
     padding: 0;
     box-sizing: border-box;
 }
+.myToast{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+}
+
+.Toastify__toast-icon{
+    position: absolute;
+    bottom: 1.5rem;
+}
+.Toastify__toast-icon svg{
+    width: 2rem!important;
+}

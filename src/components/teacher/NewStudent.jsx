@@ -5,6 +5,7 @@ import Loading from "../general/Loading";
 import { supabase } from "../../lib/supabaseClient";
 import nullStudentData from "../../helpers/dataKeep";
 import MyForm from "./MyForm";
+import { toast } from "react-toastify";
 
 const NewStudent = ({ show, setShow, userData, getTeacherData }) => {
 
@@ -57,6 +58,9 @@ const NewStudent = ({ show, setShow, userData, getTeacherData }) => {
                 password: formData.password
             };
             await addStudent(submitData);
+            toast.success(<div className='myToast'><span style={{ fontWeight: "bolder" }}>{submitData.namefamily}</span> اضافه شد</div>, {
+                position: "top-center",
+            })
             await getTeacherData()
             setLoading(false);
             onClose();
@@ -66,8 +70,8 @@ const NewStudent = ({ show, setShow, userData, getTeacherData }) => {
         }
     }
     const onClose = () => {
-        setShow(false)
         formikRef.current.resetForm();
+        setShow(false)
         setFormData(nullStudentData)
     }
 
