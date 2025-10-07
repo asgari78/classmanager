@@ -114,11 +114,11 @@ const Discipline = ({ st, userData, showAddModal, setShowAddModal, showEditModal
                         <li
                             key={rec.id}
                             className={rec.type === "positive" ? styles.positive : styles.negative}
-                            onClick={() => setShowEditModal(rec.id)}
+                            onClick={() => userData ? setShowEditModal(rec.id) : null}
                         >
                             <div className={styles.meta}>
                                 <span>{new Date(rec.date).toLocaleDateString("fa-IR")}</span>
-                                <button onClick={(e) => { e.stopPropagation(); handleDeleteRecord(rec.id); }}><i className="fas fa-trash"></i></button>
+                                {userData ? <button onClick={(e) => { e.stopPropagation(); handleDeleteRecord(rec.id); }}><i className="fas fa-trash"></i></button> : null}
                             </div>
                             <div className={styles.descriptions}>
                                 <h4>{rec.category}</h4>
