@@ -5,9 +5,9 @@ import styles from "../styles/container.module.css"
 
 import Loading from "./general/Loading.jsx";
 import { useEffect, useState } from "react";
-import ExitAlert from "./general/ExitAlert.jsx";
 import { CallUs, AboutUs, Setting, MenuRight } from "./teacher/MenuRight"
 import { getAllStudents, getTeacher, putTeacher } from "../services/axiosApi.js";
+import TarhDars from "./teacher/MenuRight/TarhDars.jsx";
 
 const Container = ({
     setUserData,
@@ -87,7 +87,6 @@ const Container = ({
                     )}
                 </div>
                 <MenuRight
-                    userData={userData}
                     setMenuPage={setMenuPage}
                     showMenuRight={showMenuRight}
                     setShowMenuRight={setShowMenuRight}
@@ -95,15 +94,7 @@ const Container = ({
                 {menuPage === 1 && <Setting setMenuPage={setMenuPage} />}
                 {menuPage === 2 && <AboutUs setMenuPage={setMenuPage} />}
                 {menuPage === 3 && <CallUs setMenuPage={setMenuPage} />}
-                {
-                    menuPage === 4 && (
-                        <ExitAlert
-                            setUserData={setUserData}
-                            userData={userData}
-                            setMenuPage={setMenuPage}
-                        />
-                    )
-                }
+                {menuPage === 4 && <TarhDars setMenuPage={setMenuPage} userData={userData} />}
             </>
     )
 }

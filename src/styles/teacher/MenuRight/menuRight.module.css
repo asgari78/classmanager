@@ -115,10 +115,10 @@
     background-color: #dcedd8;
 }
 .main ul li:nth-child(4){
-    color: #d62626;
+    color: #d65e26;
 }
 .main ul li:nth-child(4):hover{
-    background-color: #f4e4e4;
+    background-color: #ffe6da;
 }
 
 /* footer */

@@ -1,7 +1,7 @@
 import styles from "../../../styles/teacher/MenuRight/menuRight.module.css"
 import iconApp from "../../../../public/icons/icon192.png"
 
-const MenuRight = ({ showMenuRight, setMenuPage, setShowMenuRight, userData }) => {
+const MenuRight = ({ showMenuRight, setMenuPage, setShowMenuRight }) => {
     const goToPage = (page) => {
         setShowMenuRight(false)
         setMenuPage(page)
@@ -30,8 +30,8 @@ const MenuRight = ({ showMenuRight, setMenuPage, setShowMenuRight, userData }) =
                             <span>تماس با ما</span>
                         </li>
                         <li onClick={() => goToPage(4)}>
-                            <i className="fas fa-sign-out"></i>
-                            <span>خروج</span>
+                            <i className="fas fa-book-open"></i>
+                            <span>طرح درس</span>
                         </li>
                     </ul>
                 </div>
