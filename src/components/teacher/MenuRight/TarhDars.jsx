@@ -54,14 +54,19 @@ const TarhDars = ({ setMenuPage, userData }) => {
             <button className={styles.addBtn}>+</button>
             <section className={styles.modalAdd}>
                 <form>
-                    <input type="date" name="selectDataInp" id="selectDataInp" />
-                    <select name="lessonName" id="lessonName">
+                    <input className={styles.selectDataInp} type="date" name="selectDataInp" id="selectDataInp" />
+                    <select className={styles.lessonName} name="lessonName" id="lessonName">
                         {userData.lessons.map((less, index) => (
                             <option key={index}>
                                 {less.name}
                             </option>
                         ))}
                     </select>
+                    <textarea name="textareaInp" id="textareaInp" className={styles.textareaInp}></textarea>
+                    <div className={styles.btnGroup}>
+                        <button type="button">اضافه کن</button>
+                        <button type="button">لغو</button>
+                    </div>
                 </form>
             </section>
         </div>

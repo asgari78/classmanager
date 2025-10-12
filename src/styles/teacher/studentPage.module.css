@@ -85,6 +85,7 @@
     align-items: center;
     justify-content: center;
     gap: .2rem;
+    font-size: .85rem;
 }
 .paddingOn{
     padding: 0 2rem 0 0;
