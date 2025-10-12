@@ -5,13 +5,13 @@ import styles from "../styles/container.module.css"
 
 import Loading from "./general/Loading.jsx";
 import { useEffect, useState } from "react";
-import { CallUs, AboutUs, Setting, MenuRight } from "./teacher/MenuRight"
-import { getAllStudents, getTeacher, putTeacher } from "../services/axiosApi.js";
-import TarhDars from "./teacher/MenuRight/TarhDars.jsx";
+import { CallUs, AboutUs, Setting, MenuRight, TarhDars } from "./teacher/MenuRight"
+import { getAllStudents, getTeacher } from "../services/axiosApi.js";
+import ExitAlert from "./general/ExitAlert.jsx";
 
 const Container = ({
-    setUserData,
     userData,
+    setUserData,
     requestLogin,
     errorServer,
     checkTeacher,
@@ -70,7 +70,7 @@ const Container = ({
                         <p>
                             نقش : <span>{userData.isTeacher ? "آموزگار" : "دانش آموز"}</span>
                         </p>
-                        <div className={styles.profile} onClick={() => { setMenuPage(4) }}>
+                        <div className={styles.profile} onClick={() => { setMenuPage(-1) }}>
                             <i className="fa fa-sign-out"></i>
                             <p>{userData.namefamily}</p>
                         </div>
@@ -95,6 +95,7 @@ const Container = ({
                 {menuPage === 2 && <AboutUs setMenuPage={setMenuPage} />}
                 {menuPage === 3 && <CallUs setMenuPage={setMenuPage} />}
                 {menuPage === 4 && <TarhDars setMenuPage={setMenuPage} userData={userData} />}
+                {menuPage === -1 && <ExitAlert setMenuPage={setMenuPage} userData={userData} setUserData={setUserData} />}
             </>
     )
 }

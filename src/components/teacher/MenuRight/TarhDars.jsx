@@ -5,10 +5,22 @@ import { infoInit } from '../../../helpers/dataKeepTeacher'
 
 const TarhDars = ({ setMenuPage, userData }) => {
 
-    const [todayInfo, setTodayInfo] = useState();
-    const [information, seInformation] = useState(infoInit)
+    const [todayInfo, setTodayInfo] = useState(infoInit);
 
+    const setCurrentDate = () => {
+        if (userData.TarhDars.length === 0) {
+            console.log("empty");
+
+            let today = new Date();
+            today = today.toISOString().split('T')[0]
+            infoInit.date = today;
+            setTodayInfo(infoInit)
+        } else {
+
+        }
+    }
     useEffect(() => {
+        setCurrentDate()
         window.history.pushState(null, "", window.location.href);
         const handleBackButton = (e) => {
             e.preventDefault();
@@ -21,16 +33,6 @@ const TarhDars = ({ setMenuPage, userData }) => {
         };
     }, [])
     useEffect(() => {
-        if (userData.TarhDars.length === 0) {
-            let today = new Date();
-            today = today.toISOString().split('T')[0]
-            infoInit.date = today;
-            setTodayInfo(infoInit)
-        } else {
-
-        }
-    })
-    useEffect(() => {
         console.log(todayInfo);
     }, [todayInfo])
 
@@ -39,7 +41,7 @@ const TarhDars = ({ setMenuPage, userData }) => {
             <HeaderPages setMenuPage={setMenuPage} title="طرح درس" />
             <section className={styles.controlMenu}>
                 <button className={`${styles.btn} ${styles.nextDay}`} onClick={() => { }}>روز بعد</button>
-                <input className={styles.dateInput} value={todayInfo && todayInfo.date} type="date" name="tarhDarsDate" id="tarhDarsDate" onChange={() => { }} />
+                <input className={styles.dateInput} value={todayInfo.date} type="date" name="tarhDarsDate" id="tarhDarsDate" onChange={() => setCurrentDate()} />
                 <button className={`${styles.btn} ${styles.prevDay}`} onClick={() => { }}>روز قبل</button>
             </section>
             <section className={styles.content}>
@@ -48,6 +50,19 @@ const TarhDars = ({ setMenuPage, userData }) => {
                         {day.dayName}
                     </div>
                 ))}
+            </section>
+            <button className={styles.addBtn}>+</button>
+            <section className={styles.modalAdd}>
+                <form>
+                    <input type="date" name="selectDataInp" id="selectDataInp" />
+                    <select name="lessonName" id="lessonName">
+                        {userData.lessons.map((less, index) => (
+                            <option key={index}>
+                                {less.name}
+                            </option>
+                        ))}
+                    </select>
+                </form>
             </section>
         </div>
     )
