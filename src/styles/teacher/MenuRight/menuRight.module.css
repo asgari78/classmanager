@@ -97,10 +97,10 @@
     transform: rotate(360deg);
 }
 .main ul li:nth-child(1){
-    color: #873986;
+    color: #4f46e5;
 }
 .main ul li:nth-child(1):hover{
-    background-color: #f0e1f0;
+    background-color: #eeedff;
 }
 .main ul li:nth-child(2){
     color: #006a78;

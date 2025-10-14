@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styles from "../../../styles/teacher/MenuRight/setting.module.css"
 import HeaderPages from "./HeaderPages";
 
-const Setting = ({ setMenuPage }) => {
+const Setting = ({ setMenuPage, userData }) => {
 
     useEffect(() => {
         window.history.pushState(null, "", window.location.href);

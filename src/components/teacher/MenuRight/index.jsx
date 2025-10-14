@@ -1,5 +1,4 @@
 export { default as AboutUs } from "./AboutUs"
-export { default as CallUs } from "./CallUs"
 export { default as HeaderPages } from "./HeaderPages"
 export { default as MenuRight } from "./MenuRight"
 export { default as Setting } from "./Setting"

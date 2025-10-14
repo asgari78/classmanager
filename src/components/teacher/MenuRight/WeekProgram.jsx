@@ -1,8 +1,8 @@
-import HeaderPages from "./HeaderPages";
-import styles from "../../../styles/teacher/MenuRight/callUs.module.css"
 import { useEffect } from "react";
+import styles from "../../../styles/teacher/MenuRight/setting.module.css"
+import HeaderPages from "./HeaderPages";
 
-const CallUs = ({ setMenuPage }) => {
+const WeekProgram = ({ setMenuPage, userData }) => {
 
     useEffect(() => {
         window.history.pushState(null, "", window.location.href);
@@ -19,8 +19,9 @@ const CallUs = ({ setMenuPage }) => {
 
     return (
         <div className={styles.container}>
-            <HeaderPages setMenuPage={setMenuPage} title="تماس با ما" />
+            <HeaderPages setMenuPage={setMenuPage} title="برنامه هفتگی" />
         </div>
     )
 }
-export default CallUs;
+
+export default WeekProgram;

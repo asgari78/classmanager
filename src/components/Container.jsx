@@ -5,9 +5,10 @@ import styles from "../styles/container.module.css"
 
 import Loading from "./general/Loading.jsx";
 import { useEffect, useState } from "react";
-import { CallUs, AboutUs, Setting, MenuRight, TarhDars } from "./teacher/MenuRight"
+import { AboutUs, Setting, MenuRight, TarhDars } from "./teacher/MenuRight"
 import { getAllStudents, getTeacher } from "../services/axiosApi.js";
 import ExitAlert from "./general/ExitAlert.jsx";
+import WeekProgram from "./teacher/MenuRight/WeekProgram.jsx";
 
 const Container = ({
     userData,
@@ -91,10 +92,10 @@ const Container = ({
                     showMenuRight={showMenuRight}
                     setShowMenuRight={setShowMenuRight}
                 />
-                {menuPage === 1 && <Setting setMenuPage={setMenuPage} />}
-                {menuPage === 2 && <AboutUs setMenuPage={setMenuPage} />}
-                {menuPage === 3 && <CallUs setMenuPage={setMenuPage} />}
-                {menuPage === 4 && <TarhDars setMenuPage={setMenuPage} userData={userData} />}
+                {menuPage === 1 && <TarhDars setMenuPage={setMenuPage} userData={userData} onUserDataUpdate={(newUserData) => setUserData(newUserData)} />}
+                {menuPage === 2 && <Setting setMenuPage={setMenuPage} userData={userData} />}
+                {menuPage === 3 && <WeekProgram setMenuPage={setMenuPage} userData={userData} />}
+                {menuPage === 4 && <AboutUs setMenuPage={setMenuPage} />}
                 {menuPage === -1 && <ExitAlert setMenuPage={setMenuPage} userData={userData} setUserData={setUserData} />}
             </>
     )

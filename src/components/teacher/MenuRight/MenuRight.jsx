@@ -18,21 +18,22 @@ const MenuRight = ({ showMenuRight, setMenuPage, setShowMenuRight }) => {
                 <div className={styles.main}>
                     <ul>
                         <li onClick={() => goToPage(1)}>
-                            <i className="fas fa-cog"></i>
-                            <span>تنظیمات</span>
-                        </li>
-                        <li onClick={() => goToPage(2)}>
-                            <i className="fas fa-info"></i>
-                            <span>درباره ما</span>
-                        </li>
-                        <li onClick={() => goToPage(3)}>
-                            <i className="fas fa-phone"></i>
-                            <span>تماس با ما</span>
-                        </li>
-                        <li onClick={() => goToPage(4)}>
                             <i className="fas fa-book-open"></i>
                             <span>طرح درس</span>
                         </li>
+                        <li onClick={() => goToPage(2)}>
+                            <i className="fas fa-cog"></i>
+                            <span>تنظیمات</span>
+                        </li>
+                        <li onClick={() => goToPage(3)}>
+                            <i className="fas fa-calendar-week"></i>
+                            <span>برنامه هفتگی</span>
+                        </li>
+                        <li onClick={() => goToPage(4)}>
+                            <i className="fas fa-info"></i>
+                            <span>درباره ما</span>
+                        </li>
+
                     </ul>
                 </div>
                 <div className={styles.footer}>

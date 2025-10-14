@@ -14,6 +14,7 @@ const Login = ({ requestLogin, errorServer, checkTeacher, setCheckTeacher }) => 
     const [showErrServer, setShowErrServer] = useState(false)
     const [allowed, setAllowed] = useState(false)
     const [pending, setPending] = useState(false)
+    const [viewPass, setViewPass] = useState(false)
 
     useEffect(() => {
         if (formData.username != '' && formData.password != '') {
@@ -104,7 +105,8 @@ const Login = ({ requestLogin, errorServer, checkTeacher, setCheckTeacher }) => 
                         <span className={errors.username ? styles.errorTxtYes : styles.errorTxtNo}>نام کاربری وارد نشده است</span>
                     </div>
                     <div className="password-section">
-                        <input disabled={pending} onBlur={formValidation} onChange={setPassword} type="password" name="password" id="password" placeholder="رمز عبور" />
+                        <input disabled={pending} onBlur={formValidation} onChange={setPassword} type={viewPass ? "text" : "password"} name="password" id="password" placeholder="رمز عبور" />
+                        <i className={`${viewPass ? "fas fa-eye-slash" : "fas fa-eye"} ${styles.eyeBtn}`} onClick={() => { setViewPass(!viewPass) }}></i>
                         <span className={errors.password ? styles.errorTxtYes : styles.errorTxtNo}>رمز عبور وارد نشده است</span>
                     </div>
                     {

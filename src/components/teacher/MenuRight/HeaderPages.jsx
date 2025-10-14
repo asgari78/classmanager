@@ -4,7 +4,9 @@ const HeaderPages = ({ setMenuPage, title }) => {
     return (
         <div className={styles.header}>
             <span>{title}</span>
-            <i className="fas fa-close" onClick={() => setMenuPage(0)}></i>
+            <button onClick={() => setMenuPage(0)}>
+                <i className="fas fa-close"></i>
+            </button>
         </div>
     )
 }

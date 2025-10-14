@@ -74,6 +74,7 @@
     align-items: center;
     padding: .7rem 2rem;
     gap: .4rem;
+    position: relative;
 }
 .loginContainer section form>div input{
     border: none;
@@ -146,4 +147,21 @@
     font-size: .9rem;
     color: red;
     text-align: center;
+}
+
+.eyeBtn{
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 4rem;
+    position: absolute!important;
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .25s;
+}
+.eyeBtn:hover{
+    color: green;
 }
