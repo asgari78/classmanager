@@ -9,6 +9,9 @@ const HomeWork = ({ student, userData }) => {
     const [loading, setLoading] = useState(null)
     const [currentStudent, setCurrentStudent] = useState(null)
     const [saveMode, setSaveMode] = useState(false)
+    const [allHomeWorks, setAllHomeWorks] = useState([
+        [38, 0, 0, 0], [0, 0, 0, 0, 0]
+    ])
 
     const fetchGetStudent = async () => {
         try {
@@ -108,7 +111,8 @@ const HomeWork = ({ student, userData }) => {
                                 <td>
                                     <div className={styles.countContainer}>
                                         {userData ? <button onClick={() => handleSetCount(0, idx, "+")}><i className="fas fa-plus"></i></button> : null}
-                                        <span>{month.count.toLocaleString("fa-IR")}</span>
+                                        <span>{month.count.toLocaleString("fa-IR")} تکلیف </span>
+                                        {userData ? null : <span style={{ width: "max-content" }}> از {allHomeWorks[0][idx].toLocaleString("fa-IR")} تکلیف انجام شده</span>}
                                         {userData ? <button onClick={() => handleSetCount(0, idx, "-")}><i className="fas fa-minus"></i></button> : null}
                                         {userData ? <button onClick={() => handleSetCount(0, idx, "undo")}><i className="fas fa-undo-alt"></i></button> : null}
                                     </div>
@@ -117,7 +121,7 @@ const HomeWork = ({ student, userData }) => {
                         ))}
                         <tr>
                             <td className={styles.mainTerm}>نوبت اول</td>
-                            <td className={styles.mainTerm}>مجموعا {handleSum(0).toLocaleString("fa-IR")} تکلیف انجام شده</td>
+                            <td className={styles.mainTerm}>مجموعا {handleSum(0).toLocaleString("fa-IR")} تکلیف از ۳۸ تکلیف انجام شده</td>
                         </tr>
                         {copyHomeWork[1].months.map((month, idx) => (
                             <tr key={idx}>
@@ -125,7 +129,8 @@ const HomeWork = ({ student, userData }) => {
                                 <td>
                                     <div className={styles.countContainer}>
                                         {userData ? <button onClick={() => handleSetCount(1, idx, "+")}><i className="fas fa-plus"></i></button> : null}
-                                        <span>{month.count.toLocaleString("fa-IR")}</span>
+                                        <span>{month.count.toLocaleString("fa-IR")} تکلیف </span>
+                                        {userData ? null : <span style={{ width: "max-content" }}> از {allHomeWorks[1][idx].toLocaleString("fa-IR")} تکلیف انجام شده</span>}
                                         {userData ? <button onClick={() => handleSetCount(1, idx, "-")}><i className="fas fa-minus"></i></button> : null}
                                         {userData ? <button onClick={() => handleSetCount(1, idx, "undo")}><i className="fas fa-undo-alt"></i></button> : null}
                                     </div>
