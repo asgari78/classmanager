@@ -4,10 +4,908 @@ import styles from "../../styles/teacher/teacher.module.css"
 import { NewStudent, StudentBar } from "./"
 import Loading from "../general/Loading"
 
+import { putStudent } from "../../services/axiosApi.js"
+
 const Teacher = ({ userData, setShowStPage, allStudents, teacher, serverError, getTeacherData }) => {
     const [activeSection, setActiveSection] = useState(1)
     const [showNewStPage, setShowNewStPage] = useState(false)
     const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        const deleteTwoLessons = async () => {
+            for (const st of allStudents) {
+
+                const updatedLesson = [
+                    {
+                        name: "ریاضی",
+                        score: [
+                            {
+                                name: "مهر",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "آبان",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "آذر",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "دی",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "بهمن",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "اسفند",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "فروردین",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "اردیبهشت",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "خرداد",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            }
+                        ],
+                        image: "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/riazi.jpg",
+                        id: "L01"
+                    },
+                    {
+                        name: "علوم",
+                        score: [
+                            {
+                                name: "مهر",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "آبان",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "آذر",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "دی",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "بهمن",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "اسفند",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "فروردین",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "اردیبهشت",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "خرداد",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            }
+                        ],
+                        image: "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/olom.jpg",
+                        id: "L02"
+                    },
+                    {
+                        name: "فارسی",
+                        score: [
+                            {
+                                name: "مهر",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "آبان",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "آذر",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "دی",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "بهمن",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "اسفند",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "فروردین",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "اردیبهشت",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "خرداد",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            }
+                        ],
+                        image: "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/farsi.jpg",
+                        id: "L03"
+                    },
+                    {
+                        name: "فناوری",
+                        score: [
+                            {
+                                name: "نوبت اول",
+                                value: [
+                                    {
+                                        name: "ارزشیابی اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "ارزشیابی دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "ارزشیابی سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "ارزشیابی چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "نوبت دوم",
+                                value: [
+                                    {
+                                        name: "ارزشیابی اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "ارزشیابی دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "ارزشیابی سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "ارزشیابی چهارم",
+                                        value: null
+                                    }
+                                ]
+                            }
+                        ],
+                        image: "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/fanavari.jpg",
+                        id: "L04"
+                    },
+                    {
+                        name: "هنر و خوش نویسی",
+                        score: [
+                            {
+                                name: "نوبت اول",
+                                value: [
+                                    {
+                                        name: "ارزشیابی اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "ارزشیابی دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "ارزشیابی سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "ارزشیابی چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "نوبت دوم",
+                                value: [
+                                    {
+                                        name: "ارزشیابی اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "ارزشیابی دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "ارزشیابی سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "ارزشیابی چهارم",
+                                        value: null
+                                    }
+                                ]
+                            }
+                        ],
+                        image: "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/honar.jpg",
+                        id: "L05"
+                    },
+                    {
+                        name: "مطالعات",
+                        score: [
+                            {
+                                name: "مهر",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "آبان",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "آذر",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "دی",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "بهمن",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "اسفند",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "فروردین",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "اردیبهشت",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            },
+                            {
+                                name: "خرداد",
+                                value: [
+                                    {
+                                        name: "هفته اول",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته دوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته سوم",
+                                        value: null
+                                    },
+                                    {
+                                        name: "هفته چهارم",
+                                        value: null
+                                    }
+                                ]
+                            }
+                        ],
+                        image: "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/motaleat.jpg",
+                        id: "L06"
+                    }
+                ]
+                const updatedStudent = { ...st, lessons: updatedLesson }
+                const { data } = await putStudent(updatedStudent)
+            }
+        }
+        deleteTwoLessons()
+    }, [])
+
 
     return (
         <>

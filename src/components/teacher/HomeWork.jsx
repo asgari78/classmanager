@@ -10,7 +10,7 @@ const HomeWork = ({ student, userData }) => {
     const [currentStudent, setCurrentStudent] = useState(null)
     const [saveMode, setSaveMode] = useState(false)
     const [allHomeWorks, setAllHomeWorks] = useState([
-        [32, 0, 0, 0], [0, 0, 0, 0, 0]
+        [40, 40, 40, 40], [40, 40, 40, 40, 10]
     ])
 
     const fetchGetStudent = async () => {
@@ -121,7 +121,7 @@ const HomeWork = ({ student, userData }) => {
                         ))}
                         <tr>
                             <td className={styles.mainTerm}>نوبت اول</td>
-                            <td className={styles.mainTerm}>مجموعا {handleSum(0).toLocaleString("fa-IR")} تکلیف از ۳۸ تکلیف انجام شده</td>
+                            <td className={styles.mainTerm}>مجموعا {handleSum(0).toLocaleString("fa-IR")} تکلیف از {allHomeWorks[0].reduce((sum, num) => sum += num).toLocaleString("fa-IR")} تکلیف انجام شده</td>
                         </tr>
                         {copyHomeWork[1].months.map((month, idx) => (
                             <tr key={idx}>
@@ -139,7 +139,7 @@ const HomeWork = ({ student, userData }) => {
                         ))}
                         <tr>
                             <td className={styles.mainTerm}>نوبت دوم</td>
-                            <td className={styles.mainTerm}>مجموعا {handleSum(1).toLocaleString("fa-IR")} تکلیف انجام شده</td>
+                            <td className={styles.mainTerm}>مجموعا {handleSum(1).toLocaleString("fa-IR")} تکلیف از {allHomeWorks[1].reduce((sum, num) => sum += num).toLocaleString("fa-IR")} تکلیف انجام شده</td>
                         </tr>
                     </tbody>
                 </table>

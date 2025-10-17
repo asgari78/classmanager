@@ -755,7 +755,7 @@ const nullStudentData = {
                         id: "L04"
                 },
                 {
-                        name: "هدیه",
+                        name: "هنر و خوش نویسی",
                         score: [
                                 {
                                         name: "نوبت اول",
@@ -800,7 +800,7 @@ const nullStudentData = {
                                         ]
                                 }
                         ],
-                        image: "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/hediye.jpg",
+                        image: "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/honar.jpg",
                         id: "L05"
                 },
                 {
@@ -998,104 +998,6 @@ const nullStudentData = {
                         ],
                         image: "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/motaleat.jpg",
                         id: "L06"
-                },
-                {
-                        name: "قرآن",
-                        score: [
-                                {
-                                        name: "نوبت اول",
-                                        value: [
-                                                {
-                                                        name: "ارزشیابی اول",
-                                                        value: null
-                                                },
-                                                {
-                                                        name: "ارزشیابی دوم",
-                                                        value: null
-                                                },
-                                                {
-                                                        name: "ارزشیابی سوم",
-                                                        value: null
-                                                },
-                                                {
-                                                        name: "ارزشیابی چهارم",
-                                                        value: null
-                                                }
-                                        ]
-                                },
-                                {
-                                        name: "نوبت دوم",
-                                        value: [
-                                                {
-                                                        name: "ارزشیابی اول",
-                                                        value: null
-                                                },
-                                                {
-                                                        name: "ارزشیابی دوم",
-                                                        value: null
-                                                },
-                                                {
-                                                        name: "ارزشیابی سوم",
-                                                        value: null
-                                                },
-                                                {
-                                                        name: "ارزشیابی چهارم",
-                                                        value: null
-                                                }
-                                        ]
-                                }
-                        ],
-                        image: "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/quran.jpg",
-                        id: "L07"
-                },
-                {
-                        name: "تفکر",
-                        score: [
-                                {
-                                        name: "نوبت اول",
-                                        value: [
-                                                {
-                                                        name: "ارزشیابی اول",
-                                                        value: null
-                                                },
-                                                {
-                                                        name: "ارزشیابی دوم",
-                                                        value: null
-                                                },
-                                                {
-                                                        name: "ارزشیابی سوم",
-                                                        value: null
-                                                },
-                                                {
-                                                        name: "ارزشیابی چهارم",
-                                                        value: null
-                                                }
-                                        ]
-                                },
-                                {
-                                        name: "نوبت دوم",
-                                        value: [
-                                                {
-                                                        name: "ارزشیابی اول",
-                                                        value: null
-                                                },
-                                                {
-                                                        name: "ارزشیابی دوم",
-                                                        value: null
-                                                },
-                                                {
-                                                        name: "ارزشیابی سوم",
-                                                        value: null
-                                                },
-                                                {
-                                                        name: "ارزشیابی چهارم",
-                                                        value: null
-                                                }
-                                        ]
-                                }
-                        ],
-                        image: "https://gghxnqfwfnkjkwnhzfpn.supabase.co/storage/v1/object/public/test/lessons/tafakor.jpg",
-                        id: "L07"
                 }
         ]
 }
