@@ -172,8 +172,8 @@ const StudentPage = ({ userData = null, st, setShowStPage, getTeacherData }) => 
                         <span>تکالیف</span>
                     </button>
                     <button className={page == 2 ? styles.active : ""} onClick={() => { setpage(2); setLessonData(null) }}>
-                        <i className="fa fa-calendar-check"></i>
-                        <span>فعالیت ها</span>
+                        <i class="fa-solid fa-football"></i>
+                        <span>تیم ورزش</span>
                     </button>
                     <button className={page == 3 ? styles.active : ""} onClick={() => { setpage(3); setLessonData(null) }}>
                         <i className="fa fa-pie-chart"></i>

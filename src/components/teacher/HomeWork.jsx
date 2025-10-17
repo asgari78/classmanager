@@ -10,7 +10,7 @@ const HomeWork = ({ student, userData }) => {
     const [currentStudent, setCurrentStudent] = useState(null)
     const [saveMode, setSaveMode] = useState(false)
     const [allHomeWorks, setAllHomeWorks] = useState([
-        [38, 0, 0, 0], [0, 0, 0, 0, 0]
+        [32, 0, 0, 0], [0, 0, 0, 0, 0]
     ])
 
     const fetchGetStudent = async () => {
