@@ -1,6 +1,6 @@
 import styles from "../../styles/teacher/studentPage.module.css"
 import { useEffect, useState } from "react"
-import { Lesson, HomeWork, Activity, Discipline, Profile } from "./"
+import { Lesson, HomeWork, SportTeam, Discipline, Profile } from "./"
 import profileFake from "../../../public/images/emptyProfile.avif"
 import { deleteStudent, getStudent, putStudent } from "../../services/axiosApi"
 import ModalProfileEdit from "./ModalProfileEdit"
@@ -61,7 +61,7 @@ const StudentPage = ({ userData = null, st, setShowStPage, getTeacherData }) => 
         if (!confirmFormat) return;
         try {
             st.homework.map(term => term.months.map(month => month.count = 0))
-            st.activity.map(term => term.months.map(month => month.count = 0))
+            st.SportTeam.map(term => term.months.map(month => month.count = 0))
             st.lessons.map(less => less.score.map(month => month.value.map(week => week.value = null)))
             st.discipline = [];
             setShowMore(false)
@@ -137,7 +137,7 @@ const StudentPage = ({ userData = null, st, setShowStPage, getTeacherData }) => 
                         }
                         {
                             page === 2 &&
-                            <Activity student={student} userData={userData} />
+                            <SportTeam student={student} userData={userData} />
                         }
                         {
                             page === 3 &&

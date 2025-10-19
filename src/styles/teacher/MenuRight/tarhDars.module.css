@@ -101,21 +101,24 @@
 .itemDesc {
   font-size: 0.9rem;
   color: #4b5563;
-  line-height: 1.5;
+  white-space: pre-wrap;
+  line-height: 1.6;
 }
 
 /* --- دکمه حذف کوچک --- */
 .deleteBtn {
-  background: none;
+  background-color:#f5cdcd ;
+  border-radius: 1rem;
   border: none;
   font-size: 1rem;
   cursor: pointer;
   color: #ef4444;
   transition: 0.2s;
   position: absolute;
-  top: -.5rem;
-  left: -.5rem;
-  padding: .5rem 1.2rem 1.2rem .5rem;
+  top: -.02rem;
+  left: -.2rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .deleteBtn:hover {
@@ -192,7 +195,7 @@ small{
   padding: 0.6rem;  
   font-size: 0.95rem;
   resize: none;
-  height: 20rem;
+  height:  25rem;
   outline: none;
   transition: all .25s;
 }

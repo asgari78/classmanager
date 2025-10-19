@@ -261,7 +261,7 @@ const TarhDars = ({ setMenuPage, userData, onUserDataUpdate }) => {
                                         setShowDeleteModal(true);
                                     }}
                                 >
-                                    🗑️
+                                    <i className="fas fa-trash"></i>
                                 </button>
                             </div>
                             <p className={styles.itemDesc}>{b.desc}</p>
@@ -307,6 +307,7 @@ const TarhDars = ({ setMenuPage, userData, onUserDataUpdate }) => {
                             value={newLesson.desc}
                             onChange={(e) => setNewLesson({ ...newLesson, desc: e.target.value })}
                             placeholder="توضیحات طرح درس"
+                            onContextMenu={(e) => console.log(e)}
                         />
                         {errors.desc && <small className={styles.error}>{errors.desc}</small>}
 

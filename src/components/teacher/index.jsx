@@ -1,4 +1,4 @@
-export { default as Activity } from "./Activity"
+export { default as SportTeam } from "./SportTeam"
 export { default as Lesson } from "./Lesson"
 export { default as Discipline } from "./Discipline"
 export { default as HomeWork } from "./HomeWork"

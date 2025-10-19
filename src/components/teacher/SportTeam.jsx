@@ -4,7 +4,7 @@ import styles from "../../styles/teacher/homeworkAndActivity.module.css"
 import { getStudent, putStudent } from "../../services/axiosApi"
 import Loading from "../general/Loading"
 
-const Activity = ({ student, userData }) => {
+const SportTeam = ({ student, userData }) => {
     const [copyActivity, setCopyActivity] = useState(null)
     const [loading, setLoading] = useState(null)
     const [currentStudent, setCurrentStudent] = useState(null)
@@ -149,4 +149,4 @@ const Activity = ({ student, userData }) => {
     )
 }
 
-export default Activity
+export default SportTeam
